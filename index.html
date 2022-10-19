@@ -8,9 +8,9 @@
     />
     <title>1Food Menu - test app</title>
   </head>
-  <body>
+  <body class="bg-slate-100">
     <!-- Menu Design 1 -->
-    <div id="1FoodMenu" class="container"> </div>
+    <div id="1FoodMenu" class="container"></div>
     <!-- production -->
     <!-- <link rel="stylesheet" href="https://unpkg.com/1food-menu/dist/style.css"></link> -->
 
@@ -27,8 +27,8 @@
           .then(menuData => {
             createMenu({
               menu: menuData,
-              version: 2,
-              priceSymbol: '€',
+              version: 3,
+              priceSymbol: '$',
             })
                         
           })

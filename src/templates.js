@@ -5,6 +5,7 @@ export const createMenuHTML = (obj) => {
     if (version == 1) menuHTML = menuDesignOne(obj);
     if (version == 2) menuHTML = menuDesignTwo(obj);
     if (version == 3) menuHTML = menuDesignTree(obj);
+    if (version == 4) menuHTML = menuDesignFour(obj);
 
     return menuHTML;
 };
@@ -185,7 +186,7 @@ const menuDesignTwo = ({ menu, categories, priceSymbol }) => {
 const menuDesignTree = ({ menu, categories, priceSymbol }) => {
     let productTagsHTML = (tags) =>
         ` <div class="flex gap-2 overflow-x-auto mb-2">
-            ${tags
+            ${tags && tags
                 .map((tag) => {
                     return ` <div class="text-xs px-2 py-1 rounded-full bg-green-600 bg-opacity-10 text-green-600">${tag}</div>`;
                 })
@@ -195,9 +196,9 @@ const menuDesignTree = ({ menu, categories, priceSymbol }) => {
     let optionsHTML = (options) =>
         options
             .map((item) => {
-                return `<div class="flex justify-between pt-4">
-                        <div class="text-sm text-gray-400">${item?.size}</div>
-                        <div class="font-bold flex gap-2 items-center">
+                return `<div class="font-medium flex justify-between py-2 border-t first:border-t-0 border-dotted border-gray-400 text-lg">
+                        <div class="text-gray-700">${item?.size}</div>
+                        <div class="flex gap-2 items-center">
                             ${
                                 item.salePrice &&
                                 `<div class="text-gray-700">${item.salePrice && priceSymbol} ${
@@ -208,7 +209,7 @@ const menuDesignTree = ({ menu, categories, priceSymbol }) => {
                                 item.price &&
                                 `<div class="text-gray-700 ${
                                     item.salePrice &&
-                                    "!text-red-400 text-xs line-through text-opacity-70"
+                                    "!text-red-400 text-md line-through"
                                 }">
                                     ${item.price && priceSymbol} ${item.price}
                                 </div>`
@@ -227,33 +228,118 @@ const menuDesignTree = ({ menu, categories, priceSymbol }) => {
                 .map((product) => {
                     let html = "";
 
-                    html += `   <div class="1fm-product flex flex-shrink-0">`;
+                    html += `<div class="1fm-product flex flex-shrink-0">`;
 
                     // product content
-                    html += `<div class="p-4 flex flex-col flex-grow">`;
+                    html += `<div class="px-2 w-full">`;
 
                     //product name
-                    html += `<div class="font-bold mb-2">${product.name}</div>`;
+                    html += `<div class="font-bold mb-2 text-2xl line-clamp-2">${product.name}</div>`;
 
                     //productTagsHTML
+                    
                     product.tags && (html += productTagsHTML(product.tags));
 
                     //product description
-                    html += `<div class="opacity-60 leading-tight w-full">${product.description}</div>`;
+                    html += `<div class="opacity-50 leading-tight w-full mb-2 text-lg">${product.description}</div>`;
 
-                    product.options && (html += optionsHTML(product.options));
+                    html += `<div>`;
+                        product.options && (html += optionsHTML(product.options));
+                    html += `</div>`;
 
                     //closing tags
-                    html += `   </div>
+                    html += `</div>
                         </div>`;
 
                     return html;
                 })
                 .join("");
 
-            cat += `<div class="1fm-category my-6 bg-white rounded" data-category>
-                        <h2 class="text-2xl mb-6 font-semibold uppercase border-y-2 border-black py-2 px-4">${category.name}</h2> 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2"> ${prod} </div>
+            cat += `<div class="1fm-category mt-20 first:mt-0 bg-white rounded" data-category>
+                        <h2 class="text-center bg-gray-50 border-2 border-gray-200 text-2xl md:text-3xl mb-6 font-semibold uppercase p-4 w-full truncate">${category.name}</h2> 
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-y-8"> ${prod} </div>
+                    </div>`;
+            return cat;
+        })
+        .join("");
+};
+
+const menuDesignFour = ({ menu, categories, priceSymbol }) => {
+    let productTagsHTML = (tags) =>
+        ` <div class="flex gap-2 overflow-x-auto mb-2">
+            ${
+                tags &&
+                tags
+                    .map((tag) => {
+                        return ` <div class="text-xs px-2 py-1 rounded-full bg-green-600 bg-opacity-10 text-green-600">${tag}</div>`;
+                    })
+                    .join("")
+            }    
+        </div>`;
+
+    let optionsHTML = (options) =>
+        options
+            .map((item) => {
+                return `<div class="flex justify-between pt-2 text-lg font-medium">
+                        <div class="text-gray-700">${item?.size}</div>
+                        <div class="flex gap-2 items-center">
+                            ${
+                                item.salePrice &&
+                                `<div class="text-gray-700">${item.salePrice && priceSymbol} ${
+                                    item.salePrice
+                                }</div>`
+                            }
+                            ${
+                                item.price &&
+                                `<div class="text-gray-700 ${
+                                    item.salePrice &&
+                                    "!text-red-400 text-sm line-through text-opacity-70"
+                                }">
+                                    ${item.price && priceSymbol} ${item.price}
+                                </div>`
+                            }
+                        </div>
+                    </div>`;
+            })
+            .join("");
+
+    return menu.categories
+        .map((category) => {
+            let cat = "";
+            let prod = "";
+
+            prod = categories[category.uid]
+                .map((product) => {
+                    let html = "";
+
+                    html += `<div class="1fm-product flex flex-shrink-0 pb-6 border-b last:border-b-0 border-dashed border-gray-300">`;
+
+                    // product content
+                    html += `<div class="px-2 w-full">`;
+
+                    //product name
+                    html += `<div class="font-bold mb-2 text-2xl line-clamp-2">${product.name}</div>`;
+
+                    //productTagsHTML
+
+                    product.tags && (html += productTagsHTML(product.tags));
+
+                    //product description
+                    html += `<div class="opacity-50 italic leading-tight w-full mb-2 text-lg">${product.description}</div>`;
+
+                    product.options && (html += optionsHTML(product.options));
+
+                    //closing tags
+                    html += `</div>
+                        </div>`;
+
+                    return html;
+                })
+                .join("");
+
+            cat += `<div class="1fm-category my-20 first:mt-10 max-w-[768px] mx-auto" data-category>
+                        <h2 class="text-center text-2xl md:text-3xl mb-6 font-semibold uppercase border-2 border-gray-400 p-2">${category.name}</h2> 
+                        <div class="grid grid-cols-1 gap-6 gap-y-8"> ${prod} </div>
                     </div>`;
             return cat;
         })

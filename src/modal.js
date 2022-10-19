@@ -9,13 +9,13 @@ export const showModal = (product_id) => {
     let html = modalWrapper(modalContent);
 
     document.body.classList.add('modal-open');
-    __OneFoodMenuData__.modalNode.innerHTML = html;
+    __OneFoodMenuData__.oneFoodMenuModal.innerHTML = html;
 
     //close modal
     let closeModaEls = document.querySelectorAll('[data-close-modal]');
     closeModaEls.forEach((element) => {
         element.addEventListener("click", (e) => {
-            __OneFoodMenuData__.modalNode.innerHTML = "";
+            __OneFoodMenuData__.oneFoodMenuModal.innerHTML = "";
             document.body.classList.remove("modal-open");
         });
     });

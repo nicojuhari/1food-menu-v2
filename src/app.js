@@ -1,43 +1,48 @@
 import { createMenuHTML } from "./templates";
 import { events } from "./events";
 
+
 export const createMenu = ({ menu, version = 1, priceSymbol = "", }) => {
 
     // tests if global scope is bound to window
     if (!isBrowser()) return;
 
-    const nodeEl = document.getElementById("1FoodMenu");
+    const oneFoodMenuNode = document.getElementById("1FoodMenu");
     
     //validate
-    if (nodeEl == null) return;
+    if (oneFoodMenuNode == null) return;
     if(Object.entries(menu).length == 0 || menu?.products?.length == 0 || menu?.categories?.length == 0) return;
+
+    // menuBlock
+    let oneFoodMenuBlock = document.createElement("div");
+    oneFoodMenuBlock.id = "1FoodMenuBlock";
+    oneFoodMenuNode.appendChild(oneFoodMenuBlock);
 
     //create global object
     window.__OneFoodMenuData__ = {
         products: menu.products,
         categories: menu.categories,
-        menuNode: nodeEl,
+        oneFoodMenuBlock,
         version,
         priceSymbol,
     };
 
     if ([1,2].includes(version)) {
-        // create modalDiv
-        if (document.getElementById("#1FoodMenuModal") == null) {
+        // create modalBlock
+        if (document.getElementById("1FoodMenuModal") == null) {
 
             let modalDiv = document.createElement("div");
-            modalDiv.className = "modal-wrapper";
             modalDiv.id = "1FoodMenuModal";
 
-            nodeEl.parentNode.insertBefore(modalDiv, nodeEl.nextSibling);
-            __OneFoodMenuData__.modalNode = modalDiv;
+            oneFoodMenuNode.appendChild(modalDiv);
+            __OneFoodMenuData__.oneFoodMenuModal = modalDiv;
         }
     }
 
-    if(version == 3 ) {
-        let classes = ("container bg-white p-4 my-6 shadow-md rounded-md").split(" ");
+    if ([3, 4].includes(version)) {
+        let classes = "bg-white p-4 my-6 shadow-md rounded-md".split(" ");
         classes.forEach((item) => {
-            nodeEl.classList.add(item);
+            oneFoodMenuBlock.classList.add(item);
         });
     }
 
@@ -47,7 +52,7 @@ export const createMenu = ({ menu, version = 1, priceSymbol = "", }) => {
     groupedProducts = productsByCategory(menu);
     menuHTML = createMenuHTML({ menu, categories: groupedProducts, version, priceSymbol });
 
-    mountOnPage(nodeEl, menuHTML);
+    mountOnPage(oneFoodMenuBlock, menuHTML);
 
 
     //carousel
@@ -76,7 +81,6 @@ export const createMenu = ({ menu, version = 1, priceSymbol = "", }) => {
         });
 
         })
-        
     }
 
     events();
@@ -95,6 +99,8 @@ const productsByCategory = (menu) => {
     return groupedProducts;
 };
 
-const mountOnPage = (nodeEl, html) => nodeEl.innerHTML = html;
+const mountOnPage = (oneFoodMenuNode, html) => oneFoodMenuNode.innerHTML = html;
 
-const isBrowser = () => new Function("try {return this===window;}catch(e){ return false;}");
+function isBrowser() {
+    return typeof window !== "undefined";
+};
