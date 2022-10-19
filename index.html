@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
+    />
+    <title>1Food Menu - test app</title>
+  </head>
+  <body>
+    <!-- Menu Design 1 -->
+    <div id="1FoodMenu" class="container "> </div>
+    <!-- production -->
+    <link rel="stylesheet" href="https://unpkg.com/1food-menu/dist/style.css"></link>
+
+    <script type="module">
+
+        // production
+        import { createMenu } from "https://unpkg.com/1food-menu?module"
+       
+        
+        // import { createMenu } from './main.js'
+
+        fetch('https://api.1food.menu/v1/menus/l6xo01vkohrt86rk3wf')
+          .then(res => res.json())
+          .then(menuData => {
+            createMenu({
+              menu: menuData,
+              version: 2,
+              priceSymbol: '€',
+              bodyClass: 'bg-slate-100'
+            })
+                        
+          })
+          .catch(e => console.log(e))
+  
+    </script>
+   
+  </body>
+</html>
