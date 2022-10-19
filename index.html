@@ -12,15 +12,15 @@
     <!-- Menu Design 1 -->
     <div id="1FoodMenu" class="container "> </div>
     <!-- production -->
-    <link rel="stylesheet" href="https://unpkg.com/1food-menu/dist/style.css"></link>
+    <!-- <link rel="stylesheet" href="https://unpkg.com/1food-menu/dist/style.css"></link> -->
 
     <script type="module">
 
         // production
-        import { createMenu } from "https://unpkg.com/1food-menu?module"
+        // import { createMenu } from "https://unpkg.com/1food-menu?module"
        
         
-        // import { createMenu } from './main.js'
+        import { createMenu } from './main.js'
 
         fetch('https://api.1food.menu/v1/menus/l6xo01vkohrt86rk3wf')
           .then(res => res.json())

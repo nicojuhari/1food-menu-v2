@@ -8,15 +8,15 @@ export const showModal = (product_id) => {
 
     let html = modalWrapper(modalContent);
 
-    document.body.classList.add('modal-open');
+    window.document.body.classList.add('modal-open');
     __OneFoodMenuData__.modalNode.innerHTML = html;
 
     //close modal
-    let closeModaEls = document.querySelectorAll('[data-close-modal]');
+    let closeModaEls = window.document.querySelectorAll('[data-close-modal]');
     closeModaEls.forEach((element) => {
         element.addEventListener("click", (e) => {
             __OneFoodMenuData__.modalNode.innerHTML = "";
-            document.body.classList.remove("modal-open");
+            window.document.body.classList.remove("modal-open");
         });
     });
 
@@ -88,7 +88,7 @@ const getModalContent = (productData, priceSymbol) => {
 const modalWrapper = (content) => {
     return ` <div class="modal fixed z-20 flex items-end justify-center top-0 left-0 w-full h-screen p-2 md:p-4 fade-in">
         <div class="modal-backdrop fixed min-h-screen w-full top-0 left-0 bg-black bg-opacity-30" data-close-modal></div>
-        <div class="modal-container bg-white rounded-xl z-10 m-auto w-full flex flex-col flex-1 max-h-full relative overflow-hidden max-w-sm">
+        <div class="modal-container bg-white rounded-xl z-10 m-auto w-full flex flex-col flex-1 max-h-full relative overflow-hidden max-w-[375px]">
             <div class="modal-close cursor-pointer bg-white text-black absolute text-opacity-80 transition-all p-2 rounded-full right-2 top-2" data-close-modal>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">

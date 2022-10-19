@@ -2,7 +2,7 @@ import { createMenuHTML } from "./templates";
 import { events } from "./events";
 
 export const createMenu = ({ menu, version = 1, priceSymbol = "", bodyClass = '' }) => {
-    const nodeEl = document.getElementById("1FoodMenu");
+    const nodeEl = window.document.getElementById("1FoodMenu");
     
     //validate
     if (nodeEl == null) return;
@@ -18,7 +18,7 @@ export const createMenu = ({ menu, version = 1, priceSymbol = "", bodyClass = ''
     };
 
     if ([1,2].includes(version)) {
-        let modalDiv = document.createElement("div");
+        let modalDiv = window.document.createElement("div");
         modalDiv.className = "modal-wrapper";
         modalDiv.id = "1FoodMenuModal";
 
@@ -36,7 +36,7 @@ export const createMenu = ({ menu, version = 1, priceSymbol = "", bodyClass = ''
     if (bodyClass) {
         let list = bodyClass.split(' ');
         list.forEach((item) => {
-            document.body.classList.add(item);
+            window.document.body.classList.add(item);
         });
     }
 
