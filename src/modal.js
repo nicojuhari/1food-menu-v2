@@ -8,15 +8,15 @@ export const showModal = (product_id) => {
 
     let html = modalWrapper(modalContent);
 
-    window.document.body.classList.add('modal-open');
+    document.body.classList.add('modal-open');
     __OneFoodMenuData__.modalNode.innerHTML = html;
 
     //close modal
-    let closeModaEls = window.document.querySelectorAll('[data-close-modal]');
+    let closeModaEls = document.querySelectorAll('[data-close-modal]');
     closeModaEls.forEach((element) => {
         element.addEventListener("click", (e) => {
             __OneFoodMenuData__.modalNode.innerHTML = "";
-            window.document.body.classList.remove("modal-open");
+            document.body.classList.remove("modal-open");
         });
     });
 

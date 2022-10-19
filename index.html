@@ -10,7 +10,7 @@
   </head>
   <body>
     <!-- Menu Design 1 -->
-    <div id="1FoodMenu" class="container "> </div>
+    <div id="1FoodMenu" class="container"> </div>
     <!-- production -->
     <!-- <link rel="stylesheet" href="https://unpkg.com/1food-menu/dist/style.css"></link> -->
 
@@ -29,13 +29,30 @@
               menu: menuData,
               version: 2,
               priceSymbol: '€',
-              bodyClass: 'bg-slate-100'
             })
                         
           })
           .catch(e => console.log(e))
   
     </script>
+
+    <!-- <div id="1FoodMenu" class="container"> </div>
+                    <link rel="stylesheet" href="https://unpkg.com/1food-menu/dist/style.css"></link>
+                    
+                    <script type="module">
+                    
+                        import { createMenu } from "https://unpkg.com/1food-menu?module"
+
+                        const menuData = { /* your menu object */}
+                           
+                        createMenu({
+                            menu: menuData,
+                            version: 2,
+                            priceSymbol: '$',
+                        })
+            
+                      
+                    </script> -->
    
   </body>
 </html>

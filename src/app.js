@@ -1,12 +1,16 @@
 import { createMenuHTML } from "./templates";
 import { events } from "./events";
 
-export const createMenu = ({ menu, version = 1, priceSymbol = "", bodyClass = '' }) => {
-    const nodeEl = window.document.getElementById("1FoodMenu");
+export const createMenu = ({ menu, version = 1, priceSymbol = "", }) => {
+
+    // tests if global scope is bound to window
+    if (!isBrowser()) return;
+
+    const nodeEl = document.getElementById("1FoodMenu");
     
     //validate
     if (nodeEl == null) return;
-    if(menu?.products?.length == 0 || menu?.categories?.length == 0) return;
+    if(Object.entries(menu).length == 0 || menu?.products?.length == 0 || menu?.categories?.length == 0) return;
 
     //create global object
     window.__OneFoodMenuData__ = {
@@ -18,25 +22,22 @@ export const createMenu = ({ menu, version = 1, priceSymbol = "", bodyClass = ''
     };
 
     if ([1,2].includes(version)) {
-        let modalDiv = window.document.createElement("div");
-        modalDiv.className = "modal-wrapper";
-        modalDiv.id = "1FoodMenuModal";
+        // create modalDiv
+        if (document.getElementById("#1FoodMenuModal") == null) {
 
-        nodeEl.parentNode.insertBefore(modalDiv, nodeEl.nextSibling);
-        __OneFoodMenuData__.modalNode = modalDiv;
+            let modalDiv = document.createElement("div");
+            modalDiv.className = "modal-wrapper";
+            modalDiv.id = "1FoodMenuModal";
+
+            nodeEl.parentNode.insertBefore(modalDiv, nodeEl.nextSibling);
+            __OneFoodMenuData__.modalNode = modalDiv;
+        }
     }
 
     if(version == 3 ) {
         let classes = ("container bg-white p-4 my-6 shadow-md rounded-md").split(" ");
         classes.forEach((item) => {
             nodeEl.classList.add(item);
-        });
-    }
-
-    if (bodyClass) {
-        let list = bodyClass.split(' ');
-        list.forEach((item) => {
-            window.document.body.classList.add(item);
         });
     }
 
@@ -95,3 +96,5 @@ const productsByCategory = (menu) => {
 };
 
 const mountOnPage = (nodeEl, html) => nodeEl.innerHTML = html;
+
+const isBrowser = () => new Function("try {return this===window;}catch(e){ return false;}");

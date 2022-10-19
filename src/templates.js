@@ -167,7 +167,7 @@ const menuDesignTwo = ({ menu, categories, priceSymbol }) => {
                 })
                 .join("");
 
-            cat += `<div class="1fm-category my-6 mx-4 overflow-hidden" data-category>
+            cat += `<div class="1fm-category my-6 overflow-hidden" data-category>
                         <h2 class="1fm-category-title text-2xl font-bold">${category.name}</h2>
                         <div class="swiper mySwiper">
                             <div class="swiper-wrapper py-6"> ${prod} </div>

@@ -10,7 +10,7 @@ export const events = () => {
 const attachEvents = () => {
 
     //show modal events
-    window.document.addEventListener( "click",
+    document.addEventListener( "click",
         function (event) {
             let targetElement = event.target;
             
