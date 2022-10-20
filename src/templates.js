@@ -5,7 +5,14 @@ export const createMenuHTML = (obj) => {
     if (version == 1) menuHTML = menuDesignOne(obj);
     if (version == 2) menuHTML = menuDesignTwo(obj);
     if (version == 3) menuHTML = menuDesignTree(obj);
-    if (version == 4) menuHTML = menuDesignFour(obj);
+    if (version == 4)  {
+        
+        let classes = "bg-white p-4 my-6 shadow-md rounded-md".split(" ");
+        classes.forEach((item) => {
+            window.__OneFoodMenuData__.oneFoodMenuBlock.classList.add(item);
+        });
+        menuHTML = menuDesignFour(obj)
+    }
 
     return menuHTML;
 };
@@ -228,10 +235,10 @@ const menuDesignTree = ({ menu, categories, priceSymbol }) => {
                 .map((product) => {
                     let html = "";
 
-                    html += `<div class="1fm-product flex flex-shrink-0">`;
+                    html += `<div class="1fm-product p-4 md:p-6 flex flex-shrink-0">`;
 
                     // product content
-                    html += `<div class="px-2 w-full">`;
+                    html += `<div class="w-full">`;
 
                     //product name
                     html += `<div class="font-bold mb-2 text-2xl line-clamp-2">${product.name}</div>`;
@@ -255,8 +262,8 @@ const menuDesignTree = ({ menu, categories, priceSymbol }) => {
                 })
                 .join("");
 
-            cat += `<div class="1fm-category mt-20 first:mt-0 bg-white rounded" data-category>
-                        <h2 class="text-center bg-gray-50 border-2 border-gray-200 text-2xl md:text-3xl mb-6 font-semibold uppercase p-4 w-full truncate">${category.name}</h2> 
+            cat += `<div class="1fm-category my-8 first:mt-0 py-5 bg-white rounded-md" data-category>
+                        <h2 class="text-center text-2xl md:text-3xl mb-6 font-semibold uppercase p-4 w-full truncate">${category.name}</h2> 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-y-8"> ${prod} </div>
                     </div>`;
             return cat;
@@ -312,10 +319,10 @@ const menuDesignFour = ({ menu, categories, priceSymbol }) => {
                 .map((product) => {
                     let html = "";
 
-                    html += `<div class="1fm-product flex flex-shrink-0 pb-6 border-b last:border-b-0 border-dashed border-gray-300">`;
+                    html += `<div class="1fm-product flex flex-shrink-0 p-2 md:p-4 border-b last:border-b-0 border-dashed border-gray-300">`;
 
                     // product content
-                    html += `<div class="px-2 w-full">`;
+                    html += `<div class="w-full">`;
 
                     //product name
                     html += `<div class="font-bold mb-2 text-2xl line-clamp-2">${product.name}</div>`;
@@ -338,7 +345,7 @@ const menuDesignFour = ({ menu, categories, priceSymbol }) => {
                 .join("");
 
             cat += `<div class="1fm-category my-20 first:mt-10 max-w-[768px] mx-auto" data-category>
-                        <h2 class="text-center text-2xl md:text-3xl mb-6 font-semibold uppercase border-2 border-gray-400 p-2">${category.name}</h2> 
+                        <h2 class="text-center text-2xl md:text-3xl mb-6 font-semibold uppercase bg-gray-100 border-2 border-gray-400 p-2">${category.name}</h2> 
                         <div class="grid grid-cols-1 gap-6 gap-y-8"> ${prod} </div>
                     </div>`;
             return cat;
