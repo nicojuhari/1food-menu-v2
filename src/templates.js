@@ -5,14 +5,7 @@ export const createMenuHTML = (obj) => {
     if (version == 1) menuHTML = menuDesignOne(obj);
     if (version == 2) menuHTML = menuDesignTwo(obj);
     if (version == 3) menuHTML = menuDesignTree(obj);
-    if (version == 4)  {
-        
-        let classes = "bg-white p-4 my-6 shadow-md rounded-md".split(" ");
-        classes.forEach((item) => {
-            window.__OneFoodMenuData__.oneFoodMenuBlock.classList.add(item);
-        });
-        menuHTML = menuDesignFour(obj)
-    }
+    if (version == 4) menuHTML = menuDesignFour(obj);
 
     return menuHTML;
 };
@@ -37,15 +30,15 @@ const menuDesignOne = ({ menu, categories, priceSymbol }) => {
                     let html = "";
 
 
-                    html += `   <div class="1fm-product flex cursor-pointer rounded-xl bg-white flex-shrink-0 snap-start shadow-lg h-44 md:h-40" data-product-block="${product.uid}" >`;
+                    html += `   <div class="1fm-product flex cursor-pointer rounded-xl bg-white flex-shrink-0 shadow h-44 md:h-40" data-product-block="${product.uid}" >`;
 
                     // product Image
-                    html += `   <div class="h-full w-40 image-bg image-bg-2 shrink-0 rounded-l-xl">
+                    html += `   <div class=" h-full w-40 image-bg image-bg-2 shrink-0 rounded-l-xl">
                                         <div class="image-bg h-full w-full rounded-l-xl" style="background-image: url(${product.imageUrl})"> </div>
                                     </div>`;
 
                     // product content
-                    html += `<div class="p-4 flex flex-col flex-grow">`;
+                    html += `<div class="p-2.5 md:p-4 flex flex-col flex-grow">`;
 
                     //product name
                     html += `<div class="font-bold mb-2">${product.name}</div>`;
@@ -54,7 +47,7 @@ const menuDesignOne = ({ menu, categories, priceSymbol }) => {
                     product.tags && (html += productTagsHTML(product.tags));
 
                     //product description
-                    html += `<div class="opacity-60 leading-tight line-clamp-2 w-full">${product.description}</div>`;
+                    html += `<div class="opacity-60 leading-tight line-clamp-2 w-full hidden">${product.description}</div>`;
 
                     //product prices
                     html += `   <div class="mt-auto pt-1 ">
@@ -75,7 +68,7 @@ const menuDesignOne = ({ menu, categories, priceSymbol }) => {
                                             <div class="text-gray-700 ${
                                                 //class
                                                 product.options?.[0].salePrice &&
-                                                "!text-red-400 text-xs line-through text-opacity-70"
+                                                "!text-red-400 line-through"
                                             }
                                             "> 
                                                 ${product.options?.[0].price && priceSymbol} ${ product.options?.[0].price }
@@ -117,7 +110,7 @@ const menuDesignTwo = ({ menu, categories, priceSymbol }) => {
                 .map((product) => {
                     let html = "";
 
-                    html += `   <div class="swiper-slide 1fm-product !h-auto flex-auto w-full flex flex-col cursor-pointer rounded-xl bg-white flex-shrink-0 snap-start shadow-lg" data-product-block="${product.uid}" >`;
+                    html += `   <div class="swiper-slide 1fm-product !h-auto flex-auto w-full flex flex-col cursor-pointer rounded-xl bg-white flex-shrink-0 snap-start shadow" data-product-block="${product.uid}" >`;
 
                     // product Image
                     html += `   <div class="h-48 w-full image-bg image-bg-2 shrink-0 rounded-t-xl">
@@ -152,7 +145,7 @@ const menuDesignTwo = ({ menu, categories, priceSymbol }) => {
                                             <div class="text-gray-700 ${
                                                 //class
                                                 product.options?.[0].salePrice &&
-                                                "!text-red-400 text-xs line-through text-opacity-70"
+                                                "!text-red-400 line-through"
                                             }
                                             "> 
                                                 ${product.options?.[0].price && priceSymbol} ${ product.options?.[0].price }
@@ -235,7 +228,7 @@ const menuDesignTree = ({ menu, categories, priceSymbol }) => {
                 .map((product) => {
                     let html = "";
 
-                    html += `<div class="1fm-product p-4 md:p-6 flex flex-shrink-0">`;
+                    html += `<div class="1fm-product bg-white rounded-md shadow p-4 md:p-6 flex flex-shrink-0">`;
 
                     // product content
                     html += `<div class="w-full">`;
@@ -262,9 +255,9 @@ const menuDesignTree = ({ menu, categories, priceSymbol }) => {
                 })
                 .join("");
 
-            cat += `<div class="1fm-category my-8 first:mt-0 py-5 bg-white rounded-md" data-category>
+            cat += `<div class="1fm-category my-8 first:mt-0 py-5 bg-s rounded-md" data-category>
                         <h2 class="text-center text-2xl md:text-3xl mb-6 font-semibold uppercase p-4 w-full truncate">${category.name}</h2> 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-y-8"> ${prod} </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"> ${prod} </div>
                     </div>`;
             return cat;
         })
@@ -310,7 +303,7 @@ const menuDesignFour = ({ menu, categories, priceSymbol }) => {
             })
             .join("");
 
-    return menu.categories
+    let categoriesHTML =  menu.categories
         .map((category) => {
             let cat = "";
             let prod = "";
@@ -344,12 +337,15 @@ const menuDesignFour = ({ menu, categories, priceSymbol }) => {
                 })
                 .join("");
 
-            cat += `<div class="1fm-category my-20 first:mt-10 max-w-[768px] mx-auto" data-category>
-                        <h2 class="text-center text-2xl md:text-3xl mb-6 font-semibold uppercase bg-gray-100 border-2 border-gray-400 p-2">${category.name}</h2> 
+            cat += `
+                    <div class="1fm-category my-20 first:mt-10 max-w-[768px] mx-auto" data-category>
+                        <h2 class="text-center text-2xl md:text-3xl mb-6 font-semibold uppercase bg-gray-50 border border-gray-400 p-4">${category.name}</h2> 
                         <div class="grid grid-cols-1 gap-6 gap-y-8"> ${prod} </div>
                     </div>`;
             return cat;
         })
         .join("");
+
+    return `<div class="bg-white p-4 shadow rounded-md">${categoriesHTML}</div>`;
 };
 

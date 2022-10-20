@@ -45,7 +45,7 @@ const getModalContent = (productData, priceSymbol) => {
     let optionsHTML = (options) => (
         options.map(item => {
             return `<div class="flex justify-between mt-auto pt-2">
-                        ${item.size && `<div class="text-sm text-gray-400">${item.size}</div>`}
+                        <div class="text-sm text-gray-400">${item.size}</div>
                         <div class="font-bold flex gap-2 items-center">
                             ${
                                 item.salePrice &&

@@ -64,31 +64,30 @@ export const createMenu = ({ menu, version = 1, priceSymbol = "", }) => {
 };
 
 const prepareLayout = (oneFoodMenuNode, version) => {
-    
-    // menuBlock
-    //remove if exist
-    if (document.getElementById("1FoodMenuBlock") != null) {
-        document.getElementById("1FoodMenuBlock").remove();
-    }
+    //clean the block
+    oneFoodMenuNode.innerHTML = "";
 
+    //menuBlock
     let oneFoodMenuBlock = document.createElement("div");
     oneFoodMenuBlock.id = "1FoodMenuBlock";
     oneFoodMenuNode.appendChild(oneFoodMenuBlock);
 
-    __OneFoodMenuData__.oneFoodMenuBlock = oneFoodMenuBlock;
-    // oneFoodMenuBlock
+    window.__OneFoodMenuData__.oneFoodMenuBlock = oneFoodMenuBlock;
 
+    //menuModal
     if ([1, 2].includes(version)) {
-        // remove if exist
-        if (document.getElementById("1FoodMenuModal") != null) {
-            document.getElementById("1FoodMenuModal").remove();
-        }
         //create new
         let modalDiv = document.createElement("div");
         modalDiv.id = "1FoodMenuModal";
         oneFoodMenuNode.appendChild(modalDiv);
         window.__OneFoodMenuData__.oneFoodMenuModal = modalDiv;
     }
+
+    //menuCredit
+    let creditDiv = document.createElement("div");
+    creditDiv.id = "1FoodMenuCredit";
+    creditDiv.innerHTML = `<div class="p-4 text-center">Created by <strong><a href="https://1food.menu/?ref=1fm-free-templates" target="blank">1FoodMenu</a></strong></div>`;
+    oneFoodMenuNode.appendChild(creditDiv);
 };
 
 const productsByCategory = (menu) => {
