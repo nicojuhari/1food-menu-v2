@@ -34,32 +34,6 @@ export const createMenu = ({ menu, version = 1, priceSymbol = "", }) => {
     menuHTML = createMenuHTML({ menu, categories: groupedProducts, version, priceSymbol });
     mountOnPage(menuHTML);
 
-    //carousel
-    if (version == 2) {
-        import("swiper").then(({ default: Swiper, Navigation }) => {
-            new Swiper(".mySwiper", {
-                modules: [Navigation],
-                navigation: {
-                    nextEl: ".swiper-button-next",
-                    prevEl: ".swiper-button-prev",
-                },
-                spaceBetween: 15,
-                slidesPerView: 1.3,
-                breakpoints: {
-                    640: {
-                        slidesPerView: 2.3,
-                    },
-                    768: {
-                        slidesPerView: 3,
-                    },
-                    1024: {
-                        slidesPerView: 4,
-                    },
-                },
-            });
-        });
-    }
-
     events();
 };
 

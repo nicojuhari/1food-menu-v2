@@ -110,7 +110,7 @@ const menuDesignTwo = ({ menu, categories, priceSymbol }) => {
                 .map((product) => {
                     let html = "";
 
-                    html += `   <div class="swiper-slide 1fm-product !h-auto flex-auto w-full flex flex-col cursor-pointer rounded-xl bg-white flex-shrink-0 snap-start shadow" data-product-block="${product.uid}" >`;
+                    html += `   <div class="1fm-product !h-auto flex-auto flex flex-col cursor-pointer rounded-xl bg-white flex-shrink-0 snap-start shadow w-64" data-product-block="${product.uid}" >`;
 
                     // product Image
                     html += `   <div class="h-48 w-full image-bg image-bg-2 shrink-0 rounded-t-xl">
@@ -168,15 +168,9 @@ const menuDesignTwo = ({ menu, categories, priceSymbol }) => {
                 })
                 .join("");
 
-            cat += `<div class="1fm-category my-6 overflow-hidden" data-category>
+            cat += `<div class="1fm-category my-6 overflow-hidden relative" data-category>
                         <h2 class="1fm-category-title text-2xl font-bold">${category.name}</h2>
-                        <div class="swiper mySwiper">
-                            <div class="swiper-wrapper py-6"> ${prod} </div>
-                            <div class="swiper-navigation">
-                                <div class="hidden md:flex swiper-button-next"></div>
-                                <div class="hidden md:flex swiper-button-prev"></div>
-                            </div>
-                        </div>
+                        <div class="flex gap-4 overflow-x-auto snap-x snap-mandatory py-6 px-1">${prod}</div>
                     </div>`;
             return cat;
         })
