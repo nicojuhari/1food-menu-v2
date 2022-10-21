@@ -6,7 +6,7 @@ export const createMenu = ({ menu, version = 1, priceSymbol = "", }) => {
     // tests if global scope is bound to window
     if (!isBrowser()) return;
 
-    const oneFoodMenuNode = document.getElementById("1FoodMenu");
+    const oneFoodMenuNode = document.getElementById("OneFoodMenu");
 
     //validate
     if (oneFoodMenuNode == null) return;
@@ -43,7 +43,7 @@ const prepareLayout = (oneFoodMenuNode, version) => {
 
     //menuBlock
     let oneFoodMenuBlock = document.createElement("div");
-    oneFoodMenuBlock.id = "1FoodMenuBlock";
+    oneFoodMenuBlock.id = "OneFoodMenuBlock";
     oneFoodMenuNode.appendChild(oneFoodMenuBlock);
 
     window.__OneFoodMenuData__.oneFoodMenuBlock = oneFoodMenuBlock;
@@ -52,15 +52,15 @@ const prepareLayout = (oneFoodMenuNode, version) => {
     if ([1, 2].includes(version)) {
         //create new
         let modalDiv = document.createElement("div");
-        modalDiv.id = "1FoodMenuModal";
+        modalDiv.id = "OneFoodMenuModal";
         oneFoodMenuNode.appendChild(modalDiv);
         window.__OneFoodMenuData__.oneFoodMenuModal = modalDiv;
     }
 
     //menuCredit
     let creditDiv = document.createElement("div");
-    creditDiv.id = "1FoodMenuCredit";
-    creditDiv.innerHTML = `<div class="p-4 text-center">Created by <strong><a href="https://1food.menu/?ref=1fm-free-templates" target="blank">1FoodMenu</a></strong></div>`;
+    creditDiv.id = "OneFoodMenuCredit";
+    creditDiv.innerHTML = `<div class="p-4 text-center">Created by <strong><a href="https://1food.menu/?ref=1fm-free-templates" target="blank">OneFoodMenu</a></strong></div>`;
     oneFoodMenuNode.appendChild(creditDiv);
 };
 

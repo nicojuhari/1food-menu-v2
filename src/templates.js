@@ -110,10 +110,10 @@ const menuDesignTwo = ({ menu, categories, priceSymbol }) => {
                 .map((product) => {
                     let html = "";
 
-                    html += `   <div class="1fm-product !h-auto flex-auto flex flex-col cursor-pointer rounded-xl bg-white flex-shrink-0 snap-start shadow w-64" data-product-block="${product.uid}" >`;
+                    html += `<div class="1fm-product snap-center flex-auto flex flex-col cursor-pointer rounded-xl bg-white flex-shrink-0 shadow w-64" data-product-block="${product.uid}" >`;
 
                     // product Image
-                    html += `   <div class="h-48 w-full image-bg image-bg-2 shrink-0 rounded-t-xl">
+                    html += `<div class="h-48 w-full image-bg image-bg-2 shrink-0 rounded-t-xl">
                                     <div class="image-bg h-full w-full rounded-t-xl" style="background-image: url(${product.imageUrl})"> </div>
                                 </div>`;
 
