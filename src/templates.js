@@ -110,7 +110,7 @@ const menuDesignTwo = ({ menu, categories, priceSymbol }) => {
                 .map((product) => {
                     let html = "";
 
-                    html += `<div class="1fm-product snap-center flex-auto flex flex-col cursor-pointer rounded-xl bg-white flex-shrink-0 shadow w-64" data-product-block="${product.uid}" >`;
+                    html += `<div class="1fm-product snap-center flex flex-col cursor-pointer rounded-xl bg-white flex-shrink-0 shadow w-64" data-product-block="${product.uid}" >`;
 
                     // product Image
                     html += `<div class="h-48 w-full image-bg image-bg-2 shrink-0 rounded-t-xl">
@@ -190,9 +190,9 @@ const menuDesignTree = ({ menu, categories, priceSymbol }) => {
     let optionsHTML = (options) =>
         options
             .map((item) => {
-                return `<div class="font-medium flex justify-between py-2 border-t first:border-t-0 border-dotted border-gray-400 text-lg">
+                return `<div class="font-medium flex justify-between py-2 border-t first:border-t-0 border-dashed border-gray-300 text-lg">
                         <div class="text-gray-700">${item?.size}</div>
-                        <div class="flex gap-2 items-center">
+                        <div class="flex gap-2">
                             ${
                                 item.salePrice &&
                                 `<div class="text-gray-700">${item.salePrice && priceSymbol} ${
@@ -202,8 +202,7 @@ const menuDesignTree = ({ menu, categories, priceSymbol }) => {
                             ${
                                 item.price &&
                                 `<div class="text-gray-700 ${
-                                    item.salePrice &&
-                                    "!text-red-400 text-md line-through"
+                                    item.salePrice && "!text-red-400 text-md line-through"
                                 }">
                                     ${item.price && priceSymbol} ${item.price}
                                 </div>`
