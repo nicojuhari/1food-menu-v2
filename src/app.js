@@ -27,11 +27,18 @@ export const createMenu = ({ menu, version = 1, priceSymbol = "", }) => {
 
     prepareLayout(oneFoodMenuNode, version);
 
-    let groupedProducts = [];
+    
     let menuHTML = "";
 
-    groupedProducts = productsByCategory(menu);
-    menuHTML = createMenuHTML({ menu, categories: groupedProducts, version, priceSymbol });
+    let { groupedProducts, filteredCategories } = productsByCategory(menu);
+    
+    menuHTML = createMenuHTML({
+        categories: filteredCategories, 
+        products: groupedProducts,
+        version,
+        priceSymbol,
+    });
+
     mountOnPage(menuHTML);
 
     events();
@@ -60,21 +67,27 @@ const prepareLayout = (oneFoodMenuNode, version) => {
     //menuCredit
     let creditDiv = document.createElement("div");
     creditDiv.id = "OneFoodMenuCredit";
-    creditDiv.innerHTML = `<div class="p-4 text-center">Created by <strong><a href="https://1food.menu/?ref=1fm-free-templates" target="blank">OneFoodMenu</a></strong></div>`;
+    creditDiv.innerHTML = `<div class="p-4 text-center">Created with<strong><a href="https://1food.menu/?ref=1fm-free-templates" target="blank"> 1FoodMenu</a></strong> app</div>`;
     oneFoodMenuNode.appendChild(creditDiv);
 };
 
 const productsByCategory = (menu) => {
     let groupedProducts = {};
+    let filteredCategories = [];
 
     menu.products.forEach((product) => {
+
+        //this should run only once for each category
         if (!groupedProducts?.[product?.categoryId]) {
             groupedProducts[product.categoryId] = [];
+
+            filteredCategories.push({ ... menu.categories.find(c => c.uid === product.categoryId)})
         }
         groupedProducts[product.categoryId].push(product);
     });
 
-    return groupedProducts;
+    
+    return { groupedProducts, filteredCategories };
 };
 
 const mountOnPage = (html) => (window.__OneFoodMenuData__.oneFoodMenuBlock.innerHTML = html);

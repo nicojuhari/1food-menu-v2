@@ -30,14 +30,14 @@
         import { createMenu } from './main.js'
         let menuF
 
-        fetch('https://api.1food.menu/v1/menus/l6xo01vkohrt86rk3wf')
+        fetch('https://api.1food.menu/v1/menus/l9zwcpvlanynrmthvmb')
           .then(res => res.json())
           .then(menuData => {
 
             menuF = menuData
             createMenu({
               menu: menuData,
-              version: 2,
+              version: 1,
               priceSymbol: '$',
             })
                         

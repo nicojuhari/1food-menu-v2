@@ -10,7 +10,7 @@ export const createMenuHTML = (obj) => {
     return menuHTML;
 };
 
-const menuDesignOne = ({ menu, categories, priceSymbol }) => {
+const menuDesignOne = ({ products, categories, priceSymbol }) => {
 
     let productTagsHTML = (tags) =>
         ` <div class="flex gap-2 overflow-x-auto mb-2">
@@ -20,12 +20,12 @@ const menuDesignOne = ({ menu, categories, priceSymbol }) => {
                 })
                 .join("")}    
         </div>`;
-    return menu.categories
+    return categories
         .map((category) => {
             let cat = "";
             let prod = "";
 
-            prod = categories[category.uid]
+            prod = products[category.uid]
                 .map((product) => {
                     let html = "";
 
@@ -99,14 +99,14 @@ const menuDesignOne = ({ menu, categories, priceSymbol }) => {
         .join("");
 };
 
-const menuDesignTwo = ({ menu, categories, priceSymbol }) => {
+const menuDesignTwo = ({ products, categories, priceSymbol }) => {
 
-    return menu.categories
+    return categories
         .map((category) => {
             let cat = "";
             let prod = "";
 
-            prod = categories[category.uid]
+            prod = products[category.uid]
                 .map((product) => {
                     let html = "";
 
@@ -148,7 +148,9 @@ const menuDesignTwo = ({ menu, categories, priceSymbol }) => {
                                                 "!text-red-400 line-through"
                                             }
                                             "> 
-                                                ${product.options?.[0].price && priceSymbol} ${ product.options?.[0].price }
+                                                ${product.options?.[0].price && priceSymbol} ${
+                        product.options?.[0].price
+                    }
                                             </div>
                                             ${
                                                 product.options?.[1]
@@ -177,7 +179,7 @@ const menuDesignTwo = ({ menu, categories, priceSymbol }) => {
         .join("");
 };
 
-const menuDesignTree = ({ menu, categories, priceSymbol }) => {
+const menuDesignTree = ({ products, categories, priceSymbol }) => {
     let productTagsHTML = (tags) =>
         ` <div class="flex gap-2 overflow-x-auto mb-2">
             ${tags && tags
@@ -212,12 +214,12 @@ const menuDesignTree = ({ menu, categories, priceSymbol }) => {
             })
             .join("");
 
-    return menu.categories
+    return categories
         .map((category) => {
             let cat = "";
             let prod = "";
 
-            prod = categories[category.uid]
+            prod = products[category.uid]
                 .map((product) => {
                     let html = "";
 
@@ -230,14 +232,14 @@ const menuDesignTree = ({ menu, categories, priceSymbol }) => {
                     html += `<div class="font-bold mb-2 text-2xl line-clamp-2">${product.name}</div>`;
 
                     //productTagsHTML
-                    
+
                     product.tags && (html += productTagsHTML(product.tags));
 
                     //product description
                     html += `<div class="opacity-50 leading-tight w-full mb-2 text-lg">${product.description}</div>`;
 
                     html += `<div>`;
-                        product.options && (html += optionsHTML(product.options));
+                    product.options && (html += optionsHTML(product.options));
                     html += `</div>`;
 
                     //closing tags
@@ -257,7 +259,7 @@ const menuDesignTree = ({ menu, categories, priceSymbol }) => {
         .join("");
 };
 
-const menuDesignFour = ({ menu, categories, priceSymbol }) => {
+const menuDesignFour = ({ products, categories, priceSymbol }) => {
     let productTagsHTML = (tags) =>
         ` <div class="flex gap-2 overflow-x-auto mb-2">
             ${
@@ -296,12 +298,12 @@ const menuDesignFour = ({ menu, categories, priceSymbol }) => {
             })
             .join("");
 
-    let categoriesHTML =  menu.categories
+    let categoriesHTML =  categories
         .map((category) => {
             let cat = "";
             let prod = "";
 
-            prod = categories[category.uid]
+            prod = products[category.uid]
                 .map((product) => {
                     let html = "";
 
