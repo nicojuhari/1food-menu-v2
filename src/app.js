@@ -75,18 +75,18 @@ const productsByCategory = (menu) => {
     let groupedProducts = {};
     let filteredCategories = [];
 
-    menu.products.forEach((product) => {
+    menu.categories.forEach((category) => {
 
         //this should run only once for each category
-        if (!groupedProducts?.[product?.categoryId]) {
-            groupedProducts[product.categoryId] = [];
-
-            filteredCategories.push({ ... menu.categories.find(c => c.uid === product.categoryId)})
+        if (!groupedProducts?.[category.uid]) {
+            groupedProducts[category.uid] = [];
         }
-        groupedProducts[product.categoryId].push(product);
+
+        groupedProducts[category.uid] = [...menu.products.filter((p) => p.categoryId === category.uid)]
+
+        if (groupedProducts[category.uid].length) filteredCategories.push(category);
     });
 
-    
     return { groupedProducts, filteredCategories };
 };
 
