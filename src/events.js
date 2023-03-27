@@ -1,7 +1,7 @@
 import { showModal } from './modal';
 export const events = () => {
     
-    let { version } = __OneFoodMenuData__;
+    let { version } = window.__OneFoodMenu__.configs;
     
     if(version == 1 || version == 2) attachEvents()
 

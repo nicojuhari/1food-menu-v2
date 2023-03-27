@@ -1,5 +1,11 @@
+import {
+    tagsHTML, allergensHTML, optionsHTML
+} from './templates';
+
 export const showModal = (product_id) => {
-    let { products, version, priceSymbol } = __OneFoodMenuData__;
+    let { products } = window.__OneFoodMenu__;
+    let { version, priceSymbol } = window.__OneFoodMenu__.configs;
+
     let productData = products.filter((product) => product.uid === product_id);
 
     let modalContent = ''
@@ -9,13 +15,13 @@ export const showModal = (product_id) => {
     let html = modalWrapper(modalContent);
 
     document.body.classList.add('modal-open');
-    __OneFoodMenuData__.oneFoodMenuModal.innerHTML = html;
+    window.__OneFoodMenu__.nodes.menuModal.innerHTML = html;
 
     //close modal
     let closeModaEls = document.querySelectorAll('[data-close-modal]');
     closeModaEls.forEach((element) => {
         element.addEventListener("click", (e) => {
-            __OneFoodMenuData__.oneFoodMenuModal.innerHTML = "";
+            window.__OneFoodMenu__.nodes.menuModal.innerHTML = "";
             document.body.classList.remove("modal-open");
         });
     });
@@ -33,49 +39,25 @@ const getModalContent = (productData, priceSymbol) => {
         </div>`
     );
 
-    let productTagsHTML = () => (
-        ` <div class="flex gap-2 overflow-x-auto">
-            ${ product.tags.map(tag => {
-                    return `<div class="text-xs px-2 py-1 rounded-full bg-green-600 bg-opacity-10 text-green-600">${ tag }</div>`;
-                }).join('') 
-            }    
-        </div>`
-    )
-
-    let optionsHTML = (options) => (
-        options.map(item => {
-            return `<div class="flex justify-between mt-auto pt-2">
-                        <div class="text-sm text-gray-400">${item.size}</div>
-                        <div class="font-bold flex gap-2 items-center">
-                            ${
-                                item.salePrice &&
-                                `<div class="text-gray-700">${item.salePrice && priceSymbol} ${item.salePrice}</div>`
-                            }
-                            ${
-                                item.price && 
-                                `<div class="text-gray-700 ${ item.salePrice && "!text-red-400 text-xs line-through text-opacity-70"}">
-                                    ${item.price && priceSymbol} ${item.price}
-                                </div>`
-                            }
-                        </div>
-                    </div>`;
-        }).join('')    
-    );
-
     html += ` <div class="flex flex-col bg-white flex-shrink-0 rounded-t-xl">
                 ${ productImageHTML() }
                 <div class="p-4 flex flex-col flex-grow">
                     <div class="font-bold my-2">${product.name}</div>`;
                     
-                    //tags
-                    product.tags?.length && (html += productTagsHTML());
+                    //productTags && Allergens
+                    html += `<div class="flex gap-2 flex-wrap overflow-hidden max-w-full pb-2">`;
+                    html += allergensHTML(product.allergens);
+                    product.tags && (html += tagsHTML(product.tags));
+                    html += `</div>`;
                     
                     //descriptiom
                     html+=` <div class="opacity-60 text leading-tight my-2">${ product.description }</div>`;
 
                     //prices
-                    product.options && (html += optionsHTML(product.options));
-            
+                    html += `<div>`;
+                        product.options && (html += optionsHTML(product.options, true));
+                    html += `</div>`;
+
         html += `</div>`;
     html += `</div>`;
 
