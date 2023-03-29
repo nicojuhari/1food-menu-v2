@@ -3,7 +3,7 @@ export function addAllergensOnPage (allergens) {
     let title = window.__OneFoodMenu__.configs.allergens.title;
 
     let allergensHTML = `<div class="menu-allergens my-10">
-                            <h3 class="text-2xl font-bold text-center my-6">${title}</h3>
+                            <h3 class="text-2xl font-bold my-6">${title}</h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-2">`;
 
     allergens.forEach((allergen) => {

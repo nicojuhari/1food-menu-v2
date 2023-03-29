@@ -52,7 +52,7 @@ export function createMenu (menu = [], clientConfigs = {}) {
         }
     };
 
-    prepareLayout(oneFoodMenuNode, configs.version);
+    prepareLayout(oneFoodMenuNode);
 
     let menuHTML = "";
 
@@ -68,14 +68,14 @@ export function createMenu (menu = [], clientConfigs = {}) {
     mountOnPage(window.__OneFoodMenu__.nodes.menuItems, menuHTML);
 
     //add allergens
-    if (menu.allergens) {
+    if (menu.allergens?.length) {
         addAllergensOnPage(menu.allergens);
     }
 
     events();
 };
 
-const prepareLayout = (oneFoodMenuNode, version) => {
+const prepareLayout = (oneFoodMenuNode) => {
     //clean the main node
     oneFoodMenuNode.innerHTML = "";
 
