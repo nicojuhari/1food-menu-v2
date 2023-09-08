@@ -56,7 +56,7 @@ export let optionsHTML = (options, inModal = false) => {
                                     ${priceSymbol} ${item.salePrice}
                                 </div>`;
                         html += `<div class="text-red-400 line-through opacity-70 text-sm">
-                                    ${priceSymbol} ${item.salePrice}
+                                    ${priceSymbol} ${item.price}
                                 </div>`;
                     } else {
                         html += `<div class="text-gray-700 font-medium text-lg">
