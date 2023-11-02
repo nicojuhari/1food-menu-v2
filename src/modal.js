@@ -34,24 +34,26 @@ const getModalContent = (productData, priceSymbol) => {
     let html = ''
 
     let productImageHTML = () => (
-        `<div class="h-80 w-full image-bg image-bg-2 shrink-0 border-b border-opacity-50">
-            <div class="image-bg h-full w-full rounded-t-xl" style="background-image: url(${product.imageUrl})"></div>
+        `<div class="image-bg image-bg-2">
+            <div class="image-bg" style="background-image: url(${product.imageUrl})"></div>
         </div>`
     );
 
-    html += ` <div class="flex flex-col bg-white flex-shrink-0 rounded-t-xl">
+    html += ` <div>
                 ${ productImageHTML() }
-                <div class="p-4 flex flex-col flex-grow">
-                    <div class="font-bold my-2">${product.name}</div>`;
+                <div class="ofm-modal-content__text">
+                    <div class="ofm-product__title">${product.name}</div>`;
                     
                     //productTags && Allergens
-                    html += `<div class="flex gap-2 flex-wrap overflow-hidden max-w-full pb-2">`;
-                    html += allergensHTML(product.allergens);
-                    product.tags && (html += tagsHTML(product.tags));
-                    html += `</div>`;
+                    if (product.allergens?.length || product.tags?.length) {
+                        html += `<div class="ofm-product__allergens">`;
+                        html += allergensHTML(product.allergens);
+                        html += tagsHTML(product.tags);
+                        html += `</div>`;
+                    }
                     
                     //descriptiom
-                    html+=` <div class="opacity-60 text leading-tight my-2">${ product.description }</div>`;
+                    html += ` <div class="ofm-product__desc">${product.description}</div>`;
 
                     //prices
                     html += `<div>`;
@@ -68,17 +70,17 @@ const getModalContent = (productData, priceSymbol) => {
 
 
 const modalWrapper = (content) => {
-    return ` <div class="modal fixed z-20 flex items-end justify-center top-0 left-0 w-full h-screen p-2 md:p-4 fade-in">
-        <div class="modal-backdrop fixed h-full w-full min-h-screen top-0 left-0 bg-black bg-opacity-30" data-close-modal></div>
-        <div class="modal-container bg-white rounded-xl z-10 m-auto w-full flex flex-col flex-1 max-h-full relative overflow-hidden max-w-[375px]">
-            <div class="modal-close cursor-pointer bg-white text-black absolute text-opacity-80 transition-all p-2 rounded-full right-2 top-2" data-close-modal>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+    return ` <div class="ofm-modal">
+        <div class="ofm-modal-backdrop" data-close-modal></div>
+        <div class="ofm-modal-container">
+            <div class="ofm-modal-close" data-close-modal>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </div>
-            <div class="modal-content overflow-y-auto h-full flex-1">
-                <div class="overflow-y-hidden">
+            <div class="ofm-modal-content">
+                <div class="ofm-overflow-y-hidden">
                     ${content}
                 </div>
             </div>

@@ -1,10 +1,10 @@
 import { createMenuHTML } from "./templates";
 import { events } from "./events";
-import { mergeDeep, isBrowser, mountOnPage, productsByCategory } from "./helpers";
+import { mergeDeep, isBrowser, mountOnPage, productsByCategory, toggleDesignClass } from "./helpers";
 import { addAllergensOnPage } from "./allergensTemplate";
 
 
-export function createMenu (menu = [], clientConfigs = {}) {
+export function createMenu (menu = {}, clientConfigs = {}) {
     
     // tests if global scope is bound to window
     if (!isBrowser()) return;
@@ -29,17 +29,18 @@ export function createMenu (menu = [], clientConfigs = {}) {
             title: "Allergens",
             description: "Some description about allergens",
         },
+        ...menu.configs,
     };
 
     //deep merge the configs with the client configs
+    // configs = { ...configs, ...menu.dbConfigs };
     configs = mergeDeep(configs, clientConfigs);
 
     if (
         Object.entries(menu).length == 0 ||
         menu?.products?.length == 0 ||
         menu?.categories?.length == 0
-    )
-        return;
+    ) return;
 
     //create global object with all the data
     window.__OneFoodMenu__ = {
@@ -79,20 +80,20 @@ const prepareLayout = (oneFoodMenuNode) => {
     //clean the main node
     oneFoodMenuNode.innerHTML = "";
 
-    let nodes = [
-        "Items",
-        "Allergens",
-        "Credits",
-        "Modal",
-    ];
+    oneFoodMenuNode.classList.add("one-food-menu")
+
+    //ofm-design-v2 | v3, ...
+    toggleDesignClass(oneFoodMenuNode, window.__OneFoodMenu__.configs.version);
+
+    let nodes = ["Items", "Allergens", "Credits", "Modal"];
 
     nodes.forEach((node) => {
         let nodeEl = document.createElement("div");
         nodeEl.id = `OneFoodMenu${node}`;
-        window.__OneFoodMenu__.nodes['menu' + node] = nodeEl;
+        window.__OneFoodMenu__.nodes["menu" + node] = nodeEl;
 
-        if (node == "Credits") {
-            nodeEl.innerHTML = `<div class="p-4 text-center">Created with<strong><a href="https://1food.menu/?ref=1fm-free-templates" target="blank"> 1FoodMenu</a></strong> app</div>`;
+        if (node == "Credits" && !window.__OneFoodMenu__.configs?.isSubscribed) {
+            nodeEl.innerHTML = `<div class="p-4 text-center">Created with<strong><a href="https://1food.menu/?ref=ofm-free-templates" target="blank"> 1FoodMenu</a></strong> app</div>`;
         }
 
         oneFoodMenuNode.appendChild(nodeEl);

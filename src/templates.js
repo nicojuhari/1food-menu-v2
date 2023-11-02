@@ -17,7 +17,7 @@ export const allergensHTML = (prod_allergens) => {
     if (prod_allergens?.length == 0 || !prod_allergens) return "";
 
     allergensHTML += prod_allergens.map((allergen) => {
-        return `<div data-prod-allergen class="cursor-pointer flex-shrink-0 text-xs p-1 bg-slate-100 rounded-full border w-6 h-6 grid place-content-center">${
+        return `<div data-prod-allergen class="ofm-allergen__item">${
             allergens.find((al) => al.uid == allergen).name
         }</div>`;
     })
@@ -28,8 +28,9 @@ export const allergensHTML = (prod_allergens) => {
 };
 
 export const tagsHTML = (tags) => {
+    if (tags?.length == 0 || !tags) return "";
     return tags.map((tag) => {
-        return ` <div data-prod-tag class="flex text-xs flex-shrink-0 px-2 py-1 rounded-full bg-green-600 bg-opacity-10 text-green-600">${tag}</div>`;
+        return ` <div data-prod-tag class="ofm-tag">${tag}</div>`;
     }).join("")
 }
 
@@ -44,28 +45,27 @@ export let optionsHTML = (options, inModal = false) => {
                return html;
             }
             
-            html += `<div class="flex justify-between items-center border-t first:border-t-0 border-dashed border-gray-300 
-            ${ (version == 1 || version == 2) && !inModal ? 'py-0' : 'py-2'}">
+            html += `<div class="ofm-product__options">
                         
-                        <div class="text-gray-500 text-sm">${item?.size}</div>`;
+                        <div class="ofm-product__size ofm-text-sm">${item?.size}</div>`;
                         
-                html += `<div class="flex gap-2 items-center">`;
+                html += `<div class="ofm-product__price">`;
                 
                     if(item.salePrice) {
-                        html += `<div class="text-gray-700 font-medium text-lg">
+                        html += `<div class="ofm-price ofm-text-lg">
                                     ${priceSymbol} ${item.salePrice}
                                 </div>`;
-                        html += `<div class="text-red-400 line-through opacity-70 text-sm">
+                        html += `<div class="ofm-price ofm-price--old ofm-text-sm">
                                     ${priceSymbol} ${item.price}
                                 </div>`;
                     } else {
-                        html += `<div class="text-gray-700 font-medium text-lg">
+                        html += `<div class="ofm-price ofm-text-lg">
                                     ${priceSymbol} ${item.price}
                                 </div>`;
                     }
 
                     if ((version == 1 || version == 2) && !inModal && options[1]) {
-                        html += `<span class="arrow-down rounded bg-slate-200"></span>`;
+                        html += `<div class="arrow-down rounded bg-slate-200"></div>`;
                     }
 
                 html += `</div>`;
@@ -86,32 +86,36 @@ const menuDesignOne = ({ products, categories }) => {
                 .map((product) => {
                     let html = "";
 
-                    html += `   <div class="1fm-product flex cursor-pointer rounded-xl bg-white flex-shrink-0 shadow h-44" data-product-block="${product.uid}" >`;
+                    html += `   <div class="ofm-product" data-product-block="${product.uid}" >`;
 
                     // product Image
-                    html += `   <div class=" h-full w-40 image-bg image-bg-2 shrink-0 rounded-l-xl">
+                    html += `   <div class="h-full w-40 image-bg image-bg-2 shrink-0 rounded-l-xl">
                                         <div class="image-bg h-full w-full rounded-l-xl" style="background-image: url(${product.imageUrl})"> </div>
                                     </div>`;
 
                     // product content
-                    html += `<div class="p-2.5 md:p-4 flex flex-col flex-grow overflow-hidden">`;
+                    html += `<div class="ofm-product__text">`;
 
                     //product name
-                    html += `<div class="font-bold mb-2">${product.name}</div>`;
+                    html += `<div class="ofm-product__title line-clamp-1">${product.name}</div>`;
 
                     //productTags && Allergens
-                    html += `<div class="flex gap-2 overflow-x-auto overflow-hidden max-w-full pb-2">`;
-                    html += allergensHTML(product.allergens);
-                    product.tags && (html += tagsHTML(product.tags));
-                    html += `</div>`;
 
+                    if (product.allergens?.length || product.tags?.length) {
+                        html += `<div class="ofm-product__allergens">`;
+                            html += allergensHTML(product.allergens);
+                            html += tagsHTML(product.tags);
+                        html += `</div>`;
+                    }
+                    
                     //product description
-                    html += `<div class="mt-auto opacity-60 leading-tight line-clamp-2 w-full hidden text-base">${product.description}</div>`;
+                    html += `<div class="ofm-product__desc line-clamp-2">${product.description}</div>`;
 
                     //prices
-                    html += `<div class="pt-4">`;
-                        product.options && (html += optionsHTML(product.options));
-                    html += `</div>`;
+                    product.options && (html += optionsHTML(product.options));
+                    // html += `<div class="ofm-product__price">`;
+                        
+                    // html += `</div>`;
                     
 
                     //closing tags
@@ -122,9 +126,9 @@ const menuDesignOne = ({ products, categories }) => {
                 })
                 .join("");
 
-            cat += `<div class="1fm-category my-6" data-category>
-                        <h2 class="1fm-category-title text-2xl font-bold">${category.name}</h2> 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2"> ${prod} </div>
+            cat += `<div class="ofm-category my-6" data-category>
+                        <h2 class="ofm-category__title">${category.name}</h2> 
+                        <div class="ofm-category__items"> ${prod} </div>
                     </div>`;
             return cat;
         })
@@ -142,7 +146,7 @@ const menuDesignTwo = ({ products, categories, priceSymbol }) => {
                 .map((product) => {
                     let html = "";
 
-                    html += `<div class="1fm-product snap-center flex flex-col cursor-pointer rounded-xl bg-white flex-shrink-0 shadow w-72" data-product-block="${product.uid}" >`;
+                    html += `<div class="ofm-product snap-center flex flex-col cursor-pointer rounded-xl bg-white flex-shrink-0 shadow w-72" data-product-block="${product.uid}" >`;
 
                     // product Image
                     html += `<div class="h-52 w-full image-bg image-bg-2 shrink-0 rounded-t-xl">
@@ -179,8 +183,8 @@ const menuDesignTwo = ({ products, categories, priceSymbol }) => {
                 })
                 .join("");
 
-            cat += `<div class="1fm-category my-6 overflow-hidden relative" data-category>
-                        <h2 class="1fm-category-title text-2xl font-bold">${category.name}</h2>
+            cat += `<div class="ofm-category" data-category>
+                        <h2 class="ofm-category-title">${category.name}</h2>
                         <div class="flex gap-4 overflow-x-auto snap-x snap-mandatory py-6 px-1">${prod}</div>
                     </div>`;
             return cat;
@@ -198,7 +202,7 @@ const menuDesignTree = ({ products, categories }) => {
                 .map((product) => {
                     let html = "";
 
-                    html += `<div class="1fm-product bg-white rounded-md shadow p-4 md:p-6 flex flex-shrink-0 relative">`;
+                    html += `<div class="ofm-product bg-white rounded-md shadow p-4 md:p-6 flex flex-shrink-0 relative">`;
 
                     // product content
                     html += `<div class="w-full flex flex-col">`;
@@ -229,9 +233,9 @@ const menuDesignTree = ({ products, categories }) => {
                 })
                 .join("");
 
-            cat += `<div class="1fm-category my-8 first:mt-0 py-5 bg-s rounded-md" data-category>
+            cat += `<div class="ofm-category" data-category>
                         <h2 class="text-center text-2xl md:text-3xl mb-6 font-semibold uppercase p-4 w-full truncate">${category.name}</h2> 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"> ${prod} </div>
+                        <div class="ofm-category__items"> ${prod} </div>
                     </div>`;
             return cat;
         })
@@ -249,7 +253,7 @@ const menuDesignFour = ({ products, categories }) => {
                 .map((product) => {
                     let html = "";
 
-                    html += `<div class="1fm-product flex flex-shrink-0 p-2 md:p-4">`;
+                    html += `<div class="ofm-product flex flex-shrink-0 p-2 md:p-4">`;
 
                     // product content
                     html += `<div class="w-full flex flex-col">`;
@@ -282,9 +286,9 @@ const menuDesignFour = ({ products, categories }) => {
                 .join("");
 
             cat += `
-                    <div class="1fm-category my-20 first:mt-10 max-w-[768px] mx-auto" data-category>
-                        <h2 class="text-center text-2xl md:text-3xl mb-6 font-semibold uppercase bg-gray-50 border border-gray-400 p-4">${category.name}</h2> 
-                        <div class="grid grid-cols-1 gap-6 gap-y-8"> ${prod} </div>
+                    <div class="ofm-category my-20 first:mt-10 max-w-[768px] mx-auto" data-category>
+                        <h2 class="ofm-category__title text-center text-2xl md:text-3xl mb-6 font-semibold uppercase bg-gray-50 border border-gray-400 p-4">${category.name}</h2> 
+                        <div class="ofm-category__items"> ${prod} </div>
                     </div>`;
             return cat;
         })

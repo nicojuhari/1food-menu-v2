@@ -1,0 +1,81 @@
+
+.ofm-modal {
+    padding: .5rem;
+    width: 100%;
+    min-height: 100dvh;
+    display: flex;
+    z-index: 99;
+    left: 0;
+    top: 0;
+    position: fixed;
+
+    &-backdrop {
+        background-color: rgba(0, 0, 0, 0.3);
+        width: 100%;
+        min-height: 100dvh;
+        height: 100%;
+        left: 0;
+        top: 0;
+        position: fixed;
+    }
+
+    &-container {
+        background-color: #fff;
+        border-radius: .75rem;
+        overflow: hidden;
+        flex-direction: column;
+        flex: 1 1 0%;
+        max-width: 375px;
+        width: 100%;
+        max-height: 100%;
+        display: flex;
+        margin: auto;
+        z-index: 10;
+        position: relative;
+        animation: modalAnimation .4s forwards;
+    }
+
+    &-close {
+        padding: .5rem;
+        background-color: #fff;
+        top: .5rem;
+        right: .5rem;
+        position: absolute;
+        cursor: pointer;
+        border-radius: 9999px;
+        display: flex;
+
+        svg {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+    }
+
+    &-content {
+        overflow-y: auto;
+        flex: 1 1 0%;
+        height: 100%;
+
+        .image-bg {
+            height: 20rem;
+            width: 100%;
+            flex-shrink: 0;
+            border-radius: 0;
+        }
+
+        &__text {
+            padding: 1rem;
+            flex-direction: column;
+            flex-grow: 1;
+            display: flex;
+        }
+
+                .ofm-product__options {
+                    padding: 0.5rem 0;
+                }
+
+        .ofm-product__options:not(:first-child) {
+            border-top:1px dashed $border-color;
+        }
+    }
+}
