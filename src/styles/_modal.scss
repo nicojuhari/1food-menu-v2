@@ -27,12 +27,12 @@
         flex: 1 1 0%;
         max-width: 375px;
         width: 100%;
-        max-height: 100%;
+        max-height: calc(100dvh - 1rem);
         display: flex;
         margin: auto;
         z-index: 10;
         position: relative;
-        animation: modalAnimation .4s forwards;
+        box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
     }
 
     &-close {
@@ -76,6 +76,10 @@
 
         .ofm-product__options:not(:first-child) {
             border-top:1px dashed $border-color;
+        }
+
+        .ofm-product__title {
+            margin-bottom: 1rem;
         }
     }
 }

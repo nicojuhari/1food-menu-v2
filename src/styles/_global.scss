@@ -110,21 +110,10 @@ body.modal-open {
         }
 }
 
-.ofm-category {
+.ofm-category, .ofm-allergens {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
     position: relative;
-
-    .ofm-design-v2 & {
-        overflow: hidden;
-    }
-
-    .ofm-design-v4 & {
-        margin: 0 auto 5rem auto;
-        max-width: 768px;
-    }
-
-         
 
     &__title {
         font-weight: 700;
@@ -145,19 +134,12 @@ body.modal-open {
 }
 
 .ofm-product {
-    --ofm-shadow: 0 1px 3px 0 rgb(0 0 0 / .1), 0 1px 2px -1px rgb(0 0 0 / .1);
-    --ofm-ring-offset-shadow: 0 0 #0000;
-    --ofm-ring-shadow: 0 0 #0000;
-
     background-color: #fff;
     border-radius: 0.75rem;
     cursor: pointer;
     height: 11rem;
     display: flex;
-    box-shadow: var(--ofm-ring-offset-shadow, 0 0 #0000),
-        var(--ofm-ring-shadow, 0 0 #0000),
-        var(--ofm-shadow);
-
+    border: 1px solid var(--ofm-border-color);
 
     &__text {
         width: 100%;
@@ -203,7 +185,7 @@ body.modal-open {
         justify-content: space-between;
         padding-top: 1rem;
         margin-top: auto;
-            flex-shrink: 0;
+        flex-shrink: 0;
     }
 
     &__price {

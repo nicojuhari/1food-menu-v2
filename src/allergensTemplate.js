@@ -2,14 +2,14 @@ export function addAllergensOnPage (allergens) {
 
     let title = window.__OneFoodMenu__.configs.allergens.title;
 
-    let allergensHTML = `<div class="menu-allergens my-10">
-                            <h3 class="text-2xl font-bold my-6">${title}</h3>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-2">`;
+    let allergensHTML = `<div class="ofm-allergens">
+                            <h3 class="ofm-allergens__title">${title}</h3>
+                            <div class="ofm-allergens__items">`;
 
     allergens.forEach((allergen) => {
-        allergensHTML += `  <div class="flex py-2 gap-x-4 items-center">
-                                <div class="overflow-hidden truncate flex-shrink-0 w-12 h-12 grid place-content-center bg-slate-200 rounded-full border-2 border-slate-400 font-medium text-slate-500">${allergen.name}</div>
-                                <div>${allergen.description}</div>
+        allergensHTML += `  <div class="ofm-allergens__item">
+                                <div class="ofm-allergens__name">${allergen.name}</div>
+                                <div class="ofm-allergens__desc">${allergen.description}</div>
                             </div>`;
     });
 
