@@ -1,11 +1,11 @@
 export const createMenuHTML = (obj) => {
-    let { version } = obj;
+    let version = window.__OneFoodMenu__.configs?.version
     let menuHTML = "";
 
     if (version == 1) menuHTML = menuDesignOne(obj);
-    if (version == 2) menuHTML = menuDesignTwo(obj);
-    if (version == 3) menuHTML = menuDesignTree(obj);
-    if (version == 4) menuHTML = menuDesignFour(obj);
+    if (version == 2) menuHTML = menuDesignOne(obj);
+    if (version == 3) menuHTML = menuDesignOne(obj);
+    if (version == 4) menuHTML = menuDesignOne(obj);
 
     return menuHTML;
 };
@@ -45,7 +45,7 @@ export let optionsHTML = (options, inModal = false) => {
                return html;
             }
             
-            html += `<div class="ofm-product__options">
+            html += `<div class="ofm-product__options-item">
                         
                         <div class="ofm-product__size ofm-text-sm">${item?.size}</div>`;
                         
@@ -76,7 +76,7 @@ export let optionsHTML = (options, inModal = false) => {
     };
 
 const menuDesignOne = ({ products, categories }) => {
-
+    let version = window.__OneFoodMenu__.configs.version;
     return categories
         .map((category) => {
             let cat = "";
@@ -89,9 +89,11 @@ const menuDesignOne = ({ products, categories }) => {
                     html += `   <div class="ofm-product" data-product-block="${product.uid}" >`;
 
                     // product Image
-                    html += `   <div class="h-full w-40 image-bg image-bg-2 shrink-0 rounded-l-xl">
-                                        <div class="image-bg h-full w-full rounded-l-xl" style="background-image: url(${product.imageUrl})"> </div>
-                                    </div>`;
+                    if (version == 1 || version == 2) {
+                        html += `   <div class="image-bg image-bg-2">
+                                    <div class="image-bg" style="background-image: url(${product.imageUrl})"> </div>
+                                </div>`;
+                    }
 
                     // product content
                     html += `<div class="ofm-product__text">`;
@@ -112,21 +114,20 @@ const menuDesignOne = ({ products, categories }) => {
                     html += `<div class="ofm-product__desc line-clamp-2">${product.description}</div>`;
 
                     //prices
-                    product.options && (html += optionsHTML(product.options));
-                    // html += `<div class="ofm-product__price">`;
-                        
-                    // html += `</div>`;
+                    html += `<div class="ofm-product__options">`;
+                        product.options && (html += optionsHTML(product.options));
+                    html += `</div>`;
                     
 
                     //closing tags
-                    html += `   </div>
+                    html += `</div>
                         </div>`;
 
                     return html;
                 })
                 .join("");
 
-            cat += `<div class="ofm-category my-6" data-category>
+            cat += `<div class="ofm-category" data-category>
                         <h2 class="ofm-category__title">${category.name}</h2> 
                         <div class="ofm-category__items"> ${prod} </div>
                     </div>`;
@@ -135,62 +136,60 @@ const menuDesignOne = ({ products, categories }) => {
         .join("");
 };
 
-const menuDesignTwo = ({ products, categories, priceSymbol }) => {
+// const menuDesignTwo = ({ products, categories }) => {
 
-    return categories
-        .map((category) => {
-            let cat = "";
-            let prod = "";
+//     return categories
+//         .map((category) => {
+//             let cat = "";
+//             let prod = "";
 
-            prod = products[category.uid]
-                .map((product) => {
-                    let html = "";
+//             prod = products[category.uid]
+//                 .map((product) => {
+//                     let html = "";
 
-                    html += `<div class="ofm-product snap-center flex flex-col cursor-pointer rounded-xl bg-white flex-shrink-0 shadow w-72" data-product-block="${product.uid}" >`;
+//                     html += `<div class="ofm-product" data-product-block="${product.uid}" >`;
 
-                    // product Image
-                    html += `<div class="h-52 w-full image-bg image-bg-2 shrink-0 rounded-t-xl">
-                                    <div class="image-bg h-full w-full rounded-t-xl" style="background-image: url(${product.imageUrl})"> </div>
-                                </div>`;
+//                     // product Image
+//                     html += `<div class="image-bg image-bg-2">
+//                                     <div class="image-bg" style="background-image: url(${product.imageUrl})"> </div>
+//                                 </div>`;
 
-                    // product content
-                    html += `<div class="p-4 flex flex-col flex-grow">`;
+//                     // product content
+//                     html += `<div class="ofm-product__text">`;
 
-                    //product name
-                    html += `<div class="font-bold pb-2">${product.name}</div>`;
+//                     //product name
+//                     html += `<div class="ofm-product__title">${product.name}</div>`;
 
-                    //productTags && Allergens
-                    if(product.allergens?.length > 0 || product.tags?.length > 0) {
-                        html += `<div class="flex gap-2 overflow-x-auto overflow-hidden max-w-full my-2">`;
-                        html += allergensHTML(product.allergens);
-                        product.tags && (html += tagsHTML(product.tags));
-                        html += `</div>`;
-                    }
+//                     //productTags && Allergens
+//                     if (product.allergens?.length || product.tags?.length) {
+//                         html += `<div class="ofm-product__allergens">`;
+//                         html += allergensHTML(product.allergens);
+//                         html += tagsHTML(product.tags);
+//                         html += `</div>`;
+//                     }
 
-                    //product description
-                    html += `<div class="opacity-60 leading-tight line-clamp-2 w-full mt-auto">${product.description}</div>`;
+//                     //product description
+//                     html += `<div class="ofm-product__desc">${product.description}</div>`;
 
-                    //product prices
-                    html += `<div class="pt-4">`;
-                        product.options && (html += optionsHTML(product.options));
-                    html += `</div>`;
+//                     //product prices
+//                     product.options && (html += optionsHTML(product.options));
 
-                    //closing tags
-                    html += `   </div>
-                        </div>`;
+//                     //closing tags
+//                     html += `   </div>
+//                         </div>`;
 
-                    return html;
-                })
-                .join("");
+//                     return html;
+//                 })
+//                 .join("");
 
-            cat += `<div class="ofm-category" data-category>
-                        <h2 class="ofm-category-title">${category.name}</h2>
-                        <div class="flex gap-4 overflow-x-auto snap-x snap-mandatory py-6 px-1">${prod}</div>
-                    </div>`;
-            return cat;
-        })
-        .join("");
-};
+//             cat += `<div class="ofm-category" data-category>
+//                         <h2 class="ofm-category__title">${category.name}</h2>
+//                         <div class="ofm-category__items">${prod}</div>
+//                     </div>`;
+//             return cat;
+//         })
+//         .join("");
+// };
 
 const menuDesignTree = ({ products, categories }) => {
     return categories

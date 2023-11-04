@@ -24,7 +24,7 @@ export function createMenu (menu = {}, clientConfigs = {}) {
 
     let configs = {
         version: 1,
-        priceSymbol: "$",
+        priceSymbol: "",
         allergens: {
             title: "Allergens",
             description: "Some description about allergens",
@@ -62,8 +62,6 @@ export function createMenu (menu = {}, clientConfigs = {}) {
     menuHTML = createMenuHTML({
         categories: filteredCategories,
         products: groupedProducts,
-        version: configs.version,
-        priceSymbol: configs.priceSymbol,
     });
 
     mountOnPage(window.__OneFoodMenu__.nodes.menuItems, menuHTML);
@@ -93,7 +91,7 @@ const prepareLayout = (oneFoodMenuNode) => {
         window.__OneFoodMenu__.nodes["menu" + node] = nodeEl;
 
         if (node == "Credits" && !window.__OneFoodMenu__.configs?.isSubscribed) {
-            nodeEl.innerHTML = `<div class="p-4 text-center">Created with<strong><a href="https://1food.menu/?ref=ofm-free-templates" target="blank"> 1FoodMenu</a></strong> app</div>`;
+            nodeEl.innerHTML = `<div class="ofm-credits">Created with<strong><a href="https://1food.menu/?ref=ofm-free-templates" target="blank"> 1FoodMenu</a></strong></div>`;
         }
 
         oneFoodMenuNode.appendChild(nodeEl);

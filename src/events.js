@@ -16,6 +16,10 @@ const attachEvents = () => {
             
             let selector = "data-product-block";
 
+            const { version } = window.__OneFoodMenu__.configs;
+        
+            if (version == 3 || version == 4 ) return;
+
             while (targetElement != null) {
                 if (targetElement.hasAttribute(selector)) {
 
