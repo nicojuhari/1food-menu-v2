@@ -33,7 +33,6 @@ export function createMenu (menu = {}, clientConfigs = {}) {
     };
 
     //deep merge the configs with the client configs
-    // configs = { ...configs, ...menu.dbConfigs };
     configs = mergeDeep(configs, clientConfigs);
 
     if (

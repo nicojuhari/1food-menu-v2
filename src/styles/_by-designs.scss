@@ -37,8 +37,10 @@
     }
 
     &-v3 {
+        .ofm-category__items {
+            gap: 1.5rem;
+        }
         .ofm-product {
-            height: auto;
 
             &__title{
                 font-size: 1.25rem;
@@ -51,12 +53,14 @@
     }
 
     &-v4 {
-       .ofm-category {
-        // margin: 0 auto 5rem auto;
-        // max-width: 768px;
-        
-        
-        background-color: #fff;
+       .ofm-category {        
+            background-color: #fff;
+            padding-top: 0;
+            margin-bottom: 1.5rem;
+
+            @media(min-width: 768px) {
+                padding-top: 1.5rem;
+            }
 
             &__title {
                 font-size: 1.875rem;
@@ -75,7 +79,7 @@
                 flex-direction: column;
                 gap: 2rem;
                 margin: 0 auto 5rem auto;
-                    max-width: 768px;
+                max-width: 768px;
             }
                        
        }
@@ -85,8 +89,8 @@
         height: auto;
 
         &__title {
-                font-size: 1.25rem;
-            }
+            font-size: 1.5rem;
+        }
        }
     }
 }

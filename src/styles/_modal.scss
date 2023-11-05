@@ -62,16 +62,5 @@
             flex-shrink: 0;
             border-radius: 0;
         }
-
-        &__text {
-            padding: 1rem;
-            flex-direction: column;
-            flex-grow: 1;
-            display: flex;
-        }
-
-        .ofm-product__title {
-            margin-bottom: 1rem;
-        }
     }
 }
