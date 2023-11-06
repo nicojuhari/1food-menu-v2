@@ -26,12 +26,12 @@
             height: 14rem
         }
         .ofm-category {
-            overflow: hidden;
-            
             &__items {
                 display: flex;
                 overflow-x: auto;
                 scroll-snap-type: x mandatory;
+                padding-left: .25rem;
+                padding-right: .25rem;
             }
         }
     }
@@ -55,25 +55,15 @@
     &-v4 {
        .ofm-category {        
             background-color: #fff;
-            padding-top: 0;
-            margin-bottom: 1.5rem;
 
-            @media(min-width: 768px) {
-                padding-top: 1.5rem;
+            &:not(:last-child){
+                margin-bottom: 1.5rem;
             }
 
             &__title {
-                font-size: 1.875rem;
-                line-height: 2.25rem;
-                text-transform: uppercase;
-                font-weight: 600;
-                text-align: center;
-                padding: 1rem;
-                background-color: #f7f7f7;
-                border: 1px solid var(--ofm-border-color);
                 max-width: 768px;
-                margin: 0 auto;
             }
+            
             &__items {
                 display: flex;
                 flex-direction: column;
@@ -87,9 +77,14 @@
        .ofm-product {
         border: 0;
         height: auto;
+        box-shadow: none;
 
         &__title {
             font-size: 1.5rem;
+        }
+
+        &__desc {
+            font-style: italic;
         }
        }
     }
