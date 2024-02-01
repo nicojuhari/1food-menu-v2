@@ -89,8 +89,8 @@ const prepareLayout = (oneFoodMenuNode) => {
         nodeEl.id = `OneFoodMenu${node}`;
         window.__OneFoodMenu__.nodes["menu" + node] = nodeEl;
 
-        if (node == "Credits" && !window.__OneFoodMenu__.configs?.isSubscribed) {
-            nodeEl.innerHTML = `<div class="ofm-credits">Created with<strong><a href="https://1food.menu/?ref=ofm-free-templates" target="blank"> 1FoodMenu</a></strong></div>`;
+        if (node == "Credits") {
+            nodeEl.innerHTML = `<div class="ofm-credits">Created with <strong><a href="https://apps.nicojuhari.com/free-menu-maker?ref=free-menu-template" target="_blank">Free Menu Maker</a></strong></div>`;
         }
 
         oneFoodMenuNode.appendChild(nodeEl);
