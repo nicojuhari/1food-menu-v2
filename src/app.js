@@ -90,7 +90,7 @@ const prepareLayout = (oneFoodMenuNode) => {
         window.__OneFoodMenu__.nodes["menu" + node] = nodeEl;
 
         if (node == "Credits") {
-            nodeEl.innerHTML = `<div class="ofm-credits">Created with <strong><a href="https://apps.nicojuhari.com/free-menu-maker?ref=free-menu-template" target="_blank">Free Menu Maker</a></strong></div>`;
+            nodeEl.innerHTML = `<div class="ofm-credits">Created with <strong><a href="https://nicojuhari.com/tools/free-menu-maker?ref=free-menu-template" target="_blank">Free Menu Maker</a></strong></div>`;
         }
 
         oneFoodMenuNode.appendChild(nodeEl);
