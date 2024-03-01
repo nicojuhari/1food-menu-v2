@@ -1,0 +1,644 @@
+{
+    "id": 3,
+    "menu_uid": "l9zwcpvlanynrmthvmb",
+    "categories": [
+        {
+            "uid": "l6yq8ylexzv6v2e0bua",
+            "name": "Pizzas",
+            "description": "baked on wood"
+        },
+        {
+            "uid": "l6yq953tnqqlkzb2ptk",
+            "name": "Pastas"
+        },
+        {
+            "uid": "l6yqd8u9jiehq8a9i6",
+            "name": "Salads"
+        },
+        {
+            "uid": "l7klwgc81mekiakx6fb",
+            "name": "Desserts"
+        },
+        {
+            "uid": "l9xcn2irx1hsp4pa66m",
+            "name": "Drinks"
+        },
+        {
+            "uid": "lf6wlreywqfccwjpjq",
+            "name": "Juices"
+        },
+        {
+            "uid": "lfr1cnia2r05m597klg",
+            "name": "Empty Category"
+        }
+    ],
+    "products": [
+        {
+            "uid": "l6yr4547b2eyyp7tm9m",
+            "name": "Pizza with Arugula and Prosciutto",
+            "tags": [
+                "Popular"
+            ],
+            "inStock": true,
+            "options": [
+                {
+                    "size": "13\"",
+                    "price": "14.50",
+                    "salePrice": ""
+                },
+                {
+                    "size": "15\"",
+                    "price": "16",
+                    "salePrice": "15"
+                }
+            ],
+            "imageUrl": "https://1FoodMenu.b-cdn.net/1FoodMenu/italianMenu/pizza-with-arugula-and-prosciutto.jpg",
+            "allergens": [
+                "lfo7y9sl91ns8fupah9",
+                "lfo7z4exgc9m597sxe"
+            ],
+            "categoryId": "l6yq8ylexzv6v2e0bua",
+            "description": "tomato sauce, arugula, prosciutto"
+        },
+        {
+            "uid": "l6yr1xnvovwptpk4hhf",
+            "name": "Margherita",
+            "tags": [
+                "Vegan",
+                "30 mins"
+            ],
+            "inStock": false,
+            "options": [
+                {
+                    "size": "13''",
+                    "price": "13.50",
+                    "salePrice": ""
+                },
+                {
+                    "size": "18''",
+                    "price": "16",
+                    "salePrice": ""
+                }
+            ],
+            "imageUrl": "https://1FoodMenu.b-cdn.net/1FoodMenu/italianMenu/pizza-margherita-new.png",
+            "allergens": [
+                "lfo7z4exgc9m597sxe",
+                "lfo7y9sl91ns8fupah9"
+            ],
+            "extraInfo": "",
+            "categoryId": "l6yq8ylexzv6v2e0bua",
+            "description": "tomato sauce, mozzarella, basil, parmesan"
+        },
+        {
+            "uid": "l6yr57xyex033fdqlt",
+            "name": "Vegeterian",
+            "tags": [],
+            "inStock": true,
+            "options": [
+                {
+                    "size": "13''",
+                    "price": "14.50",
+                    "salePrice": ""
+                },
+                {
+                    "size": "15",
+                    "price": "17",
+                    "salePrice": ""
+                }
+            ],
+            "imageUrl": "https://1FoodMenu.b-cdn.net/1FoodMenu/italianMenu/pizza-vegetarian.jpg",
+            "categoryId": "l6yq8ylexzv6v2e0bua",
+            "description": "tomato sauce, mozzarella, basil, parmesan, onion, peppers, mushroom, black olives"
+        },
+        {
+            "uid": "l6yr9ven24rwwwwzgkk",
+            "name": "Lasagna Bolognese",
+            "tags": [
+                "pasta",
+                "Basil",
+                "one more tag",
+                "another one",
+                "very long tag name"
+            ],
+            "inStock": true,
+            "options": [
+                {
+                    "size": "320g",
+                    "price": "14.50",
+                    "salePrice": ""
+                }
+            ],
+            "imageUrl": "https://1FoodMenu.b-cdn.net/1FoodMenu/italianMenu/Lasagna-Bolognese.jpg",
+            "allergens": [
+                "lfo7t0hf3qwvdnjq563",
+                "lfo7zx4250wvq55fjyy",
+                "lfo7z4exgc9m597sxe",
+                "lfu15ehn5ecnmddb9"
+            ],
+            "categoryId": "l6yq953tnqqlkzb2ptk",
+            "description": "bolognese in bechamel sauce with parmesan, mozzarella, basil, and a side salad"
+        },
+        {
+            "uid": "l6yras9yoqfmlc46mih",
+            "name": "Spaghetti Alla Carbonara",
+            "tags": [
+                "Eggs",
+                "🥚"
+            ],
+            "inStock": true,
+            "options": [
+                {
+                    "size": "380g",
+                    "price": "15.50",
+                    "salePrice": ""
+                }
+            ],
+            "imageUrl": "https://1FoodMenu.b-cdn.net/1FoodMenu/italianMenu/Spaghetti-Alla-carbonara.jpg",
+            "categoryId": "l6yq953tnqqlkzb2ptk",
+            "description": "spaghetti, egg, pecorino, guanciale, black pepper"
+        },
+        {
+            "uid": "l6yrc921zkz2mhygpj",
+            "name": "Penne alla puttanesca",
+            "tags": [],
+            "inStock": true,
+            "options": [
+                {
+                    "size": "300g",
+                    "price": "14.50",
+                    "salePrice": "11"
+                }
+            ],
+            "imageUrl": "https://1FoodMenu.b-cdn.net/1FoodMenu/italianMenu/Penne-alla-puttanesca.jpg",
+            "allergens": [],
+            "categoryId": "l6yq953tnqqlkzb2ptk",
+            "description": "olive oil, chili, garlic, tomato, black olives, capers & penne"
+        },
+        {
+            "uid": "l6yr8ugxr1ur7bs67o",
+            "name": "Spaghetti Aglio e Olio",
+            "tags": [
+                "🌶️🌶️"
+            ],
+            "inStock": true,
+            "options": [
+                {
+                    "size": "400g",
+                    "price": "13.50",
+                    "salePrice": ""
+                }
+            ],
+            "imageUrl": "https://1FoodMenu.b-cdn.net/1FoodMenu/italianMenu/pasta-aglio-olio.jpg",
+            "allergens": [],
+            "categoryId": "l6yq953tnqqlkzb2ptk",
+            "description": "garlic, olive oil, chili flakes, parsley, parmesan cheese & shrimp tossed with spaghetti pasta"
+        },
+        {
+            "uid": "l6yrflnqkl6zz7n109",
+            "name": "Prawn Salad",
+            "tags": [],
+            "inStock": true,
+            "options": [
+                {
+                    "size": "250g",
+                    "price": "13.50",
+                    "salePrice": ""
+                }
+            ],
+            "imageUrl": "https://1FoodMenu.b-cdn.net/1FoodMenu/italianMenu/Prawn-Salad.jpg",
+            "allergens": [
+                "lfo7t0hf3qwvdnjq563",
+                "lfo7z4exgc9m597sxe"
+            ],
+            "categoryId": "l6yqd8u9jiehq8a9i6",
+            "description": "shrimp, sundried tomatoes, and green olives\nserved on a salad bed with a chili lemon mayo dressing"
+        },
+        {
+            "uid": "l6yrgnnfs0n71zzramh",
+            "name": "Insalata di tonno e fagioli",
+            "tags": [
+                "Olive"
+            ],
+            "inStock": true,
+            "options": [
+                {
+                    "size": "320g",
+                    "price": "14",
+                    "salePrice": ""
+                }
+            ],
+            "imageUrl": "https://1FoodMenu.b-cdn.net/1FoodMenu/italianMenu/Insalata-di-tonno-e-fagioli.jpg",
+            "allergens": [
+                "lfo7y9sl91ns8fupah9",
+                "lfo7zowy2u0aou52hnb"
+            ],
+            "categoryId": "l6yqd8u9jiehq8a9i6",
+            "description": "red onions, olive oil, salt, pepper, cannellini beans, and tuna"
+        },
+        {
+            "uid": "l6z175lu4tnsa3bjs6o",
+            "name": "Hawaiian Chicken Pizza Smoked",
+            "tags": [
+                "tag"
+            ],
+            "inStock": true,
+            "options": [
+                {
+                    "size": "13''",
+                    "price": "14.5",
+                    "salePrice": ""
+                }
+            ],
+            "imageUrl": "https://1FoodMenu.b-cdn.net/1FoodMenu/italianMenu/hawaiian-chicken-pizza-smoked.jpg",
+            "allergens": [],
+            "categoryId": "l6yq8ylexzv6v2e0bua",
+            "description": "smokey bbq sauce, chicken pieces, creamy mozzarella, sweet pineapple, and flavorful red onion and cilantro."
+        },
+        {
+            "uid": "l6yr36g51pfc5f9njwb",
+            "name": "4 Cheese",
+            "tags": [
+                "Vegan",
+                "Popular"
+            ],
+            "inStock": true,
+            "options": [
+                {
+                    "size": "13''",
+                    "price": "12",
+                    "salePrice": "11"
+                },
+                {
+                    "size": "add double cheese",
+                    "price": "+2",
+                    "salePrice": ""
+                }
+            ],
+            "imageUrl": "https://1FoodMenu.b-cdn.net/1FoodMenu/italianMenu/4-cheese-pizza.png",
+            "allergens": [],
+            "categoryId": "l6yq8ylexzv6v2e0bua",
+            "description": "tomato sauce, 4 cheese."
+        },
+        {
+            "uid": "l7klxp3vb9t6ll8o744",
+            "name": "Tiramisu",
+            "tags": [],
+            "inStock": false,
+            "options": [
+                {
+                    "size": "1 piece",
+                    "price": "7",
+                    "salePrice": ""
+                },
+                {
+                    "size": "1 piece + coffee",
+                    "price": "8.5",
+                    "salePrice": ""
+                },
+                {
+                    "size": "2 pieces",
+                    "price": "12",
+                    "salePrice": ""
+                }
+            ],
+            "imageUrl": "https://1FoodMenu.b-cdn.net/1FoodMenu/italianMenu/Tiramisu.jpg",
+            "categoryId": "l7klwgc81mekiakx6fb",
+            "description": "homemade coffee-flavored Italian dessert"
+        },
+        {
+            "uid": "l7kmyc4hsvnt8s2jdz",
+            "name": "Panna Cotta",
+            "tags": [],
+            "inStock": true,
+            "options": [
+                {
+                    "size": "160gr",
+                    "price": "7.50",
+                    "salePrice": "5"
+                }
+            ],
+            "imageUrl": "https://1FoodMenu.b-cdn.net/1FoodMenu/italianMenu/panna-cotta.jpg",
+            "allergens": [
+                "lfo7t0hf3qwvdnjq563",
+                "lfo7z4exgc9m597sxe"
+            ],
+            "categoryId": "l7klwgc81mekiakx6fb",
+            "description": "classic Italian dessert with delicate vanilla\nand a fresh strawberry coulis"
+        },
+        {
+            "uid": "l7kn3s0ae9dkbibtrd",
+            "name": "Gelato Sundae",
+            "tags": [
+                "Pistachio"
+            ],
+            "inStock": true,
+            "options": [
+                {
+                    "size": "",
+                    "price": "7",
+                    "salePrice": ""
+                }
+            ],
+            "imageUrl": "https://1FoodMenu.b-cdn.net/1FoodMenu/italianMenu/Ice-Cream-Sundae.jpg",
+            "categoryId": "l7klwgc81mekiakx6fb",
+            "description": "Served with fresh whipped cream & strawberries\nChoose any three flavors: Strawberry; Vanilla; Chocolate; Pistachio; Lemon Sorbet; Mango"
+        },
+        {
+            "uid": "l835ufqa6il0qhog2ro",
+            "name": "Lorem Ipsum",
+            "tags": [],
+            "inStock": true,
+            "options": [
+                {
+                    "size": "200g",
+                    "price": "9.50",
+                    "salePrice": ""
+                }
+            ],
+            "imageUrl": "https://1FoodMenu.b-cdn.net/1FoodMenu/italianMenu/italian-menu-salad.jpg",
+            "allergens": [
+                "lfo7zx4250wvq55fjyy",
+                "lfo7z4exgc9m597sxe"
+            ],
+            "categoryId": "l6yqd8u9jiehq8a9i6",
+            "description": "Lorem Ipsum is simply dummying text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,"
+        },
+        {
+            "uid": "l835zcpkabukix2fh99",
+            "name": "Italian Salad Panzanella",
+            "tags": [],
+            "inStock": true,
+            "options": [
+                {
+                    "size": "300g",
+                    "price": "12.50",
+                    "salePrice": "11"
+                }
+            ],
+            "imageUrl": "https://1FoodMenu.b-cdn.net/1FoodMenu/italianMenu/Italian-salad-2.jpg",
+            "categoryId": "l6yqd8u9jiehq8a9i6",
+            "description": "Panzanella, Breadcrumbs, Tomatoes, Red, Heirloom tomatoes, Basil"
+        },
+        {
+            "uid": "l836boaznt3gttbjned",
+            "name": "Italian Desert",
+            "tags": [],
+            "inStock": true,
+            "options": [
+                {
+                    "size": "220g",
+                    "price": "8",
+                    "salePrice": ""
+                }
+            ],
+            "imageUrl": "https://1FoodMenu.b-cdn.net/1FoodMenu/italianMenu/italian-desert.jpg",
+            "categoryId": "l7klwgc81mekiakx6fb",
+            "description": "Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source."
+        },
+        {
+            "uid": "lf6wn0vufcsvo7g651",
+            "name": "Orange Juice",
+            "tags": [
+                "Vegan"
+            ],
+            "inStock": true,
+            "options": [
+                {
+                    "size": "200ml",
+                    "price": "4",
+                    "salePrice": ""
+                },
+                {
+                    "size": "500ml",
+                    "price": "7",
+                    "salePrice": "6.5"
+                }
+            ],
+            "imageUrl": "https://1FoodMenu.b-cdn.net/1FoodMenu/italianMenu/orange-juice.png",
+            "allergens": [],
+            "categoryId": "l9xcn2irx1hsp4pa66m",
+            "description": "Orange juice, no sugar"
+        },
+        {
+            "uid": "lfl5abxte133gf882e",
+            "name": "Cocktail",
+            "tags": [
+                "Alchohol"
+            ],
+            "inStock": null,
+            "options": [
+                {
+                    "size": "",
+                    "price": "7.5",
+                    "salePrice": ""
+                }
+            ],
+            "imageUrl": "https://1FoodMenu.b-cdn.net/1FoodMenu/italianMenu/sweet-cocktail.png",
+            "categoryId": "l9xcn2irx1hsp4pa66m",
+            "description": "Cocktail with Sweet Alchohol"
+        },
+        {
+            "uid": "lfnspm7maeh6s064b4",
+            "name": "Cappucino",
+            "tags": [],
+            "inStock": true,
+            "options": [
+                {
+                    "size": "",
+                    "price": "4.5",
+                    "salePrice": ""
+                },
+                {
+                    "size": "with chocolate dessert",
+                    "price": "8",
+                    "salePrice": "7.25"
+                }
+            ],
+            "imageUrl": "https://1FoodMenu.b-cdn.net/1FoodMenu/italianMenu/cappuccino.png",
+            "allergens": [],
+            "categoryId": "l9xcn2irx1hsp4pa66m",
+            "description": "espresso, steamed milk, and foam"
+        },
+        {
+            "uid": "l9xdxinuhjga9flizk8",
+            "name": "Dark Beer",
+            "tags": [],
+            "inStock": null,
+            "options": [
+                {
+                    "size": "0.3",
+                    "price": "5",
+                    "salePrice": ""
+                },
+                {
+                    "size": "0.5",
+                    "price": "6.5",
+                    "salePrice": ""
+                }
+            ],
+            "imageUrl": "https://1FoodMenu.b-cdn.net/1FoodMenu/italianMenu/best-dark-beer-in-town.jpg",
+            "allergens": [],
+            "categoryId": "l9xcn2irx1hsp4pa66m",
+            "description": "Best Dark Beer in Phnom Pen"
+        },
+        {
+            "uid": "l9xcnxseffnmv2z126u",
+            "name": "Beer",
+            "tags": [
+                "beer"
+            ],
+            "inStock": true,
+            "options": [
+                {
+                    "size": "0.3",
+                    "price": "4.5",
+                    "salePrice": ""
+                },
+                {
+                    "size": "0.5",
+                    "price": "6",
+                    "salePrice": ""
+                }
+            ],
+            "imageUrl": "https://1FoodMenu.b-cdn.net/1FoodMenu/italianMenu/best-beer-in-town.jpg",
+            "allergens": [],
+            "categoryId": "l9xcn2irx1hsp4pa66m",
+            "description": "Best beer in your town"
+        }
+    ],
+    "configs": {
+        "title": "Demo Menu"
+    },
+    "promos": [],
+    "allergens": [
+        {
+            "uid": "lfo7t0hf3qwvdnjq563",
+            "name": "🍯",
+            "description": "Nice description of an allergen"
+        },
+        {
+            "uid": "lfo7y9sl91ns8fupah9",
+            "name": "B",
+            "description": "Nice description of an allergen"
+        },
+        {
+            "uid": "lfo7z4exgc9m597sxe",
+            "name": "C",
+            "description": "Nice description of an allergen"
+        },
+        {
+            "uid": "lfo7zowy2u0aou52hnb",
+            "name": "D",
+            "description": "Nice description of an allergen"
+        },
+        {
+            "uid": "lfo7zx4250wvq55fjyy",
+            "name": "E",
+            "description": "Nice description of an allergen"
+        },
+        {
+            "uid": "lfu15ehn5ecnmddb9",
+            "name": "F",
+            "description": "Nice description of an allergen"
+        },
+        {
+            "uid": "lofqkbvcvvoifkqax2e",
+            "name": "🥜",
+            "description": "Allergen Description"
+        }
+    ],
+    "bundles": [
+        {
+            "uid": "leq5qh09x9y37z9ol0i",
+            "name": "Monday",
+            "bundleItems": [
+                {
+                    "qty": 2,
+                    "uid": "l6yr36g51pfc5f9njwb",
+                    "option": "0",
+                    "customPrice": 10
+                },
+                {
+                    "qty": 1,
+                    "uid": "l9xcnxseffnmv2z126u",
+                    "option": "0",
+                    "customPrice": 4
+                },
+                {
+                    "qty": 1,
+                    "uid": "l6yr1xnvovwptpk4hhf",
+                    "option": "1",
+                    "customPrice": null
+                }
+            ],
+            "description": "happy Monday",
+            "customBundlePrice": "38.56"
+        },
+        {
+            "uid": "levw55nh8jyae9b9f2o",
+            "name": "Tuesday",
+            "bundleItems": [
+                {
+                    "qty": 1,
+                    "uid": "l6yr4547b2eyyp7tm9m",
+                    "option": "0",
+                    "customPrice": null
+                },
+                {
+                    "qty": 1,
+                    "uid": "l6yr9ven24rwwwwzgkk",
+                    "option": "0",
+                    "customPrice": null
+                },
+                {
+                    "qty": 1,
+                    "uid": "l6yrgnnfs0n71zzramh",
+                    "option": "0",
+                    "customPrice": 12
+                },
+                {
+                    "qty": 1,
+                    "uid": "l6yr1xnvovwptpk4hhf",
+                    "option": "0",
+                    "customPrice": null
+                },
+                {
+                    "qty": 1,
+                    "uid": "l6yr36g51pfc5f9njwb",
+                    "option": "0",
+                    "customPrice": null
+                }
+            ],
+            "description": "between 11:30 am - 2:00 pm",
+            "customBundlePrice": "39"
+        },
+        {
+            "uid": "lfaah5fld708r5a1kyb",
+            "name": "Family pack",
+            "bundleItems": [
+                {
+                    "qty": 1,
+                    "uid": "l6yr4547b2eyyp7tm9m",
+                    "option": "1",
+                    "customPrice": 11.91
+                },
+                {
+                    "qty": 1,
+                    "uid": "lf6wn0vufcsvo7g651",
+                    "option": "0",
+                    "customPrice": null
+                },
+                {
+                    "qty": 3,
+                    "uid": "l7klxp3vb9t6ll8o744",
+                    "option": "0",
+                    "customPrice": 18
+                }
+            ],
+            "description": "up to 3 persons",
+            "customBundlePrice": "60"
+        }
+    ],
+    "updated_at": "2023-11-01T19:25:11.000Z",
+    "created_at": "2023-09-14T12:50:55.000Z"
+}
