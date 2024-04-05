@@ -34,7 +34,7 @@ export const createMenuHTML = ({ products, categories }) => {
                     }
 
                     //product description
-                    html += `<div class="ofm-product__desc ${[1,2].includes(version) ? 'line-clamp-2' : ''}">${product.description}</div>`;
+                    html += product.description && `<div class="ofm-product__desc ${[1,2].includes(version) ? 'line-clamp-2' : ''}">${product.description}</div>`;
 
                     //prices
                     html += `<div class="ofm-product__options">`;
