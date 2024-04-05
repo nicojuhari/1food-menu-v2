@@ -53,7 +53,7 @@ const getModalContent = (productData, priceSymbol) => {
                     }
                     
                     //descriptiom
-                    html += ` <div class="ofm-product__desc">${product.description}</div>`;
+                    html += product.description && ` <div class="ofm-product__desc">${product.description}</div>`;
 
                     //prices
                     html += `<div class="ofm-product__options">`;
