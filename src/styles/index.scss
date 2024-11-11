@@ -1,9 +1,8 @@
-@import './vars';
-@import './custom-proprities';
-@import './global';
-@import './allergens';
-@import './by-designs';
-@import './modal';
+@use './custom-proprities';
+@use './global';
+@use './allergens';
+@use './by-designs';
+@use './modal';
 
 
 .ofm-credits {

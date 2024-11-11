@@ -48,20 +48,20 @@
         //   })
         //   .catch(e => console.log(e))
 
-          createMenu({
-              menu: menuData,
+          createMenu(menuData, {
               version: 3,
               priceSymbol: '$',
               allergens: {
-                title: 'Allergens Information',
-              }
+                title: 'Allergens',
+                show: true,
+              },
+              disableCredits: false,
             })
           
           function createAgain(nr) {
             // console.log(nr)
 
-            createMenu({
-              menu: menuF,
+            createMenu( menuData, {
               version: +nr,
             })
           }
@@ -75,7 +75,20 @@
             })
           })
 
+
     </script>
+    <style>
+      .one-food-menu {
+        /* --ofm-brand-color: rgb(28, 43, 87);
+        --ofm-price-color: rgb(41, 41, 51);
+        --ofm-bg-color: rgb(229, 229, 229);
+        --ofm-border-color: rgb(229, 229, 229);
+        --ofm-tag-color: rgb(255, 255, 255);
+        --ofm-tag-bg-color: rgb(7, 87, 200);
+        --ofm-allergen-color: rgb(255, 255, 255);
+        --ofm-allergen-bg-color: rgb(157, 13, 152); */
+      }
+    </style>
 
 
     <!-- <div id="OneFoodMenu" class="container"> </div>

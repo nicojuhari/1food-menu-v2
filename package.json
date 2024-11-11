@@ -1,6 +1,6 @@
 {
   "name": "1food-menu",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "JS and CSS for Free Digital Menu Templates from www.1food.menu",
   "files": [
     "dist"
@@ -23,7 +23,7 @@
   "author": "Nicolae Cojuhari <nicojuhari@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "sass": "^1.69.5",
-    "vite": "^4.5.0"
+    "sass": "^1.80.6",
+    "vite": "^5.4.11"
   }
 }

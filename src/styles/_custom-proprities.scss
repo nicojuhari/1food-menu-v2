@@ -1,8 +1,18 @@
+@use './colors' as *;
 
 :root {
-    --ofm-border-color: #{$border-color};
+    --ofm-brand-color: #000;
+    
     --ofm-bg-color: #{$bg-color};
+    --ofm-border-color: #{$border-color};
+    
     --ofm-tag-color: #{$tag-color};
+    --ofm-tag-bg-color: #{$tag-bg-color};
+    
+    --ofm-allergen-color: #{$allergen-color};
+    --ofm-allergen-bg-color: #{$allergen-bg-color};
+    
+    --ofm-price-color: var(--ofm-brand-color);
     --ofm-font-family:  ui-sans-serif,
      system-ui,
      -apple-system,

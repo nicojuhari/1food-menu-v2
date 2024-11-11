@@ -2,14 +2,14 @@ export function isBrowser() {
     return typeof window !== "undefined";
 }
 
-export function mergeDeep(obj1, obj2) {
+export function deepMerge(obj1, obj2) {
     let result = Object.assign({}, obj1);
     for (let key in obj2) {
         if (typeof obj2[key] === "object" && obj2[key] !== null) {
             if (!(key in obj1)) {
                 result[key] = obj2[key];
             } else {
-                result[key] = mergeDeep(obj1[key], obj2[key]);
+                result[key] = deepMerge(obj1[key], obj2[key]);
             }
         } else {
             result[key] = obj2[key];
@@ -56,3 +56,30 @@ export function toggleDesignClass(nodeEl, versionNumber) {
 
     nodeEl.classList.add(`ofm-design-v${versionNumber}`);
 }
+
+export function addCreditsOnPage(nodeEl) {
+    //check if the nodeEl is a valid element
+    if (nodeEl && nodeEl.innerHTML === "") {
+        nodeEl.innerHTML = `<div class="ofm-credits">Created with <strong><a href="https://1food.menu?ref=free-menu-designs" target="_blank">1Food Menu</a></strong></div>`;
+    }
+}
+
+export function prepareLayout(oneFoodMenuNode) {
+    //clean the main node
+    oneFoodMenuNode.innerHTML = "";
+
+    oneFoodMenuNode.classList.add("one-food-menu");
+
+    //ofm-design-v2 | v3, ...
+    toggleDesignClass(oneFoodMenuNode, window.__OneFoodMenu__.configs.version);
+
+    let nodes = ["Items", "Allergens", "Credits", "Modal"];
+
+    nodes.forEach((node) => {
+        let nodeEl = document.createElement("div");
+        nodeEl.id = `OneFoodMenu${node}`;
+        window.__OneFoodMenu__.nodes["menu" + node] = nodeEl;
+
+        oneFoodMenuNode.appendChild(nodeEl);
+    });
+};

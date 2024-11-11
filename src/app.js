@@ -1,6 +1,12 @@
 import { createMenuHTML } from "./templates";
 import { events } from "./events";
-import { mergeDeep, isBrowser, mountOnPage, productsByCategory, toggleDesignClass } from "./helpers";
+import {
+    deepMerge,
+    isBrowser,
+    productsByCategory,
+    prepareLayout,
+    addCreditsOnPage,
+} from "./helpers";
 import { addAllergensOnPage } from "./allergensTemplate";
 
 
@@ -27,13 +33,13 @@ export function createMenu (menu = {}, clientConfigs = {}) {
         priceSymbol: "",
         allergens: {
             title: "Allergens",
-            description: "Some description about allergens",
+            show: true,
         },
-        ...menu.configs,
+        ...menu?.configs,
     };
 
     //deep merge the configs with the client configs
-    configs = mergeDeep(configs, clientConfigs);
+    configs = deepMerge(configs, clientConfigs);
 
     if (
         Object.entries(menu).length == 0 ||
@@ -63,36 +69,20 @@ export function createMenu (menu = {}, clientConfigs = {}) {
         products: groupedProducts,
     });
 
-    mountOnPage(window.__OneFoodMenu__.nodes.menuItems, menuHTML);
+    //add products
+    window.__OneFoodMenu__.nodes.menuItems.innerHTML = menuHTML;
 
     //add allergens
-    if (menu.allergens?.length) {
+    if (menu.allergens?.length && configs.allergens.show) {
         addAllergensOnPage(menu.allergens);
     }
 
+    //add credits
+    if (!configs.disableCredits) {
+        addCreditsOnPage(window.__OneFoodMenu__.nodes.menuCredits);
+    }
+
+    //add events
     events();
 };
 
-const prepareLayout = (oneFoodMenuNode) => {
-    //clean the main node
-    oneFoodMenuNode.innerHTML = "";
-
-    oneFoodMenuNode.classList.add("one-food-menu")
-
-    //ofm-design-v2 | v3, ...
-    toggleDesignClass(oneFoodMenuNode, window.__OneFoodMenu__.configs.version);
-
-    let nodes = ["Items", "Allergens", "Credits", "Modal"];
-
-    nodes.forEach((node) => {
-        let nodeEl = document.createElement("div");
-        nodeEl.id = `OneFoodMenu${node}`;
-        window.__OneFoodMenu__.nodes["menu" + node] = nodeEl;
-
-        if (node == "Credits") {
-            nodeEl.innerHTML = `<div class="ofm-credits">Created with <strong><a href="https://nicojuhari.com/tools/free-menu-maker?ref=free-menu-template" target="_blank">Free Menu Maker</a></strong></div>`;
-        }
-
-        oneFoodMenuNode.appendChild(nodeEl);
-    });
-};

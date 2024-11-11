@@ -6,11 +6,12 @@
     }
 
     &__name {
+        color: var(--ofm-allergen-color);
         width: 3rem;
         height: 3rem;
         display: grid;
         place-content: center;
-        background-color: var(--ofm-bg-color);
+        background-color: var(--ofm-allergen-bg-color);
         border-radius: 999px;
     }
 }
