@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
     />
-    <title>Local 1Food Menu</title>
+    <title>Production 1Food Menu</title>
   </head>
   <body style="background-color: #f1f5f9">
     <div style="display:flex; gap:20px; justify-content:center; margin: 10px;">
@@ -18,15 +18,23 @@
    
     <!-- Menu Design 1 -->
     <div id="OneFoodMenu" class="container"></div>
+    <!-- production -->
+    <link rel="stylesheet" href="https://unpkg.com/1food-menu-v2/dist/style.css"></link>
+
     <script type="module">
+
+        // production
+        import { createMenu } from "https://unpkg.com/1food-menu-v2?module"
+       
         
-        import { createMenu } from './main.js'
         import menuData from './menu.json'
+        let menuF
+
+        
 
           createMenu(menuData, {
-              version: 1,
+              version: 3,
               priceSymbol: '$',
-              priceSymbolPosition: 'after',
               allergens: {
                 title: 'Allergens',
                 show: true,
@@ -34,6 +42,10 @@
               disableCredits: false,
             })
           
+
+
+
+        //events
           function createAgain(nr) {
             // console.log(nr)
 
@@ -53,17 +65,5 @@
 
 
     </script>
-    <style>
-      .one-food-menu {
-        /* --ofm-brand-color: rgb(28, 43, 87);
-        --ofm-price-color: rgb(41, 41, 51);
-        --ofm-bg-color: rgb(229, 229, 229);
-        --ofm-border-color: rgb(229, 229, 229);
-        --ofm-tag-color: rgb(255, 255, 255);
-        --ofm-tag-bg-color: rgb(7, 87, 200);
-        --ofm-allergen-color: rgb(255, 255, 255);
-        --ofm-allergen-bg-color: rgb(157, 13, 152); */
-      }
-    </style>
   </body>
 </html>

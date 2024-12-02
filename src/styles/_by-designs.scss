@@ -1,41 +1,4 @@
 .ofm-design {
-    &-v1 {
-        .image-bg-2,  .image-bg {
-            border-top-left-radius: 0.75rem;
-            border-bottom-left-radius: 0.75rem;
-            width: 10rem;
-
-            @media (min-width: 768px) {
-                width: 12rem;
-            }
-        }
-    }
-
-    &-v2 {
-        .ofm-product {
-            flex-direction: column;
-            height: auto;
-            width: 18rem;
-            scroll-snap-align: center;
-            flex-shrink: 0;
-        }
-
-        .image-bg-2, .image-bg { 
-            border-top-left-radius: 0.75rem;
-            border-top-right-radius: 0.75rem;
-            height: 14rem
-        }
-        .ofm-category {
-            &__items {
-                display: flex;
-                overflow-x: auto;
-                scroll-snap-type: x mandatory;
-                padding-left: .25rem;
-                padding-right: .25rem;
-            }
-        }
-    }
-
     &-v3 {
         .ofm-category__items {
             gap: 1.5rem;

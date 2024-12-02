@@ -1,7 +1,11 @@
 @use './custom-proprities';
+@use './utils';
 @use './global';
 @use './allergens';
 @use './by-designs';
+
+@use './design/v1';
+@use './design/v2';
 @use './modal';
 
 

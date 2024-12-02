@@ -13,9 +13,7 @@ export const createMenuHTML = ({ products, categories }) => {
 
                     // product Image
                     if (version == 1 || version == 2) {
-                        html += `   <div class="image-bg image-bg-2">
-                                    <div class="image-bg" style="background-image: url(${product.imageUrl})"> </div>
-                                </div>`;
+                        html += productImageHTML(product.imageUrl, product.name);
                     }
 
                     // product content
@@ -26,9 +24,8 @@ export const createMenuHTML = ({ products, categories }) => {
 
                     //productTags && Allergens
 
-                    if (product.allergens?.length || product.tags?.length) {
-                        html += `<div class="ofm-product__allergens">`;
-                        html += allergensHTML(product.allergens);
+                    if (product.tags?.length) {
+                        html += `<div class="ofm-product__tags flex items-center">`;
                         html += tagsHTML(product.tags);
                         html += `</div>`;
                     }
@@ -77,13 +74,14 @@ export const allergensHTML = (prod_allergens) => {
 
 export const tagsHTML = (tags) => {
     if (tags?.length == 0 || !tags) return "";
-    return tags.map((tag) => {
+    return tags.slice(0, 3).map((tag) => {
         return ` <div data-prod-tag class="ofm-tag">${tag}</div>`;
     }).join("")
 }
 
 export let optionsHTML = (options, inModal = false) => {
     let priceSymbol = window.__OneFoodMenu__.configs.priceSymbol;
+    let priceSymbolPosition = window.__OneFoodMenu__.configs.priceSymbolPosition || 'before';
     let version = window.__OneFoodMenu__.configs.version;
     let html = ''
     return options
@@ -101,14 +99,14 @@ export let optionsHTML = (options, inModal = false) => {
                 
                     if(item.salePrice) {
                         html += `<div class="ofm-price ofm-text-lg">
-                                    ${priceSymbol} ${item.salePrice}
+                                    ${priceSymbolPosition == 'after' ? item.salePrice + priceSymbol : priceSymbol + item.salePrice}
                                 </div>`;
                         html += `<div class="ofm-price ofm-price--old ofm-text-sm">
-                                    ${priceSymbol} ${item.price}
+                                    ${priceSymbolPosition == 'after' ? item.price + priceSymbol : priceSymbol + item.price}
                                 </div>`;
                     } else {
                         html += `<div class="ofm-price ofm-text-lg">
-                                    ${priceSymbol} ${item.price}
+                                    ${priceSymbolPosition == 'after' ? item.price + priceSymbol : priceSymbol + item.price}
                                 </div>`;
                     }
 
@@ -122,4 +120,11 @@ export let optionsHTML = (options, inModal = false) => {
         })
         .join("");
     };
+
+export let productImageHTML = (imageUrl = "", name = "") =>
+    imageUrl
+        ? `<div class="image-bg image-bg-2">
+            <img class="image-bg" src="${imageUrl}" alt="${name}" onerror="this.style.display='none'">
+        </div>`
+        : "";
 

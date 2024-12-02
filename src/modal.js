@@ -1,5 +1,5 @@
 import {
-    tagsHTML, allergensHTML, optionsHTML
+    tagsHTML, allergensHTML, optionsHTML, productImageHTML
 } from './templates';
 
 export const showModal = (product_id) => {
@@ -28,26 +28,19 @@ export const showModal = (product_id) => {
 
 }
 
-const getModalContent = (productData, priceSymbol) => {
+const getModalContent = (productData) => {
     let product = productData?.[0];
 
     let html = ''
 
-    let productImageHTML = () => (
-        `<div class="image-bg image-bg-2">
-            <div class="image-bg" style="background-image: url(${product.imageUrl})"></div>
-        </div>`
-    );
-
     html += ` <div>
-                ${ productImageHTML() }
+                ${ productImageHTML(product?.imageUrl, product?.name) }
                 <div class="ofm-product__text">
                     <div class="ofm-product__title">${product.name}</div>`;
                     
                     //productTags && Allergens
-                    if (product.allergens?.length || product.tags?.length) {
-                        html += `<div class="ofm-product__allergens">`;
-                        html += allergensHTML(product.allergens);
+                    if (product.tags?.length) {
+                        html += `<div class="ofm-product__tags flex items-center">`;
                         html += tagsHTML(product.tags);
                         html += `</div>`;
                     }
@@ -60,6 +53,9 @@ const getModalContent = (productData, priceSymbol) => {
                         product.options && (html += optionsHTML(product.options, true));
                     html += `</div>`;
 
+                    if(product.allergens?.length) {
+                        html += `<div class="flex-center ofm-product__allergens">${allergensHTML(product.allergens)}</div>`;
+                    }
         html += `</div>`;
     html += `</div>`;
 
@@ -76,7 +72,7 @@ const modalWrapper = (content) => {
             <div class="ofm-modal-close" data-close-modal>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </div>
             <div class="ofm-modal-content">

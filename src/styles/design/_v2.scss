@@ -1,0 +1,33 @@
+.ofm-design-v2 {
+    .ofm-product {
+        flex-direction: column;
+        height: auto;
+        width: 18rem;
+        scroll-snap-align: center;
+        flex-shrink: 0;
+
+        &__text {
+            padding-top: 1rem;
+        }
+
+        &__desc {
+            font-size: 14px;
+        }
+    }
+
+    .image-bg-2,
+        .image-bg {
+            border-radius: 0.75rem;
+            height: 14rem
+        }
+
+        .ofm-category {
+            &__items {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                padding-left: .25rem;
+                padding-right: .25rem;
+        }
+    }
+}

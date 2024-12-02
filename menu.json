@@ -47,12 +47,12 @@
                     "salePrice": ""
                 },
                 {
-                    "size": "15\"",
+                    "size": "15",
                     "price": "16",
                     "salePrice": "15"
                 }
             ],
-            "imageUrl": "https://1FoodMenu.b-cdn.net/1FoodMenu/italianMenu/pizza-with-arugula-and-prosciutto.jpg",
+            "imageUrl": "",
             "allergens": [
                 "lfo7y9sl91ns8fupah9",
                 "lfo7z4exgc9m597sxe"
