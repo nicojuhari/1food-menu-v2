@@ -12,26 +12,26 @@ export const createMenuHTML = ({ products, categories }) => {
                     html += `   <div class="ofm-product" data-product-block="${product.uid}" >`;
 
                     // product Image
-                    if (version == 1 || version == 2) {
-                        html += productImageHTML(product.imageUrl, product.name);
-                    }
+                    html += productImageHTML(product.imageUrl, product.name);
 
                     // product content
                     html += `<div class="ofm-product__text">`;
 
                     //product name
-                    html += `<div class="ofm-product__title ${[1,2].includes(version) ? 'line-clamp-1' : ''}">${product.name}</div>`;
+                    html += `<div class="ofm-product__title ${[1,2,3].includes(version) ? 'line-clamp-1' : ''}">${product.name}</div>`;
 
                     //productTags && Allergens
 
-                    if (product.tags?.length) {
+                    if (product.tags?.length && version !== 3) {
                         html += `<div class="ofm-product__tags flex items-center">`;
                         html += tagsHTML(product.tags);
                         html += `</div>`;
                     }
 
                     //product description
-                    html += product.description && `<div class="ofm-product__desc ${[1,2].includes(version) ? 'line-clamp-2' : ''}">${product.description}</div>`;
+                    if(version !== 3) {
+                        html += product.description && `<div class="ofm-product__desc ${[1,2].includes(version) ? 'line-clamp-2' : ''}">${product.description}</div>`;
+                    }
 
                     //prices
                     html += `<div class="ofm-product__options">`;
@@ -87,7 +87,7 @@ export let optionsHTML = (options, inModal = false) => {
     return options
         .map((item, idx) => {
             html = "";
-            if((version == 1 || version == 2) && idx >= 1 && !inModal) {
+            if((version == 1 || version == 2 || version == 3) && idx >= 1 && !inModal) {
                return html;
             }
             

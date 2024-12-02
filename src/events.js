@@ -3,7 +3,7 @@ export const events = () => {
     
     let { version } = window.__OneFoodMenu__.configs;
     
-    if(version == 1 || version == 2) attachEvents()
+    if(version == 1 || version == 2 || version == 3) attachEvents()
 
 }
 
@@ -18,7 +18,7 @@ const attachEvents = () => {
 
             const { version } = window.__OneFoodMenu__.configs;
         
-            if (version == 3 || version == 4 ) return;
+            if (version == 4 ) return;
 
             while (targetElement != null) {
                 if (targetElement.hasAttribute(selector)) {

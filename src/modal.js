@@ -10,7 +10,7 @@ export const showModal = (product_id) => {
 
     let modalContent = ''
 
-    if(version == 1 || version == 2) modalContent = getModalContent(productData, priceSymbol);
+    if(version == 1 || version == 2 || version == 3) modalContent = getModalContent(productData, priceSymbol);
 
     let html = modalWrapper(modalContent);
 

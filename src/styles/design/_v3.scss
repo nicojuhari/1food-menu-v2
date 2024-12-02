@@ -1,0 +1,39 @@
+.ofm-design-v3 {
+    .image-bg-2,
+        .image-bg {
+            border-radius: 999px;
+            height: 4rem;
+            width: 4rem;
+
+            @media (min-width: 768px) {
+                height: 5rem;
+                width: 5rem;
+            }
+        }
+
+    .ofm-product {
+        border-radius: 3.75rem;
+        padding: .5rem;
+        align-items: center;
+
+        &__title {
+            font-size: 1rem;
+        }
+
+        &__text {
+            padding: .5rem 1.5rem;
+        }
+    }
+
+    .ofm-category {
+        max-width: 600px;
+        margin: 0 auto;
+
+        &__items {
+        @media (min-width: 768px) {
+                grid-template-columns: repeat(1, minmax(0, 1fr));
+            }
+        }
+
+    }
+}
