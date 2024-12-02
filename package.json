@@ -1,18 +1,19 @@
 {
-  "name": "1food-menu",
-  "version": "0.3.8",
-  "description": "JS and CSS for Free Digital Menu Templates from www.1food.menu",
+  "name": "1food-menu-v2",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "Designs for Digital Food Menus created at 1food.menu",
   "files": [
     "dist"
   ],
-  "main": "dist/1food-menu.umd.js",
-  "unpkg": "dist/1food-menu.mjs",
-  "jsdelivr": "dist/1food-menu.mjs",
-  "module": "./dist/1food-menu.mjs",
+  "main": "dist/1food-menu-v2.umd.js",
+  "unpkg": "dist/1food-menu-v2.mjs",
+  "jsdelivr": "dist/1food-menu-v2.mjs",
+  "module": "./dist/1food-menu-v2.mjs",
   "exports": {
     ".": {
-      "import": "./dist/1food-menu.mjs",
-      "require": "./dist/1food-menu.umd.js"
+      "import": "./dist/1food-menu-v2.mjs",
+      "require": "./dist/1food-menu-v2.umd.js"
     }
   },
   "scripts": {
@@ -23,7 +24,7 @@
   "author": "Nicolae Cojuhari <nicojuhari@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "sass": "^1.80.6",
-    "vite": "^5.4.11"
+    "sass": "^1.81.0",
+    "vite": "^6.0.2"
   }
 }
