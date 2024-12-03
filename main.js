@@ -1,3 +1,3 @@
-import './src/styles/index.scss';
+import "./src/styles/index.scss";
 
-export { createMenu } from './src/app'
+export { createMenu } from "./src/app";
