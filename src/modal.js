@@ -38,24 +38,33 @@ const getModalContent = (productData) => {
                 <div class="ofm-product__text">
                     <div class="ofm-product__title">${product.name}</div>`;
                     
-                    //productTags && Allergens
-                    if (product.tags?.length) {
-                        html += `<div class="ofm-product__tags flex items-center">`;
-                        html += tagsHTML(product.tags);
-                        html += `</div>`;
-                    }
+        
                     
                     //descriptiom
                     html += product.description && ` <div class="ofm-product__desc">${product.description}</div>`;
+
+                    //productTags && Allergens
+                    if (product.tags?.length || product.allergens?.length) {
+                        html += `<div class="flex items-center justify-between gap-2">`;
+                        
+                            //tags
+                            html += `<div class="ofm-product__tags flex items-center gap-2">`;
+                            html += tagsHTML(product.tags);
+                            html += `</div>`;
+
+                            //allergens
+                            html += `<div class="ofm-product__allergens flex items-center gap-2">`;
+                            html += allergensHTML(product.allergens);
+                            html += `</div>`;
+
+                        html += `</div>`;
+                    }
 
                     //prices
                     html += `<div class="ofm-product__options">`;
                         product.options && (html += optionsHTML(product.options, true));
                     html += `</div>`;
 
-                    if(product.allergens?.length) {
-                        html += `<div class="flex-center ofm-product__allergens">${allergensHTML(product.allergens)}</div>`;
-                    }
         html += `</div>`;
     html += `</div>`;
 

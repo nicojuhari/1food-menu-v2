@@ -15,14 +15,20 @@
         border-radius: 3.75rem;
         padding: .5rem;
         align-items: center;
+        gap: 1rem;
+        height: auto;
 
         &__title {
             font-size: 1rem;
+
+            @media (min-width: 768px) {
+                font-size: 1.5rem;
+            }
         }
 
-        &__text {
-            padding: .5rem 1.5rem;
-        }
+        
+
+        
     }
 
     .ofm-category {
@@ -32,6 +38,13 @@
         &__items {
         @media (min-width: 768px) {
                 grid-template-columns: repeat(1, minmax(0, 1fr));
+            }
+        }
+
+        .ofm-product {
+            &__text {
+                padding-right: 1.5rem;
+                gap: 0.25rem;
             }
         }
 

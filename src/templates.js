@@ -12,7 +12,9 @@ export const createMenuHTML = ({ products, categories }) => {
                     html += `   <div class="ofm-product" data-product-block="${product.uid}" >`;
 
                     // product Image
-                    html += productImageHTML(product.imageUrl, product.name);
+                    if(version !== 4) {
+                        html += productImageHTML(product.imageUrl, product.name);
+                    }
 
                     // product content
                     html += `<div class="ofm-product__text">`;
@@ -20,23 +22,38 @@ export const createMenuHTML = ({ products, categories }) => {
                     //product name
                     html += `<div class="ofm-product__title ${[1,2,3].includes(version) ? 'line-clamp-1' : ''}">${product.name}</div>`;
 
-                    //productTags && Allergens
+                    //product description
+                    if(version !== 3) {
+                        html += product.description && `<div class="ofm-product__desc ${[1,2].includes(version) ? 'line-clamp-1' : ''}">${product.description}</div>`;
+                    }
 
+                    //productTags && Allergens
                     if (product.tags?.length && version !== 3) {
+                        html += `<div class="flex items-center justify-between gap-2">`;
+                        
+                        //tags
                         html += `<div class="ofm-product__tags flex items-center">`;
                         html += tagsHTML(product.tags);
                         html += `</div>`;
+
+                        //allergens
+                        if (version == 4) {
+                            html += `<div class="ofm-product__allergens flex items-center gap-2">`;
+                            html += allergensHTML(product.allergens);
+                            html += `</div>`;
+                        }
+
+                        html += `</div>`;
                     }
 
-                    //product description
-                    if(version !== 3) {
-                        html += product.description && `<div class="ofm-product__desc ${[1,2].includes(version) ? 'line-clamp-2' : ''}">${product.description}</div>`;
-                    }
+                    
 
                     //prices
                     html += `<div class="ofm-product__options">`;
                     product.options && (html += optionsHTML(product.options));
                     html += `</div>`;
+
+                    
 
                     //closing tags
                     html += `</div>
@@ -47,8 +64,8 @@ export const createMenuHTML = ({ products, categories }) => {
                 .join("");
 
             cat += `<div class="ofm-category" data-category>
-                        <h2 class="ofm-category__title">${category.name}</h2> 
-                        <div class="ofm-category__items"> ${prod} </div>
+                        <h3 class="ofm-category__title">${category.name}</h3> 
+                        <div class="ofm-category__items">${prod}</div>
                     </div>`;
             return cat;
         })
@@ -122,9 +139,6 @@ export let optionsHTML = (options, inModal = false) => {
     };
 
 export let productImageHTML = (imageUrl = "", name = "") =>
-    imageUrl
-        ? `<div class="image-bg image-bg-2">
+        `<div class="image-bg image-bg-2">
             <img class="image-bg" src="${imageUrl}" alt="${name}" onerror="this.style.display='none'">
         </div>`
-        : "";
-
