@@ -42,6 +42,21 @@ export function productsByCategory(menu) {
     return { groupedProducts, filteredCategories };
 };
 
+export function toggleDesignClass(nodeEl, versionNumber) {
+    // Get all classes on the element
+    const allClasses = nodeEl.classList;
+
+    // Loop through the classes to find the one starting with 'ofm-design'
+    for (const className of allClasses) {
+        if (className.startsWith("ofm-design-v")) {
+            // Toggle the class
+            nodeEl.classList.remove(className);
+        }
+    }
+
+    nodeEl.classList.add(`ofm-design-v${versionNumber}`);
+}
+
 export function addCreditsOnPage(nodeEl) {
     //check if the nodeEl is a valid element
     if (nodeEl && nodeEl.innerHTML === "") {
@@ -54,6 +69,9 @@ export function prepareLayout(oneFoodMenuNode) {
     oneFoodMenuNode.innerHTML = "";
 
     oneFoodMenuNode.classList.add("one-food-menu");
+
+    //ofm-design-v2 | v3, ...
+    toggleDesignClass(oneFoodMenuNode, window.__OneFoodMenu__.configs.version);
 
     let nodes = ["Items", "Allergens", "Credits", "Modal"];
 
