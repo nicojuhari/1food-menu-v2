@@ -21,12 +21,12 @@
     <script type="module">
         
         import { createMenu } from './main.js'
-        import menuData from './menu.json'
+        let menuData = []
 
         let ofmNode = document.getElementById('OneFoodMenu')
         
           let menuConfig = {
-            version: 4,
+            version: 3,
             priceSymbol: '$',
             priceSymbolPosition: 'after',
             allergens: {
@@ -36,13 +36,32 @@
             disableCredits: false,
           }
 
-          createMenu(menuData, menuConfig)
+
+          try {
+            
+            fetch('https://api.1food.menu/v1/menus/672d32b10006909b4965').then(res => res.json()).then(data => {
+                menuData =  data  
+                console.time('createMenu')
+                createMenu(menuData, menuConfig)
+                console.timeEnd('createMenu')
+            })
+
+          } catch(e) {
+              console.error(e)
+          } finally {
+            
+          }
+              
+
+          
         
           
           function createAgain(nr) {
             // console.log(nr)
             menuConfig.version = +nr
+            console.time('createAgain')
             createMenu(menuData, menuConfig)
+            console.timeEnd('createAgain')
       
           }
 

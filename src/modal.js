@@ -2,31 +2,42 @@ import {
     tagsHTML, allergensHTML, optionsHTML, productImageHTML
 } from './templates';
 
-export const showModal = (product_id) => {
-    let { products } = window.__OneFoodMenu__;
-    let { version, priceSymbol } = window.__OneFoodMenu__.configs;
+export const showModal = (productId) => {
+    // Input validation
+    if (!productId) return;
 
-    let productData = products.filter((product) => product.uid === product_id);
+    // Destructure with default values for safety
+    const { products = [], nodes = {}, configs = {} } = window.__OneFoodMenu__ ?? {};
+    const { version = 1 } = configs;
 
-    let modalContent = ''
+    // Find product (using find instead of filter)
+    const product = products.find(product => product.uid === productId);
+    if (!product) return;
 
-    if(version == 1 || version == 2 || version == 3) modalContent = getModalContent(productData, priceSymbol);
-
-    let html = modalWrapper(modalContent);
-
+    // Check version and generate content
+    const isValidVersion = [1, 2, 3].includes(version);
+    const modalContent = isValidVersion ? getModalContent([product]) : '';
+    
+    // Create modal elements using DOM API
+    const modalElement = createModalElement(modalContent);
+    
+    // Add to DOM and update state
     document.body.classList.add('modal-open');
-    window.__OneFoodMenu__.nodes.menuModal.innerHTML = html;
-
-    //close modal
-    let closeModaEls = document.querySelectorAll('[data-close-modal]');
-    closeModaEls.forEach((element) => {
-        element.addEventListener("click", (e) => {
-            window.__OneFoodMenu__.nodes.menuModal.innerHTML = "";
-            document.body.classList.remove("modal-open");
-        });
-    });
-
-}
+    if (nodes.menuModal) {
+        nodes.menuModal.replaceChildren(modalElement);
+        
+        // Ensure modal element is in the DOM before adding animation class
+        const modal = nodes.menuModal.querySelector('.ofm-modal');
+        if (modal) {
+            setupModalCloseHandlers(nodes.menuModal);
+            
+            // Trigger animation after a micro-task to ensure DOM is ready
+            requestAnimationFrame(() => {
+                modal.classList.add('modal-show');
+            });
+        }
+    }
+};
 
 const getModalContent = (productData) => {
     let product = productData?.[0];
@@ -71,24 +82,66 @@ const getModalContent = (productData) => {
     return html;
 }
 
+const createModalElement = (content) => {
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = modalWrapper(content);
+    
+    const modalEl = wrapper.firstElementChild;
+    modalEl.classList.add('modal-wrapper');
+    
+    return modalEl;
+};
 
+const setupModalCloseHandlers = (modalNode) => {
+    const handleClose = () => {
+        const modal = modalNode.querySelector('.ofm-modal');
+        if (!modal) return;
 
+        // Add closing animation
+        modal.classList.remove('modal-show');
+        modal.classList.add('modal-hide');
+
+        // Wait for animation to complete before removing
+        const container = modal.querySelector('.ofm-modal-container');
+        if (container) {
+            container.addEventListener('transitionend', () => {
+                modalNode.replaceChildren();
+                document.body.classList.remove('modal-open');
+            }, { once: true });
+        }
+    };
+
+    // Use event delegation instead of multiple listeners
+    modalNode.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close-modal]')) {
+            handleClose();
+        }
+    });
+
+    // Add escape key handler
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            handleClose();
+        }
+    }, { once: true });
+};
 
 const modalWrapper = (content) => {
-    return ` <div class="ofm-modal">
-        <div class="ofm-modal-backdrop" data-close-modal></div>
-        <div class="ofm-modal-container">
-            <div class="ofm-modal-close" data-close-modal>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </div>
-            <div class="ofm-modal-content">
-                <div class="ofm-overflow-y-hidden">
-                    ${content}
+    return `
+        <div class="ofm-modal">
+            <div class="ofm-modal-backdrop" data-close-modal></div>
+            <div class="ofm-modal-container">
+                <div class="ofm-modal-close" data-close-modal>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </div>
+                <div class="ofm-modal-content">
+                    <div class="ofm-overflow-y-hidden">
+                        ${content}
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>`;
-}
+        </div>`;
+};

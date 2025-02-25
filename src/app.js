@@ -4,85 +4,78 @@ import {
     deepMerge,
     isBrowser,
     productsByCategory,
+    getNotEmptyCategories,
     prepareLayout,
     addCreditsOnPage,
 } from "./helpers";
 import { addAllergensOnPage } from "./allergensTemplate";
 
+export function createMenu(menuInput = {}, clientConfigsInput = {}) {
+    // Early validation checks combined
+    if (!isBrowser() || 
+        !document.getElementById("OneFoodMenu")) {
+        return;
+    }
 
-export function createMenu (menu = {}, clientConfigs = {}) {
+    // Handle legacy single argument case
+    let menu = menuInput;
+    let clientConfigs = clientConfigsInput;
     
-    // tests if global scope is bound to window
-    if (!isBrowser()) return;
-
-    const oneFoodMenuNode = document.getElementById("OneFoodMenu");
-
-    //validate
-    if (oneFoodMenuNode == null) return;
-
-    //from old version, when was passed one argument
-    if (arguments?.length == 1) {
-        clientConfigs = menu;
-        menu = menu?.menu;
-        //delete the menu property from the clientConfigs object
+    if (arguments.length === 1) {
+        clientConfigs = menuInput;
+        menu = menuInput?.menu ?? {};
         delete clientConfigs.menu;
     }
 
-    let configs = {
+    // Validate menu data
+    if (!menu?.products?.length || !menu?.categories?.length) {
+        return;
+    }
+
+    // Default configs with spread
+    const configs = deepMerge({
         version: 1,
         priceSymbol: "",
         allergens: {
             title: "Allergens",
             show: true,
-        },
-        ...menu?.configs,
-    };
+        }
+    }, clientConfigs);
 
-    //deep merge the configs with the client configs
-    configs = deepMerge(configs, clientConfigs);
-
-    if (
-        Object.entries(menu).length == 0 ||
-        menu?.products?.length == 0 ||
-        menu?.categories?.length == 0
-    ) return;
-
-    //create global object with all the data
-    window.__OneFoodMenu__ = {
+    // Create global object with Object.freeze for immutability
+    const menuNode = document.getElementById("OneFoodMenu");
+    window.__OneFoodMenu__ = Object.freeze({
         configs,
         products: menu.products,
         categories: menu.categories,
-        allergens: menu?.allergens || null,
+        allergens: menu?.allergens ?? null,
         nodes: {
-            menuMain: oneFoodMenuNode,
+            menuMain: menuNode,
         }
-    };
-
-    prepareLayout(oneFoodMenuNode);
-
-    let menuHTML = "";
-
-    let { groupedProducts, filteredCategories } = productsByCategory(menu);
-
-    menuHTML = createMenuHTML({
-        categories: filteredCategories,
-        products: groupedProducts,
     });
 
-    //add products
+    // Prepare layout
+    prepareLayout(menuNode);
+
+    // Generate menu HTML
+    const menuHTML = createMenuHTML({
+        categories: getNotEmptyCategories(menu.categories, menu.products),
+        products: productsByCategory(menu),
+    });
+
+    // Update DOM
     window.__OneFoodMenu__.nodes.menuItems.innerHTML = menuHTML;
 
-    //add allergens
+    // Conditional rendering of allergens and credits
     if (menu.allergens?.length && configs.allergens.show) {
         addAllergensOnPage(menu.allergens);
     }
 
-    //add credits
     if (!configs.disableCredits) {
         addCreditsOnPage(window.__OneFoodMenu__.nodes.menuCredits);
     }
 
-    //add events
+    // Initialize events
     events();
-};
+}
 

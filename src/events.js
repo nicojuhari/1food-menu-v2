@@ -1,39 +1,34 @@
 import { showModal } from './modal';
+
 export const events = () => {
+    const { configs = {} } = window.__OneFoodMenu__ ?? {};
+    const { version = 1 } = configs;
     
-    let { version } = window.__OneFoodMenu__.configs;
+    // Check if version is valid for event attachment
+    if ([1, 2, 3].includes(version)) {
+        attachProductClickEvents();
+    }
+};
+
+const attachProductClickEvents = () => {
+    const PRODUCT_SELECTOR = 'data-product-block';
     
-    if(version == 1 || version == 2 || version == 3) attachEvents()
-
-}
-
-const attachEvents = () => {
-
-    //show modal events
-    document.addEventListener( "click",
-        function (event) {
-            let targetElement = event.target;
-            
-            let selector = "data-product-block";
-
-            const { version } = window.__OneFoodMenu__.configs;
+    // Use event delegation for better performance
+    document.addEventListener('click', handleProductClick, { capture: true });
+    
+    function handleProductClick(event) {
+        const { configs = {} } = window.__OneFoodMenu__ ?? {};
         
-            if (version == 4 ) return;
-
-            while (targetElement != null) {
-                if (targetElement.hasAttribute(selector)) {
-
-                    let productId = targetElement.getAttribute(selector)
-
-                    showModal(productId)
-                    
-                    targetElement = null
-                    return;
-                }
-
-                targetElement = targetElement.parentElement;
-            }
-        },
-        true
-    );
-}   
+        // Early return if version 4
+        if (configs.version === 4) return;
+        
+        // Find closest product element
+        const productElement = event.target.closest(`[${PRODUCT_SELECTOR}]`);
+        if (!productElement) return;
+        
+        const productId = productElement.getAttribute(PRODUCT_SELECTOR);
+        if (productId) {
+            showModal(productId);
+        }
+    }
+};   

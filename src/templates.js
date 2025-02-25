@@ -136,7 +136,7 @@ export let optionsHTML = (options, inModal = false) => {
             return html;
         })
         .join("");
-    };
+};
 
 export let productImageHTML = (imageUrl = "", name = "") => {
     let html = `<div class="image-bg image-bg-2">`;

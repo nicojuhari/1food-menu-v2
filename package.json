@@ -2,7 +2,12 @@
   "name": "1food-menu",
   "type": "module",
   "version": "0.4.1",
-  "description": "Designs for Digital Food Menus created with www.1food.menu",
+  "description": "Designs for Digital Restaurant Menus created with 1FoodMenu app",
+  "homepage": "https:/1food.menu",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nicojuhari/1food-menu"
+  },
   "files": [
     "dist"
   ],
@@ -24,7 +29,7 @@
   "author": "Nicolae Cojuhari <nicojuhari@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "sass": "^1.81.1",
-    "vite": "^6.0.2"
+    "sass": "^1.85.1",
+    "vite": "^6.2.0"
   }
 }

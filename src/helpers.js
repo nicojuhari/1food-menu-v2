@@ -2,84 +2,120 @@ export function isBrowser() {
     return typeof window !== "undefined";
 }
 
-export function deepMerge(obj1, obj2) {
-    let result = Object.assign({}, obj1);
-    for (let key in obj2) {
-        if (typeof obj2[key] === "object" && obj2[key] !== null) {
-            if (!(key in obj1)) {
-                result[key] = obj2[key];
-            } else {
-                result[key] = deepMerge(obj1[key], obj2[key]);
-            }
-        } else {
-            result[key] = obj2[key];
+export function deepMerge(target, source) {
+    // Handle null/undefined and non-object cases
+    if (!source || typeof source !== "object") return source;
+    if (!target || typeof target !== "object") return { ...source };
+
+    // Handle arrays
+    if (Array.isArray(source)) {
+        return Array.isArray(target) ? [...target, ...source] : [...source];
+    }
+
+    // Create new object to avoid mutations
+    const result = { ...target };
+
+    for (const key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+            result[key] = deepMerge(target[key], source[key]);
         }
     }
+
     return result;
 }
 
-export function mountOnPage(nodeEl, html = '') { nodeEl.innerHTML = html };
-
 export function productsByCategory(menu) {
-    let groupedProducts = {};
-    let filteredCategories = [];
-
-    //check if the category has products
-
-    menu.categories.forEach((category) => {
-        //this should run only once for each category
-        if (!groupedProducts?.[category.uid]) {
-            groupedProducts[category.uid] = [];
-        }
-
-        groupedProducts[category.uid] = [
-            ...menu.products.filter((p) => p.categoryId === category.uid),
-        ];
-
-        if (groupedProducts[category.uid].length) filteredCategories.push(category);
-    });
-
-    return { groupedProducts, filteredCategories };
-};
-
-export function toggleDesignClass(nodeEl, versionNumber) {
-    // Get all classes on the element
-    const allClasses = nodeEl.classList;
-
-    // Loop through the classes to find the one starting with 'ofm-design'
-    for (const className of allClasses) {
-        if (className.startsWith("ofm-design-v")) {
-            // Toggle the class
-            nodeEl.classList.remove(className);
-        }
+    // Return for invalid input
+    if (!menu?.categories || !menu?.products) {
+        return { groupedProducts: {}, notEmptyCategories: [] };
     }
 
+    // Create a map of products by categoryId for O(1) lookup
+    return menu.products.reduce((acc, product) => {
+        if (!acc[product.categoryId]) {
+            acc[product.categoryId] = [];
+        }
+        acc[product.categoryId].push(product);
+        return acc;
+    }, {});
+};
+
+export function getNotEmptyCategories(categories, products) {
+    return categories.filter((category) =>
+        products.some((product) => product.categoryId === category.uid)
+    );
+}
+
+export function toggleDesignClass(nodeEl, versionNumber) {
+    // Remove any existing design version class using regex pattern
+    nodeEl.className = nodeEl.className.replace(/\bofm-design-v\d+\b/g, "").trim();
+
+    // Add new design class
     nodeEl.classList.add(`ofm-design-v${versionNumber}`);
 }
 
 export function addCreditsOnPage(nodeEl) {
-    //check if the nodeEl is a valid element
-    if (nodeEl && nodeEl.innerHTML === "") {
-        nodeEl.innerHTML = `<div class="ofm-credits">Created with <strong><a href="https://1food.menu?ref=free-menu-designs" target="_blank">1Food Menu</a></strong></div>`;
+    // Validate node element
+    if (!nodeEl || !(nodeEl instanceof Element) || nodeEl.innerHTML.trim()) {
+        return;
     }
+
+    const credits = document.createElement("div");
+    credits.className = "ofm-credits";
+
+    const link = document.createElement("a");
+    link.href = "https://1food.menu?ref=free-menu-designs";
+    link.target = "_blank";
+    link.textContent = "1Food Menu";
+
+    credits.textContent = "Created with ";
+    const strong = document.createElement("strong");
+    strong.appendChild(link);
+    credits.appendChild(strong);
+
+    nodeEl.appendChild(credits);
 }
 
 export function prepareLayout(oneFoodMenuNode) {
-    //clean the main node
-    oneFoodMenuNode.innerHTML = "";
+    // Validate input
+    if (!oneFoodMenuNode || !(oneFoodMenuNode instanceof Element)) {
+        throw new Error('Invalid node element provided to prepareLayout');
+    }
 
-    oneFoodMenuNode.classList.add("one-food-menu");
+    // Create document fragment for batch DOM operations
+    const fragment = document.createDocumentFragment();
+    
+    // Clean and prepare main node
+    while (oneFoodMenuNode.firstChild) {
+        oneFoodMenuNode.removeChild(oneFoodMenuNode.firstChild);
+    }
+    oneFoodMenuNode.classList.add('one-food-menu');
+    
+    // Apply design version
+    toggleDesignClass(oneFoodMenuNode, window.__OneFoodMenu__?.configs?.version || 1);
 
-    //ofm-design-v2 | v3, ...
-    toggleDesignClass(oneFoodMenuNode, window.__OneFoodMenu__.configs.version);
-
-    let nodes = ["Items", "Allergens", "Credits", "Modal"];
-
-    nodes.forEach((node) => {
-        let nodeEl = document.createElement("div");
-        nodeEl.id = `OneFoodMenu${node}`;
-        window.__OneFoodMenu__.nodes["menu" + node] = nodeEl;
-
-        oneFoodMenuNode.appendChild(nodeEl);
+    // Define menu sections
+    const sections = Object.freeze({
+        Items: 'menu-items',
+        Allergens: 'menu-allergens',
+        Credits: 'menu-credits',
+        Modal: 'menu-modal'
     });
-};
+    
+    // Create all sections at once using fragment
+    Object.entries(sections).forEach(([nodeName, className]) => {
+        const nodeEl = document.createElement('div');
+        nodeEl.id = `OneFoodMenu${nodeName}`;
+        nodeEl.className = className;
+        
+        // Store reference in global object
+        if (window.__OneFoodMenu__?.nodes) {
+            window.__OneFoodMenu__.nodes[`menu${nodeName}`] = nodeEl;
+        }
+        
+        fragment.appendChild(nodeEl);
+    });
+
+    // Single DOM update
+    oneFoodMenuNode.appendChild(fragment);
+}
