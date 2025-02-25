@@ -1,6 +1,6 @@
 .ofm-design-v3 {
-    .image-bg-2,
-        .image-bg {
+    .image-container,
+        .product-image {
             border-radius: 999px;
             height: 4rem;
             width: 4rem;
@@ -16,27 +16,16 @@
         padding: .5rem;
         align-items: center;
         gap: 1rem;
-        height: auto;
-
-        &__title {
-            font-size: 1rem;
-
-            @media (min-width: 768px) {
-                font-size: 1.5rem;
-            }
-        }
-
-        
-
+        height: auto;        
         
     }
 
+    //in grid only
+
     .ofm-category {
-        max-width: 600px;
-        margin: 0 auto;
 
         &__items {
-        @media (min-width: 768px) {
+            @media (min-width: 768px) {
                 grid-template-columns: repeat(1, minmax(0, 1fr));
             }
         }
@@ -45,8 +34,32 @@
             &__text {
                 padding-right: 1.5rem;
                 gap: 0.25rem;
+                flex-direction: row;
+                justify-content: space-between;
             }
+
+            &__title {
+                font-size: 1rem;
+
+                @media (min-width: 768px) {
+                    font-size: 1.5rem;
+                }
+            }
+
+            &__size {
+                display: none;
+            }
+           
         }
 
     }
+
+        .ofm-category, .ofm-allergens {
+            max-width: 600px;
+            margin: 0 auto;
+
+            &__title {
+                text-align: center;
+            }               
+        }
 }

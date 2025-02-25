@@ -40,6 +40,20 @@
     gap: 1rem;
 }
 
+.shrink-none {
+    flex-shrink: 0;
+}
+
+.ofm-text-xl {
+    font-size: 1.25rem;
+    line-height: 1.4rem;
+
+    @media (min-width: 768px) {
+        font-size: 1.5rem;
+        line-height: 1.3rem;
+    }
+}
+
 .ofm-text-lg {
     font-size: 1rem;
     line-height: 1.5rem;

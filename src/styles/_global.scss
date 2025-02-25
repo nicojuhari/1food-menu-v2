@@ -42,13 +42,18 @@ body.modal-open {
         .arrow-down {
             width: 20px;
             height: 20px;
-            background-image: url('../assets/arrow-down.svg');
-            background-size: 90%;
-            background-position: center;
-            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: .5;
+            color: currentColor;
             opacity: .5;
             background-color: var(--ofm-bg-color);
             border-radius: .25rem;
+
+            &:hover {
+                opacity: .8;
+            }
         }
     
         .line-clamp-1 {
@@ -59,8 +64,8 @@ body.modal-open {
             -webkit-box-orient: vertical;
         }
     
-        .image-bg,
-        .image-bg-2 {
+        .product-image,
+        .image-container {
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -68,9 +73,10 @@ body.modal-open {
             height: 100%;
             flex-shrink: 0;
             object-fit: cover;
+            display: block;
         }
     
-        .image-bg-2 {
+        .image-container {
             background-image: url('../assets/image-palceholder.svg');
             background-color: rgba(178, 178, 178, 0.217);
             background-size: 70%;

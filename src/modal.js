@@ -47,7 +47,7 @@ const getModalContent = (productData) => {
     html += ` <div>
                 ${ productImageHTML(product?.imageUrl, product?.name) }
                 <div class="ofm-product__text">
-                    <div class="ofm-product__title">${product.name}</div>`;
+                    <div class="ofm-product__title ofm-text-xl">${product.name}</div>`;
                     
         
                     

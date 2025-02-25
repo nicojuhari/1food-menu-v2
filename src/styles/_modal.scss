@@ -62,7 +62,7 @@
         flex: 1 1 0%;
         height: 100%;
 
-        .image-bg {
+        .product-image, .image-container {
             aspect-ratio: 1/1;
             height: auto;
             width: 100%;
@@ -77,6 +77,10 @@
 
         &__text {
             padding: 1rem;
+        }
+
+        &__title {
+            font-size: 1.5rem;
         }
     }
 }

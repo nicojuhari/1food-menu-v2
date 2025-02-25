@@ -1,8 +1,8 @@
 {
   "name": "1food-menu",
   "type": "module",
-  "version": "0.4.1",
-  "description": "Designs for Digital Restaurant Menus created with 1FoodMenu app",
+  "version": "0.4.2",
+  "description": "Digital Restaurant Menu designs created with 1FoodMenu app",
   "homepage": "https:/1food.menu",
   "repository": {
     "type": "git",

@@ -1,92 +1,133 @@
+// Template Strategy Pattern - Define different version renderers
+const renderProductV1 = (product) => `
+    <div class="ofm-product" data-product-block="${product.uid}">
+        ${productImageHTML(product.imageUrl, product.name)}
+        <div class="ofm-product__text">
+            <div class="ofm-product__title line-clamp-1">${product.name}</div>
+            ${
+                product.description
+                    ? `<div class="ofm-product__desc line-clamp-1">${product.description}</div>`
+                    : ""
+            }
+            ${
+                product.tags?.length ? `
+                <div class="flex items-center justify-between gap-2">
+                    <div class="ofm-product__tags flex items-center">
+                        ${tagsHTML(product.tags)}
+                    </div>
+                </div>`
+                    : ""
+            }
+            ${
+                product.options
+                    ? `
+                <div class="ofm-product__options">
+                    ${optionsHTML(product.options, false, true)}
+                </div>`
+                    : ""
+            }
+        </div>
+    </div>
+`;
+
+const renderProductV3 = (product) => `
+    <div class="ofm-product" data-product-block="${product.uid}">
+        ${productImageHTML(product.imageUrl, product.name)}
+        <div class="ofm-product__text">
+            <div class="ofm-product__title line-clamp-1">${product.name}</div>
+            ${
+                product.options
+                    ? `
+                <div class="ofm-product__options">
+                    ${optionsHTML(product.options, false, false)}
+                </div>`
+                    : ""
+            }
+        </div>
+    </div>
+`;
+
+const renderProductV4 = (product) => `
+    <div class="ofm-product" data-product-block="${product.uid}">
+        <div class="ofm-product__text">
+            <div class="ofm-product__title">${product.name}</div>
+            ${
+                product.description
+                    ? `<div class="ofm-product__desc">${product.description}</div>`
+                    : ""
+            }
+            ${
+                product.tags?.length
+                    ? `
+                <div class="flex items-center justify-between gap-2">
+                    <div class="ofm-product__tags flex items-center">
+                        ${tagsHTML(product.tags)}
+                    </div>
+                    <div class="ofm-product__allergens flex items-center gap-2">
+                        ${allergensHTML(product.allergens)}
+                    </div>
+                </div>`
+                    : ""
+            }
+            ${
+                product.options
+                    ? `
+                <div class="ofm-product__options">
+                    ${optionsHTML(product.options, false, false)}
+                </div>`
+                    : ""
+            }
+        </div>
+    </div>
+`;
+
+// Simple version selector
+const getProductRenderer = (version) => {
+    switch (version) {
+        case 4: return renderProductV4;
+        case 3: return renderProductV3;
+        default: return renderProductV1; //for 1 and 2, the same html structure
+    }
+};
+
+
 export const createMenuHTML = ({ products, categories }) => {
-    let version = window.__OneFoodMenu__.configs.version;
+    const version = window.__OneFoodMenu__.configs.version;
+    const renderProduct = getProductRenderer(version);
+
     return categories
-        .map((category) => {
-            let cat = "";
-            let prod = "";
-
-            prod = products[category.uid]
-                .map((product) => {
-                    let html = "";
-
-                    html += `   <div class="ofm-product" data-product-block="${product.uid}" >`;
-
-                    // product Image
-                    if(version !== 4) {
-                        html += productImageHTML(product.imageUrl, product.name);
-                    }
-
-                    // product content
-                    html += `<div class="ofm-product__text">`;
-
-                    //product name
-                    html += `<div class="ofm-product__title ${[1,2,3].includes(version) ? 'line-clamp-1' : ''}">${product.name}</div>`;
-
-                    //product description
-                    if(version !== 3) {
-                        html += product.description && `<div class="ofm-product__desc ${[1,2].includes(version) ? 'line-clamp-1' : ''}">${product.description}</div>`;
-                    }
-
-                    //productTags && Allergens
-                    if (product.tags?.length && version !== 3) {
-                        html += `<div class="flex items-center justify-between gap-2">`;
-                        
-                        //tags
-                        html += `<div class="ofm-product__tags flex items-center">`;
-                        html += tagsHTML(product.tags);
-                        html += `</div>`;
-
-                        //allergens
-                        if (version == 4) {
-                            html += `<div class="ofm-product__allergens flex items-center gap-2">`;
-                            html += allergensHTML(product.allergens);
-                            html += `</div>`;
-                        }
-
-                        html += `</div>`;
-                    }
-
-                    
-
-                    //prices
-                    html += `<div class="ofm-product__options">`;
-                    product.options && (html += optionsHTML(product.options));
-                    html += `</div>`;
-
-                    
-
-                    //closing tags
-                    html += `</div>
-                        </div>`;
-
-                    return html;
-                })
-                .join("");
-
-            cat += `<div class="ofm-category" data-category>
-                        <h3 class="ofm-category__title">${category.name}</h3> 
-                        <div class="ofm-category__items">${prod}</div>
-                    </div>`;
-            return cat;
-        })
+        .map(
+            (category) => `
+            <div class="ofm-category" data-category>
+                <h3 class="ofm-category__title">${category.name}</h3> 
+                <div class="ofm-category__items">
+                    ${products[category.uid].map(renderProduct).join("")}
+                </div>
+            </div>`
+        )
         .join("");
 };
 
 export const allergensHTML = (prod_allergens) => {
-    let allergens = window.__OneFoodMenu__.allergens;
-    let allergensHTML = "";
+    // Early return if no allergens
+    if (!prod_allergens?.length) return "";
 
-    if (prod_allergens?.length == 0 || !prod_allergens) return "";
+    // Get allergens from global config
+    const allergensList = window.__OneFoodMenu__.allergens || [];
 
-    allergensHTML += prod_allergens.map((allergen) => {
-        return `<div data-prod-allergen class="ofm-allergen__item">${
-            allergens.find((al) => al.uid == allergen).name
-        }</div>`;
-    })
-    .join("");
-    // allergensHTML += `<div class="mr-auto pr-2"></div>`;
+    // Create a map for O(1) lookup instead of using find() for each allergen
+    const allergensMap = new Map(allergensList.map((allergen) => [allergen.uid, allergen.name]));
 
-    return allergensHTML;
+    return prod_allergens
+        .map((allergenId) => {
+            const allergenName = allergensMap.get(allergenId);
+            // Skip invalid allergens
+            if (!allergenName) return "";
+
+            return `<div data-prod-allergen class="ofm-allergen__item">${allergenName}</div>`;
+        })
+        .filter(Boolean) // Remove empty strings from invalid allergens
+        .join("");
 };
 
 export const tagsHTML = (tags) => {
@@ -96,53 +137,63 @@ export const tagsHTML = (tags) => {
     }).join("")
 }
 
-export let optionsHTML = (options, inModal = false) => {
-    let priceSymbol = window.__OneFoodMenu__.configs.priceSymbol;
-    let priceSymbolPosition = window.__OneFoodMenu__.configs.priceSymbolPosition || 'before';
-    let version = window.__OneFoodMenu__.configs.version;
-    let html = ''
+export const formatPrice = (price, priceSymbol, priceSymbolPosition) => {
+    return priceSymbolPosition === "after" ? `${price}${priceSymbol}` : `${priceSymbol}${price}`;
+};
+export const optionsHTML = (options, inModal = false, showArrow = false) => {
+    const { priceSymbol, priceSymbolPosition = "before" } = window.__OneFoodMenu__.configs;
+    const version = window.__OneFoodMenu__.configs.version;
+    
     return options
         .map((item, idx) => {
-            html = "";
-            if((version == 1 || version == 2 || version == 3) && idx >= 1 && !inModal) {
-               return html;
+            if ((version <= 3) && idx >= 1 && !inModal) {
+                return '';
             }
             
-            html += `<div class="ofm-product__options-item">
-                        
-                        <div class="ofm-product__size ofm-text-sm">${item?.size}</div>`;
-                        
-                html += `<div class="ofm-product__price">`;
-                
-                    if(item.salePrice) {
-                        html += `<div class="ofm-price ofm-text-lg">
-                                    ${priceSymbolPosition == 'after' ? item.salePrice + priceSymbol : priceSymbol + item.salePrice}
-                                </div>`;
-                        html += `<div class="ofm-price ofm-price--old ofm-text-sm">
-                                    ${priceSymbolPosition == 'after' ? item.price + priceSymbol : priceSymbol + item.price}
-                                </div>`;
-                    } else {
-                        html += `<div class="ofm-price ofm-text-lg">
-                                    ${priceSymbolPosition == 'after' ? item.price + priceSymbol : priceSymbol + item.price}
-                                </div>`;
-                    }
+            
 
-                    if ((version == 1 || version == 2) && !inModal && options[1]) {
-                        html += `<div class="arrow-down rounded bg-slate-200"></div>`;
-                    }
-
-                html += `</div>`;
-            html += `</div>`;
-            return html;
+            return `
+                <div class="ofm-product__options-item">
+                    <div class="ofm-product__size ofm-text-sm">${item?.size}</div>
+                    <div class="ofm-product__price">
+                        ${
+                            item.salePrice
+                                ? `<div class="ofm-price ofm-text-lg">${formatPrice(
+                                      item.salePrice,
+                                      priceSymbol,
+                                      priceSymbolPosition
+                                  )}</div>
+                             <div class="ofm-price ofm-price--old ofm-text-sm">${formatPrice(
+                                 item.price,
+                                 priceSymbol,
+                                 priceSymbolPosition
+                             )}</div>`
+                                : `<div class="ofm-price ofm-text-lg">${formatPrice(
+                                      item.price,
+                                      priceSymbol,
+                                      priceSymbolPosition
+                                  )}</div>`
+                        }
+                        ${
+                            showArrow && options[1] && !inModal
+                                ? `<div class="arrow-down">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>`
+                                : ""
+                        }
+                    </div>
+                </div>`;
         })
         .join("");
 };
 
 export let productImageHTML = (imageUrl = "", name = "") => {
-    let html = `<div class="image-bg image-bg-2">`;
-    if (imageUrl) {
-        html += `<img class="image-bg" src="${imageUrl}" alt="${name}" onerror="this.style.display='none'">`;
-    }
+    let html = `<div class="image-container">`;
+        if (imageUrl) {
+            html += `<img class="product-image" src="${imageUrl}" alt="${name}" onerror="this.style.display='none'">`;
+        }
     html += `</div>`;
     return html;
 }
