@@ -56,13 +56,18 @@ body.modal-open {
             }
         }
     
-        .line-clamp-1 {
+        .ofm-line-clamp {
             display: -webkit-box;
             overflow: hidden;
             -webkit-line-clamp: 1;
             line-clamp: 1;
             -webkit-box-orient: vertical;
-        }
+
+            &.clamp-2 {
+                -webkit-line-clamp: 2;
+                line-clamp: 2;
+            }
+        }   
     
         .product-image,
         .image-container {
@@ -84,8 +89,7 @@ body.modal-open {
 }
 
 .ofm-category, .ofm-allergens {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+    margin-top: 2.5rem;
     position: relative;
 
     &__title {
@@ -114,8 +118,10 @@ body.modal-open {
     box-shadow: var(--ofm-box-shadow);
     padding: 1rem;
     transition: box-shadow .3s ease-in-out;
+    position: relative;
+    overflow: hidden;
 
-    &__text {
+    &__info {
         width: 100%;
         display: flex;
         flex-grow: 1;
@@ -175,6 +181,33 @@ body.modal-open {
     &__size {
         opacity: .7;
     }
+
+    &.product-unavailable {
+        .image-container {
+            opacity: 0.7;
+            filter: grayscale(0.8);
+        }
+
+        .ofm-product__info {
+            opacity: 0.5;
+        }
+    }
+
+}
+
+.out-of-stock-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--ofm-out-of-stock-bg-color);
+    color: var(--ofm-out-of-stock-txt-color);
+    padding: 6px 20px;
+    font-weight: 500;
+    font-size: 0.75rem;
+    border-radius: 0 0 30px 0;
+    z-index: 2;
+    pointer-events: none;
+    box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -218,7 +251,7 @@ body.modal-open {
 
 .ofm-modal-content, .ofm-design-v4 {
     
-    .ofm-product__text {
+    .ofm-product__info {
         gap: 1rem;
     }
     .ofm-product__options-item {
@@ -252,4 +285,10 @@ body.modal-open {
     .ofm-product:hover {
         box-shadow: var(--ofm-box-shadow-hover);
     }
+}
+
+.ofm-category .ofm-category__description {
+    margin: 6px 0;
+    opacity: .7;
+    line-height: 1.4;
 }

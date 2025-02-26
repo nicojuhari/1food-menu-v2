@@ -32,14 +32,21 @@
               show: true,
             },
             disableCredits: false,
+            labels: {
+              outOfStock: "Out of Stock",
+              allergens: "Allergens111",
+            }
+
           }
 
 
           try {
             
-            fetch('https://api.1food.menu/v1/menus/672d32b10006909b4965').then(res => res.json()).then(data => {
+            fetch('https://api.1food.menu/v1/menus/672cbe580015e16438b3').then(res => res.json()).then(data => {
                 menuData =  data  
                 console.time('createMenu')
+
+                console.log(menuData)
                 createMenu(menuData, menuConfig)
                 console.timeEnd('createMenu')
             })

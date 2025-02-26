@@ -119,3 +119,20 @@ export function prepareLayout(oneFoodMenuNode) {
     // Single DOM update
     oneFoodMenuNode.appendChild(fragment);
 }
+
+
+export function getLabel(key) {
+    const configs = window.__OneFoodMenu__.configs;
+    const userLabels = configs.labels || {};
+
+    const DEFAULT_LABELS = {
+        outOfStock: "Currently Unavailable",
+        allergens: "Allergens",
+        // categories: "Categories",
+        // price: "Price",
+        // Add more default labels as needed
+    };
+
+    // Return user custom label if provided, otherwise return default
+    return userLabels[key] || DEFAULT_LABELS?.[key] || '';
+}

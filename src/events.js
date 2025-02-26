@@ -11,7 +11,7 @@ export const events = () => {
 };
 
 const attachProductClickEvents = () => {
-    const PRODUCT_SELECTOR = 'data-product-block';
+    const PRODUCT_SELECTOR = 'data-product-id';
     
     // Use event delegation for better performance
     document.addEventListener('click', handleProductClick, { capture: true });

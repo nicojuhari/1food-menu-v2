@@ -1,6 +1,7 @@
 import {
     tagsHTML, allergensHTML, optionsHTML, productImageHTML
-} from './templates';
+} from './template-helpers';
+import { getLabel } from './helpers';
 
 export const showModal = (productId) => {
     // Input validation
@@ -42,41 +43,41 @@ export const showModal = (productId) => {
 const getModalContent = (productData) => {
     let product = productData?.[0];
 
-    let html = ''
+    const outOfStockLabel = !product.inStock
+        ? `<div class="out-of-stock-label">${getLabel("outOfStock")}</div>`
+        : "";
 
-    html += ` <div>
-                ${ productImageHTML(product?.imageUrl, product?.name) }
-                <div class="ofm-product__text">
-                    <div class="ofm-product__title ofm-text-xl">${product.name}</div>`;
-                    
-        
-                    
-                    //descriptiom
-                    html += product.description && ` <div class="ofm-product__desc">${product.description}</div>`;
+    let html = "";
 
-                    //productTags && Allergens
-                    if (product.tags?.length || product.allergens?.length) {
-                        html += `<div class="flex items-center justify-between gap-2">`;
-                        
-                            //tags
-                            html += `<div class="ofm-product__tags flex items-center gap-2">`;
-                            html += tagsHTML(product.tags);
-                            html += `</div>`;
+    html += `${outOfStockLabel}
+            ${productImageHTML(product?.imageUrl, product?.name)}
+            <div class="ofm-product__info">
+                <div class="ofm-product__title ofm-text-xl">${product.name}</div>`;
 
-                            //allergens
-                            html += `<div class="ofm-product__allergens flex items-center gap-2">`;
-                            html += allergensHTML(product.allergens);
-                            html += `</div>`;
+    //descriptiom
+    html += product.description && ` <div class="ofm-product__desc">${product.description}</div>`;
 
-                        html += `</div>`;
-                    }
-
-                    //prices
-                    html += `<div class="ofm-product__options">`;
-                        product.options && (html += optionsHTML(product.options, true));
-                    html += `</div>`;
-
+    //productTags
+    if (product.tags?.length) {
+        html += `<div class="ofm-product__tags flex items-center gap-2">`;
+        html += tagsHTML(product.tags);
         html += `</div>`;
+    }
+
+    //prices
+    if (product.options?.length) {
+        html += `<div class="ofm-product__options">`;
+        html += optionsHTML(product.options, true);
+        html += `</div>`;
+    }
+
+    //allergens
+    if (product.allergens?.length) {
+        html += `<div class="ofm-modal-allergens">`;
+        html += allergensHTML(product.allergens, true);
+        html += `</div>`;
+    }
+
     html += `</div>`;
 
     return html;
@@ -138,9 +139,7 @@ const modalWrapper = (content) => {
                     </svg>
                 </div>
                 <div class="ofm-modal-content">
-                    <div class="ofm-overflow-y-hidden">
-                        ${content}
-                    </div>
+                    ${content}
                 </div>
             </div>
         </div>`;

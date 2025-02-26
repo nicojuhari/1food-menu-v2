@@ -1,3 +1,4 @@
+
 export function addAllergensOnPage (allergens) {
 
     let title = window.__OneFoodMenu__.configs.allergens.title;
@@ -9,7 +10,7 @@ export function addAllergensOnPage (allergens) {
     allergens.forEach((allergen) => {
         allergensHTML += `  <div class="ofm-allergens__item">
                                 <div class="ofm-allergens__name shrink-none">${allergen.name}</div>
-                                <div class="ofm-allergens__desc line-clamp-1">${allergen.description}</div>
+                                <div class="ofm-allergens__desc ofm-line-clamp">${allergen.description}</div>
                             </div>`;
     });
 
