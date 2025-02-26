@@ -123,7 +123,7 @@ export function prepareLayout(oneFoodMenuNode) {
 
 export function getLabel(key) {
     const configs = window.__OneFoodMenu__.configs;
-    const userLabels = configs.labels || {};
+    const userLabels = configs?.labels || {};
 
     const DEFAULT_LABELS = {
         outOfStock: "Currently Unavailable",

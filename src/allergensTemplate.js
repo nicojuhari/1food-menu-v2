@@ -1,10 +1,8 @@
-
+import { getLabel } from "./helpers";
 export function addAllergensOnPage (allergens) {
 
-    let title = window.__OneFoodMenu__.configs.allergens.title;
-
     let allergensHTML = `<div class="ofm-allergens">
-                            <h3 class="ofm-allergens__title">${title}</h3>
+                            <h3 class="ofm-allergens__title">${getLabel('allergens')}</h3>
                             <div class="ofm-allergens__items">`;
 
     allergens.forEach((allergen) => {

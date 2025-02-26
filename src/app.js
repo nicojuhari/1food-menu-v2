@@ -33,14 +33,13 @@ export function createMenu(menuInput = {}, clientConfigsInput = {}) {
     }
 
     // Default configs with spread
-    const configs = deepMerge({
-        version: 1,
-        priceSymbol: "",
-        allergens: {
-            title: "Allergens",
-            show: true,
-        }
-    }, clientConfigs);
+    const configs = deepMerge(
+        {
+            version: 1,
+            priceSymbol: "",
+        },
+        clientConfigs
+    );
 
     // Create global object with Object.freeze for immutability
     const menuNode = document.getElementById("OneFoodMenu");
@@ -67,7 +66,7 @@ export function createMenu(menuInput = {}, clientConfigsInput = {}) {
     window.__OneFoodMenu__.nodes.menuItems.innerHTML = menuHTML;
 
     // Conditional rendering of allergens and credits
-    if (menu.allergens?.length && configs.allergens.show) {
+    if (menu.allergens?.length) {
         addAllergensOnPage(menu.allergens);
     }
 
