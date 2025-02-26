@@ -44,13 +44,12 @@ export function tagsHTML(tags) {
 }
 
 export function optionsHTML(options, inModal = false, showArrow = false) {
-    const { priceSymbol, priceSymbolPosition = "before" } = window.__OneFoodMenu__.configs;
+    const { priceSymbol, priceSymbolPosition = 1 } = window.__OneFoodMenu__.configs;
     const version = window.__OneFoodMenu__.configs.version;
 
     function formatPrice(price) {
-        return priceSymbolPosition === "after"
-            ? `${price}${priceSymbol}`
-            : `${priceSymbol}${price}`;
+        // 1 = before price (default), 2 = after price
+        return priceSymbolPosition === 2 ? `${price}${priceSymbol}` : `${priceSymbol}${price}`;
     }
 
     return options
