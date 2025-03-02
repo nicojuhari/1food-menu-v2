@@ -25,13 +25,13 @@ export const allergensHTML = (prod_allergens, inModal = false) => {
 
     return prod_allergens
         .map((allergenId) => {
-            const allergenName = allergensMap.get(allergenId);
+            const allergen = allergensMap.get(allergenId);
             // Skip invalid allergens
-            if (!allergenName) return "";
+            if (!allergen) return "";
 
-            return `<div data-prod-allergen class="ofm-allergen__item">${allergenName}</div>`;
+            return `<div data-prod-allergen class="ofm-allergen__item">${allergen.name}</div>`; // Changed from allergenName to allergen.name
         })
-        .filter(Boolean) // Remove empty strings from invalid allergens
+        .filter(Boolean)
         .join("");
 };
 

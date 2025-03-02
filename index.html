@@ -29,7 +29,7 @@
             priceSymbolPosition: 1,
             labels: {
               outOfStock: "Out of Stock",
-              allergens: "Allergens111",
+              allergens: "Allergens",
             },
             disableCredits: false,
 
@@ -42,7 +42,11 @@
                 menuData =  data  
                 console.time('createMenu')
 
+                
+                menuData.categories[1].isArchived = true
+                menuData.products[2].isArchived = false
                 console.log(menuData)
+
                 createMenu(menuData, menuConfig)
                 console.timeEnd('createMenu')
             })

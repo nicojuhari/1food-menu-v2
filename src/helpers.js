@@ -24,14 +24,15 @@ export function deepMerge(target, source) {
     return result;
 }
 
-export function productsByCategory(menu) {
-    // Return for invalid input
-    if (!menu?.categories || !menu?.products) {
-        return { groupedProducts: {}, notEmptyCategories: [] };
+export function productsByCategory(products) {
+    
+    // Return empty object for invalid input
+    if (!Array.isArray(products) || !products.length) {
+        return {};
     }
 
     // Create a map of products by categoryId for O(1) lookup
-    return menu.products.reduce((acc, product) => {
+    return products.reduce((acc, product) => {
         if (!acc[product.categoryId]) {
             acc[product.categoryId] = [];
         }

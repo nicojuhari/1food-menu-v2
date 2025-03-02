@@ -10,25 +10,25 @@ import {
 } from "./helpers";
 import { addAllergensOnPage } from "./allergensTemplate";
 
-export function createMenu(menuInput = {}, clientConfigsInput = {}) {
+export function createMenu(menuInput = {}, clientConfigs = {}) {
     // Early validation checks combined
-    if (!isBrowser() || 
-        !document.getElementById("OneFoodMenu")) {
+    if (!isBrowser() || !document.getElementById("OneFoodMenu")) {
         return;
     }
 
-    // Handle legacy single argument case
-    let menu = menuInput;
-    let clientConfigs = clientConfigsInput;
-    
-    if (arguments.length === 1) {
-        clientConfigs = menuInput;
-        menu = menuInput?.menu ?? {};
-        delete clientConfigs.menu;
-    }
+    const menu = {
+        products: [],
+        categories: [],
+        allergens: [],
+        ...menuInput,
+    };
+
+    // Filter out archived items before creating global object
+    const filteredProducts = menu.products.filter((product) => product.isArchived !== true);
+    const filteredCategories = menu.categories.filter((category) => category.isArchived !== true);
 
     // Validate menu data
-    if (!menu?.products?.length || !menu?.categories?.length) {
+    if (!filteredProducts.length || !filteredCategories.length) {
         return;
     }
 
@@ -45,12 +45,12 @@ export function createMenu(menuInput = {}, clientConfigsInput = {}) {
     const menuNode = document.getElementById("OneFoodMenu");
     window.__OneFoodMenu__ = Object.freeze({
         configs,
-        products: menu.products,
-        categories: menu.categories,
+        products: filteredProducts,
+        categories: filteredCategories,
         allergens: menu?.allergens ?? null,
         nodes: {
             menuMain: menuNode,
-        }
+        },
     });
 
     // Prepare layout
@@ -58,8 +58,8 @@ export function createMenu(menuInput = {}, clientConfigsInput = {}) {
 
     // Generate menu HTML
     const menuHTML = createMenuHTML({
-        categories: getNotEmptyCategories(menu.categories, menu.products),
-        products: productsByCategory(menu),
+        categories: getNotEmptyCategories(filteredCategories, filteredProducts),
+        products: productsByCategory(filteredProducts),
     });
 
     // Update DOM

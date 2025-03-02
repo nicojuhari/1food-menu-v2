@@ -47,20 +47,15 @@ const renderProductV3 = (product) => `
 const renderProductV4 = (product) => `
     <div class="ofm-product__info">
         <div class="ofm-product__title">${product.name}</div>
+        ${product.description ? `<div class="ofm-product__desc">${product.description}</div>` : ""}
         ${
-            product.description
-                ? `<div class="ofm-product__desc">${product.description}</div>`
-                : ""
-        }
-        ${
-            product.tags?.length
-                ? `
-            <div class="flex items-center justify-between gap-2">
+            product.tags?.length || product.allergens?.length ? `
+            <div class="flex items-center gap-2">
                 <div class="ofm-product__tags flex items-center">
                     ${tagsHTML(product.tags)}
                 </div>
                 <div class="ofm-product__allergens flex items-center gap-2">
-                    ${allergensHTML(product.allergens)}
+                    ${allergensHTML(product.allergens, false)}
                 </div>
             </div>`
                 : ""
