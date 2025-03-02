@@ -25,7 +25,7 @@ export function deepMerge(target, source) {
 }
 
 export function productsByCategory(products) {
-    
+
     // Return empty object for invalid input
     if (!Array.isArray(products) || !products.length) {
         return {};
@@ -61,64 +61,73 @@ export function addCreditsOnPage(nodeEl) {
         return;
     }
 
-    const credits = document.createElement("div");
-    credits.className = "ofm-credits";
-
     const link = document.createElement("a");
     link.href = "https://1food.menu?ref=free-menu-designs";
     link.target = "_blank";
     link.textContent = "1Food Menu";
 
-    credits.textContent = "Created with ";
+    nodeEl.textContent = "Created with ";
     const strong = document.createElement("strong");
     strong.appendChild(link);
-    credits.appendChild(strong);
-
-    nodeEl.appendChild(credits);
+    nodeEl.appendChild(strong);
 }
 
-export function prepareLayout(oneFoodMenuNode) {
-    // Validate input
-    if (!oneFoodMenuNode || !(oneFoodMenuNode instanceof Element)) {
-        throw new Error('Invalid node element provided to prepareLayout');
-    }
+export function prepareLayout(menuNode) {
+    // Add default class and preserve any existing classes
+    menuNode.classList.add("one-food-menu");
 
-    // Create document fragment for batch DOM operations
-    const fragment = document.createDocumentFragment();
-    
-    // Clean and prepare main node
-    while (oneFoodMenuNode.firstChild) {
-        oneFoodMenuNode.removeChild(oneFoodMenuNode.firstChild);
-    }
-    oneFoodMenuNode.classList.add('one-food-menu');
-    
     // Apply design version
-    toggleDesignClass(oneFoodMenuNode, window.__OneFoodMenu__?.configs?.version || 1);
+    toggleDesignClass(menuNode, window.__OneFoodMenu__?.configs?.version || 1);
 
-    // Define menu sections
+
+    // Define menu sections with frozen object for immutability
     const sections = Object.freeze({
-        Items: 'menu-items',
-        Allergens: 'menu-allergens',
-        Credits: 'menu-credits',
-        Modal: 'menu-modal'
-    });
-    
-    // Create all sections at once using fragment
-    Object.entries(sections).forEach(([nodeName, className]) => {
-        const nodeEl = document.createElement('div');
-        nodeEl.id = `OneFoodMenu${nodeName}`;
-        nodeEl.className = className;
-        
-        // Store reference in global object
-        if (window.__OneFoodMenu__?.nodes) {
-            window.__OneFoodMenu__.nodes[`menu${nodeName}`] = nodeEl;
-        }
-        
-        fragment.appendChild(nodeEl);
+        controls: {
+            id: "OneFoodMenuControls",
+            className: "ofm-controls",
+        },
+        items: {
+            id: "OneFoodMenuItems",
+            className: "ofm-items",
+        },
+        allergens: {
+            id: "OneFoodMenuAllergens",
+            className: "ofm-allergens",
+        },
+        credits: {
+            id: "OneFoodMenuCredits",
+            className: "ofm-credits",
+        },
+        modal: {
+            id: "OneFoodMenuModal",
+            className: "ofm-modal",
+        },
     });
 
-    // Single DOM update
-    oneFoodMenuNode.appendChild(fragment);
+    // Create document fragment for better performance
+    const fragment = document.createDocumentFragment();
+
+    // Create nodes object to store references
+    const nodes = { menuMain: menuNode };
+
+    // Create all sections and store references
+    Object.entries(sections).forEach(([key, { id, className }]) => {
+        const element = document.createElement("div");
+        element.id = id;
+        element.className = className;
+
+        // Store reference
+        nodes[`menu${key.charAt(0).toUpperCase() + key.slice(1)}`] = element;
+
+        fragment.appendChild(element);
+    });
+
+    // Clear and update menu node
+    menuNode.innerHTML = "";
+    menuNode.appendChild(fragment);
+
+    // Update global nodes reference
+    window.__OneFoodMenu__.nodes = nodes;
 }
 
 

@@ -89,7 +89,7 @@ body.modal-open {
 }
 
 .ofm-category, .ofm-allergens {
-    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
     position: relative;
 
     &__title {
@@ -97,16 +97,23 @@ body.modal-open {
         font-size: 1.5rem;
         line-height: 2;
     }
+}
 
+.ofm-category {
     &__items {
-        display: grid;
-        grid-template-columns: 1fr;
-        padding: 0.5rem 0;
-        gap: 1rem;
-        @media (min-width: 768px) {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            display: grid;
+            grid-template-columns: 1fr;
+            padding: 0.5rem 0;
+            gap: 1rem;
+    
+            @media (min-width: 768px) {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
         }
-    }
+}
+
+.ofm-category:last-of-type {
+    margin-top: 0rem;
 }
 
 .ofm-product {
@@ -156,8 +163,12 @@ body.modal-open {
     &__desc {
         opacity: .7;
         line-height: 1.4;
-        font-size: 1rem;
+        font-size: 14px;
         flex-shrink: 0;
+
+        @media (min-width: 768px) {
+            font-size: 16px;
+        }
     }
 
     &__options {
@@ -263,22 +274,22 @@ body.modal-open {
     }
 }
 
-.ofm-design-v3,
-.ofm-design-v4 {
-    .ofm-product {
-        height: auto;
-    }
-    // .ofm-category__title, .ofm-allergens__title {
-    //     font-size: 1.875rem;
-    //     line-height: 2.25rem;
-    //     text-transform: uppercase;
-    //     font-weight: 600;
-    //     text-align: center;
-    //     padding: 1.5rem 0;
-    //     margin: 0 auto;
-    // }
+// .ofm-design-v3,
+// .ofm-design-v4 {
+//     // .ofm-product {
+//     //     height: auto;
+//     // }
+//     // .ofm-category__title, .ofm-allergens__title {
+//     //     font-size: 1.875rem;
+//     //     line-height: 2.25rem;
+//     //     text-transform: uppercase;
+//     //     font-weight: 600;
+//     //     text-align: center;
+//     //     padding: 1.5rem 0;
+//     //     margin: 0 auto;
+//     // }
     
-}
+// }
 
 .ofm-design-v1, 
 .ofm-design-v3 {

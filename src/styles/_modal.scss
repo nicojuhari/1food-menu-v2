@@ -1,13 +1,16 @@
 
 .ofm-modal {
-    padding: .5rem;
-    width: 100%;
-    min-height: 100dvh;
-    display: flex;
-    z-index: 99;
-    left: 0;
-    top: 0;
-    position: fixed;
+
+    &-wrapper {
+        padding: .5rem;
+        width: 100%;
+        min-height: 100dvh;
+        display: flex;
+        z-index: 99;
+        left: 0;
+        top: 0;
+        position: fixed;
+    }
 
     &-backdrop {
         position: fixed;

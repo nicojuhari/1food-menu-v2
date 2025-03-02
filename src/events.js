@@ -3,11 +3,17 @@ import { showModal } from './modal';
 export const events = () => {
     const { configs = {} } = window.__OneFoodMenu__ ?? {};
     const { version = 1 } = configs;
-    
+
     // Check if version is valid for event attachment
     if ([1, 2, 3].includes(version)) {
         attachProductClickEvents();
     }
+
+    // Add category filter events
+    const categoryTabs = document.querySelectorAll(".ofm-tab");
+    categoryTabs.forEach((tab) => {
+        tab.addEventListener("click", handleCategoryFilter);
+    });
 };
 
 const attachProductClickEvents = () => {
@@ -31,4 +37,23 @@ const attachProductClickEvents = () => {
             showModal(productId);
         }
     }
-};   
+};
+
+function handleCategoryFilter(e) {
+    const categoryId = e.target.dataset.categoryFilter;
+    const allTabs = document.querySelectorAll(".ofm-tab");
+    const allCategories = document.querySelectorAll(".ofm-category");
+
+    // Update active tab
+    allTabs.forEach((tab) => tab.classList.remove("active"));
+    e.target.classList.add("active");
+
+    // Show/hide categories
+    allCategories.forEach((category) => {
+        if (categoryId === "all") {
+            category.style.display = "block";
+        } else {
+            category.style.display = category.dataset.categoryId === categoryId ? "block" : "none";
+        }
+    });
+}

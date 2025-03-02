@@ -90,7 +90,6 @@ export function optionsHTML(options, inModal = false, showArrow = false) {
     }
 }
 
-
 export let productImageHTML = (imageUrl = "", name = "") => {
     let html = `<div class="image-container">`;
     if (imageUrl) {
@@ -98,4 +97,29 @@ export let productImageHTML = (imageUrl = "", name = "") => {
     }
     html += `</div>`;
     return html;
+};
+
+export const createCategoryTabsHTML = (categories) => {
+    return `
+        <div class="ofm-category-tabs">
+            <button 
+                class="ofm-tab active" 
+                data-category-filter="all"
+            >
+                All
+            </button>
+            ${categories
+                .map(
+                    (category) => `
+                <button 
+                    class="ofm-tab" 
+                    data-category-filter="${category.uid}"
+                >
+                    ${category.name}
+                </button>
+            `
+                )
+                .join("")}
+        </div>
+    `;
 };

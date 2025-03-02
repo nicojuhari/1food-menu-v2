@@ -9,6 +9,7 @@ import {
     addCreditsOnPage,
 } from "./helpers";
 import { addAllergensOnPage } from "./allergensTemplate";
+import { createCategoryTabsHTML } from './template-helpers';
 
 export function createMenu(menuInput = {}, clientConfigs = {}) {
     // Early validation checks combined
@@ -37,40 +38,59 @@ export function createMenu(menuInput = {}, clientConfigs = {}) {
         {
             version: 1,
             priceSymbol: "",
+            features: {
+                categoryTabs: true, // Enable/disable category filtering tabs
+                allergens: true, // Enable/disable allergens section
+                credits: true, // Enable/disable credits
+                search: true, // Future feature
+                tagFilters: true, // Future feature
+                productModal: true, // Enable/disable product modal
+            },
         },
         clientConfigs
     );
 
-    // Create global object with Object.freeze for immutability
+    // Create nodes object first
     const menuNode = document.getElementById("OneFoodMenu");
-    window.__OneFoodMenu__ = Object.freeze({
+    const nodes = { menuMain: menuNode };
+
+    window.__OneFoodMenu__ = {
         configs,
         products: filteredProducts,
         categories: filteredCategories,
-        allergens: menu?.allergens ?? null,
-        nodes: {
-            menuMain: menuNode,
-        },
-    });
+        allergens: menu.allergens ?? null,
+        nodes, // Initialize with empty nodes object
+    };
 
     // Prepare layout
     prepareLayout(menuNode);
 
+    window.__OneFoodMenu__ = Object.freeze(window.__OneFoodMenu__);
+
+    const cleanCategories = getNotEmptyCategories(filteredCategories, filteredProducts);
+
     // Generate menu HTML
     const menuHTML = createMenuHTML({
-        categories: getNotEmptyCategories(filteredCategories, filteredProducts),
+        categories: cleanCategories,
         products: productsByCategory(filteredProducts),
     });
 
     // Update DOM
     window.__OneFoodMenu__.nodes.menuItems.innerHTML = menuHTML;
 
-    // Conditional rendering of allergens and credits
-    if (menu.allergens?.length) {
+    //add category tabs on the page
+    if (configs.features.categoryTabs) {
+        const categoryTabsHTML = createCategoryTabsHTML(filteredCategories);
+        window.__OneFoodMenu__.nodes.menuControls.innerHTML = categoryTabsHTML;
+    }
+
+    // Conditional rendering of allergens
+    if (configs.features.allergens) {
         addAllergensOnPage(menu.allergens);
     }
 
-    if (!configs.disableCredits) {
+    // Conditional rendering of credits
+    if (configs.features.credits) {
         addCreditsOnPage(window.__OneFoodMenu__.nodes.menuCredits);
     }
 

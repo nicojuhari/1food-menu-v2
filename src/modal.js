@@ -28,7 +28,7 @@ export const showModal = (productId) => {
         nodes.menuModal.replaceChildren(modalElement);
         
         // Ensure modal element is in the DOM before adding animation class
-        const modal = nodes.menuModal.querySelector('.ofm-modal');
+        const modal = nodes.menuModal.querySelector('.ofm-modal-wrapper');
         if (modal) {
             setupModalCloseHandlers(nodes.menuModal);
             
@@ -87,15 +87,12 @@ const createModalElement = (content) => {
     const wrapper = document.createElement('div');
     wrapper.innerHTML = modalWrapper(content);
     
-    const modalEl = wrapper.firstElementChild;
-    modalEl.classList.add('modal-wrapper');
-    
-    return modalEl;
+    return wrapper.firstElementChild;
 };
 
 const setupModalCloseHandlers = (modalNode) => {
     const handleClose = () => {
-        const modal = modalNode.querySelector('.ofm-modal');
+        const modal = modalNode.querySelector('.ofm-modal-wrapper');
         if (!modal) return;
 
         // Add closing animation
@@ -129,7 +126,7 @@ const setupModalCloseHandlers = (modalNode) => {
 
 const modalWrapper = (content) => {
     return `
-        <div class="ofm-modal">
+        <div class="ofm-modal-wrapper">
             <div class="ofm-modal-backdrop" data-close-modal></div>
             <div class="ofm-modal-container">
                 <div class="ofm-modal-close" data-close-modal>

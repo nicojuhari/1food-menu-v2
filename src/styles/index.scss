@@ -1,7 +1,9 @@
 @use './custom-proprities';
+@use './ofm-nodes';
 @use './utils';
 @use './global';
 @use './allergens';
+@use './controls';
 
 @use './design/v1';
 @use './design/v2';
@@ -9,8 +11,3 @@
 @use './design/v4';
 
 @use './modal';
-
-.ofm-credits {
-    text-align: center;
-    margin: 1.5rem auto;
-}

@@ -1,4 +1,10 @@
 .ofm-design-v3 {
+    &.one-food-menu {
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
     .image-container,
         .product-image {
             border-radius: 999px;
@@ -64,13 +70,14 @@
 
     }
 
-        .ofm-category, .ofm-allergens {
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+    .ofm-category, .ofm-allergens {
+        &__title {
+            text-align: center;
+        }               
+    }
 
-            &__title {
-                text-align: center;
-            }               
-        }
+    .ofm-tab, .ofm-allergens__item {
+        border-radius: 3.75rem;
+    }
+
 }
