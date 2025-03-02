@@ -25,13 +25,7 @@
         
           let menuConfig = {
             version: 2,
-            features: {
-              credits: false
-            },
-            labels: {
-              outOfStock: "Out of Stock",
-              allergens: "Allergens",
-            },
+            priceSymbol: ''
           }
 
 
@@ -42,11 +36,11 @@
                 console.time('createMenu')
 
                 
-                menuData.categories[1].isArchived = true
+                menuData.categories[0].isArchived = true
                 menuData.products[2].isArchived = false
                 console.log(menuData)
 
-                createMenu(menuData, menuConfig)
+                createMenu(menuData, menuConfig);
                 console.timeEnd('createMenu')
             })
 

@@ -19,39 +19,60 @@
     <!-- Menu Design 1 -->
     <div id="OneFoodMenu" class="container"></div>
     <!-- production -->
-    <link rel="stylesheet" href="https://unpkg.com/1food-menu@0.5.0/dist/style.css"></link>
+    <link rel="stylesheet" href="https://unpkg.com/1food-menu@latest/dist/style.css"></link>
 
     <script type="module">
 
         // production
-        import { createMenu } from "https://unpkg.com/1food-menu@0.5.0/dist/1food-menu.mjs"
-       
-        
-        import menuData from './menu.json'
-        let menuF
+        import { createMenu } from "https://unpkg.com/1food-menu@latest/dist/1food-menu.mjs"
 
-        
 
-          createMenu(menuData, {
-              version: 3,
-              priceSymbol: '$',
-              allergens: {
-                title: 'Allergens',
-                show: true,
-              },
-              disableCredits: false,
+        let menuData = []
+        
+          let menuConfig = {
+            version: 1,
+            features: {
+              credits: true,
+            },
+            labels: {
+              outOfStock: "Out of Stock",
+              allergens: "Allerge11ns",
+            },
+          }
+
+
+          try {
+            
+            fetch('https://api.1food.menu/v1/menus/672cbe580015e16438b3').then(res => res.json()).then(data => {
+                menuData =  data  
+                console.time('createMenu')
+
+                
+                // menuData.categories[1].isArchived = true
+                // menuData.products[2].isArchived = false
+                // console.log(menuData)
+
+                createMenu(menuData, menuConfig)
+                console.timeEnd('createMenu')
             })
+
+          } catch(e) {
+              console.error(e)
+          } finally {
+            
+          }
+              
+
           
-
-
-
-        //events
+        
+          
           function createAgain(nr) {
             // console.log(nr)
-
-            createMenu( menuData, {
-              version: +nr,
-            })
+            menuConfig.version = +nr
+            console.time('createAgain')
+            createMenu(menuData, menuConfig)
+            console.timeEnd('createAgain')
+      
           }
 
 

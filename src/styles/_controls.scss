@@ -21,6 +21,11 @@
     cursor: pointer;
     border: 1px solid var(--ofm-border-color);
     transition: all 0.3s ease;
+    font-size: 14px;
+
+    @media (min-width: 768px) {
+        font-size: 16px;
+    }
 
     &:hover {
         opacity: 0.8;
