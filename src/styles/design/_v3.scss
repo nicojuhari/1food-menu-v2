@@ -3,6 +3,8 @@
         max-width: 600px;
         margin-left: auto;
         margin-right: auto;
+
+        --ofm-border-radius: 999px;
     }
     
     .image-container,
@@ -18,7 +20,6 @@
         }
 
     .ofm-product {
-        border-radius: 3.75rem;
         padding: .5rem;
         align-items: center;
         gap: 1rem;
@@ -75,9 +76,4 @@
             text-align: center;
         }               
     }
-
-    .ofm-tab, .ofm-allergens__item {
-        border-radius: 3.75rem;
-    }
-
 }

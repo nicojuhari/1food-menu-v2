@@ -68,3 +68,16 @@
     font-size: .875rem;
     line-height: 1.25rem;
 }
+
+.ofm-line-clamp {
+    --ofm-line-clamp: 1;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: var(--ofm-line-clamp);
+    line-clamp: var(--ofm-line-clamp);
+    -webkit-box-orient: vertical;
+
+    &.clamp-2 {
+        --ofm-line-clamp: 2;
+    }
+}

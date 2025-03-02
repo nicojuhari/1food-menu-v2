@@ -1,18 +1,13 @@
 @use './colors' as *;
 
 :root {
-    --ofm-brand-color: #000;
+    --ofm-brand-color: #232323;
+    --ofm-text-color: #232323;
+    --ofm-card-color: #fff;
+    --ofm-soft-bg-color: rgba(132, 132, 132, 0.15);
+    --ofm-border-color: #a8a8a8;
+    --ofm-border-radius: 0.75rem;
     
-    --ofm-bg-color: #{$bg-color};
-    --ofm-border-color: #{$border-color};
-    
-    --ofm-tag-color: #{$tag-color};
-    --ofm-tag-bg-color: #{$tag-bg-color};
-    
-    --ofm-allergen-color: #{$allergen-color};
-    --ofm-allergen-bg-color: #{$allergen-bg-color};
-    
-    --ofm-price-color: var(--ofm-brand-color);
     --ofm-font-family:  ui-sans-serif,
                         system-ui,
                         -apple-system,
@@ -23,15 +18,39 @@
                         Arial,
                         "Noto Sans",
                         sans-serif;
+    
+    --ofm-font-size-base: 14px;
+
     --ofm-box-shadow:   0 0 #0000,
                         0 0 #0000,
                         0 1px 3px 0 rgba(0, 0, 0, .1),
                         0 1px 2px -1px rgba(0, 0, 0, .1);
     --ofm-box-shadow-hover: 0px 12px 36px rgba(0, 0, 0, .1);
 
+    //Product
+    // --ofm-price-color: var(--ofm-brand-color);
+    // --ofm-old-price-color: var(--ofm-brand-color);
+
+
+    --ofm-tag-bg-color: rgba(59, 167, 102, 0.2);
+    --ofm-tag-color: #205b37;
+    --ofm-tag-border-color: rgba(32, 91, 55, 0.05);
+
+    //Out of Stock label
     --ofm-out-of-stock-bg-color: #c62626;
     --ofm-out-of-stock-txt-color: #fff;
 
+    // Category Tabs
     --ofm-tab-bg-color: #fff;
     --ofm-tab-text-color: var(--ofm-brand-color, #333);
+
+    //Allergens 
+    --ofm-allergen-bg-color: #{$allergen-bg-color};
+    --ofm-allergen-color: #{$allergen-color};
+}
+
+:root {
+    @media (min-width: 768px) {
+            --ofm-font-size-base: 16px;
+        }
 }

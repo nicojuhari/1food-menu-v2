@@ -1,9 +1,13 @@
-@use './custom-proprities';
+@use './custom-properties';
 @use './ofm-nodes';
 @use './utils';
 @use './global';
-@use './allergens';
+
+//components
 @use './controls';
+@use './category';
+@use './product';
+@use './allergens';
 
 @use './design/v1';
 @use './design/v2';

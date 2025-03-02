@@ -130,8 +130,7 @@ const modalWrapper = (content) => {
             <div class="ofm-modal-backdrop" data-close-modal></div>
             <div class="ofm-modal-container">
                 <div class="ofm-modal-close" data-close-modal>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
+                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#333">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </div>

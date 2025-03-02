@@ -15,17 +15,13 @@
 
 .ofm-tab {
     padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
+    border-radius: var(--ofm-border-radius);
     background: var(--ofm-tab-bg-color);
     color: var(--ofm-tab-color);
     cursor: pointer;
-    border: 1px solid var(--ofm-border-color);
+    box-shadow: var(--ofm-box-shadow);
     transition: all 0.3s ease;
-    font-size: 14px;
-
-    @media (min-width: 768px) {
-        font-size: 16px;
-    }
+    font-size: var(--ofm-font-size-base);
 
     &:hover {
         opacity: 0.8;
