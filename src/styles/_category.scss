@@ -7,7 +7,7 @@
         font-weight: 700;
         font-size: 1.5rem;
         line-height: 2;
-        color: var(--ofm-text-color);
+        color: var(--ofm-category-title-color, var(--ofm-txt-color));
     }
 }
 

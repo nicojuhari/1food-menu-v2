@@ -1,6 +1,6 @@
 .ofm-allergens {
 
-    &__items {
+    &__tabs {
         display: flex;
         flex-wrap: wrap;
         gap: 1rem;
@@ -8,13 +8,15 @@
         padding: .5rem 0;
     }
 
-    &__item {
+    &__tab {
         display: flex;
         align-items: center;
+        color: var(--ofm-allergens-tab-txt-color, var(--ofm-txt-color));
         gap: 0.5rem;
         padding: 0.5rem 1rem;
         border-radius: var(--ofm-border-radius);
-        border: 1px dashed var(--ofm-border-color);
+        border: 1px dashed var(--ofm-allergens-tab-bg-color, var(--ofm-border-color));
+        background-color: var(--ofm-allergens-tab-bg-color, transparent);
 
         .allergen-name {
             font-weight: 500;

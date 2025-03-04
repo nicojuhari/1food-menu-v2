@@ -4,11 +4,11 @@ export function addAllergensOnPage (allergens) {
 
     let allergensHTML = `
             <h3 class="ofm-allergens__title">${getLabel("allergens")}</h3>
-            <div class="ofm-allergens__items">
+            <div class="ofm-allergens__tabs">
                 ${allergens
                     .map(
                         (allergen) => `
-                    <div class="ofm-allergens__item">
+                    <div class="ofm-allergens__tab">
                         <div class="allergen-name">${allergen?.name}</div>
                         <div class="allergen-description">${allergen?.description}</div>   
                     </div>

@@ -49,7 +49,7 @@ export function createMenu(menuInput = {}, clientConfigs = {}) {
             priceSymbol: "$",
             features: {
                 categoryTabs: true, // Enable/disable category filtering tabs
-                allergens: true, // Enable/disable allergens section
+                allergenTabs: true, // Enable/disable allergens section
                 credits: true, // Enable/disable credits
                 search: false, // Future feature
                 tagFilters: false, // Future feature
@@ -93,7 +93,7 @@ export function createMenu(menuInput = {}, clientConfigs = {}) {
     }
 
     // Conditional rendering of allergens
-    if (configs.features.allergens && menu.allergens?.length) {
+    if (configs.features.allergenTabs && menu.allergens?.length) {
         addAllergensOnPage(menu.allergens);
     }
 

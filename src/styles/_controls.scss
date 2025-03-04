@@ -13,11 +13,11 @@
 
 }
 
-.ofm-tab {
+.ofm-cat-tab {
     padding: 0.5rem 1rem;
     border-radius: var(--ofm-border-radius);
-    background: var(--ofm-tab-bg-color);
-    color: var(--ofm-tab-color);
+    background: var(--ofm-cat-tab-bg-color);
+    color: var(--ofm-cat-tab-txt-color);
     cursor: pointer;
     box-shadow: var(--ofm-box-shadow);
     transition: all 0.3s ease;

@@ -1,9 +1,7 @@
-@use './colors' as *;
-
 :root {
     --ofm-brand-color: #232323;
-    --ofm-text-color: #232323;
-    --ofm-card-color: #fff;
+    --ofm-txt-color: #232323;
+    --ofm-card-bg-color: #fffff;
     --ofm-soft-bg-color: rgba(132, 132, 132, 0.15);
     --ofm-border-color: #a8a8a8;
     --ofm-border-radius: 0.75rem;
@@ -21,32 +19,32 @@
     
     --ofm-font-size-base: 14px;
 
-    --ofm-box-shadow:   0 0 #0000,
-                        0 0 #0000,
+    --ofm-box-shadow:   0 0 #000000,
+                        0 0 #000000,
                         0 1px 3px 0 rgba(0, 0, 0, .1),
                         0 1px 2px -1px rgba(0, 0, 0, .1);
     --ofm-box-shadow-hover: 0px 12px 36px rgba(0, 0, 0, .1);
 
-    //Product
-    // --ofm-price-color: var(--ofm-brand-color);
-    // --ofm-old-price-color: var(--ofm-brand-color);
-
-
     --ofm-tag-bg-color: rgba(59, 167, 102, 0.2);
-    --ofm-tag-color: #205b37;
+    --ofm-tag-txt-color: #205b37;
     --ofm-tag-border-color: rgba(32, 91, 55, 0.05);
+    
+    //Allergens 
+    --ofm-tag-allergen-txt-color: #00000;
+    --ofm-tag-allergen-bg-color: rgba(0, 0, 0, 0.1);
+    --ofm-tag-allergen-border-color: rgba(0, 0, 0, 0.3);
 
     //Out of Stock label
     --ofm-out-of-stock-bg-color: #c62626;
-    --ofm-out-of-stock-txt-color: #fff;
+    --ofm-out-of-stock-txt-color: #ffffff;
 
     // Category Tabs
-    --ofm-tab-bg-color: #fff;
-    --ofm-tab-text-color: var(--ofm-brand-color, #333);
+    --ofm-cat-tab-bg-color: #ffffff;
+    --ofm-cat-tab-txt-color: var(--ofm-brand-color, #232323);
 
-    //Allergens 
-    --ofm-allergen-bg-color: #{$allergen-bg-color};
-    --ofm-allergen-color: #{$allergen-color};
+    //Allergen Tabs
+   //just for override
+
 }
 
 :root {

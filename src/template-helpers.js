@@ -29,7 +29,7 @@ export const allergensHTML = (prod_allergens, inModal = false) => {
             // Skip invalid allergens
             if (!allergen) return "";
 
-            return `<div data-prod-allergen class="ofm-allergen__item">${allergen.name}</div>`; // Changed from allergenName to allergen.name
+            return `<div data-prod-allergen class="ofm-tag ofm-tag-allergen">${allergen.name}</div>`; // Changed from allergenName to allergen.name
         })
         .filter(Boolean)
         .join("");
@@ -103,7 +103,7 @@ export const createCategoryTabsHTML = (categories) => {
     return `
         <div class="ofm-category-tabs">
             <button 
-                class="ofm-tab active" 
+                class="ofm-cat-tab active" 
                 data-category-filter="all"
             >
                 All
@@ -112,7 +112,7 @@ export const createCategoryTabsHTML = (categories) => {
                 .map(
                     (category) => `
                 <button 
-                    class="ofm-tab" 
+                    class="ofm-cat-tab" 
                     data-category-filter="${category.uid}"
                 >
                     ${category.name}

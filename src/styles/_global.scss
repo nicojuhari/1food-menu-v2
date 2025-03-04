@@ -1,4 +1,3 @@
-@use './colors' as *;
 
 body.modal-open {
     overflow: hidden;
@@ -16,6 +15,7 @@ body.modal-open {
     -o-tab-size: 4;
     tab-size: 4;
     font-family: var(--ofm-font-family);
+    color: var(--ofm-txt-color, #232323);
     
     *,
         ::before,
@@ -23,7 +23,7 @@ body.modal-open {
         box-sizing: border-box;
         border-width: 0;
         border-style: solid;
-        border-color: var(--border-color);
+        border-color: var(--ofm-border-color);
     }
 
     a {
@@ -46,7 +46,7 @@ body.modal-open {
             align-items: center;
             justify-content: center;
             opacity: .5;
-            color: var(--ofm-text-color);
+            color: var(--ofm-txt-color);
             background-color: var(--ofm-soft-bg-color);
             border-radius: .25rem;
 
@@ -119,27 +119,21 @@ body.modal-open {
     line-height: 1.3;
     padding: 0.25rem 0.5rem;
     background-color: var(--ofm-tag-bg-color);
-    color: var(--ofm-tag-color);
+    color: var(--ofm-tag-txt-color);
     border: 1px solid var(--ofm-tag-border-color);
     border-radius: 9999px;
     flex-shrink: 0;
     height: 1.5rem;
     display: grid;
     place-content: center;
-}
 
-//on product card
-.ofm-allergen__item {
-    color: var(--ofm-allergen-color);
-    font-size: .75rem;
-    line-height: 1rem;
-    background-color: var(--ofm-allergen-bg-color);
-    border-radius: 9999px;
-    flex-shrink: 0;
-    width: 1.5rem;
-    height: 1.5rem;
-    display: grid;
-    place-content: center;
+    &.ofm-tag-allergen {
+        background-color: var(--ofm-tag-allergen-bg-color);
+        color: var(--ofm-tag-allergen-txt-color);
+        border: 1px solid var(--ofm-tag-llergen-border-color, var(--ofm-border-color));
+        width: 1.5rem;
+        height: 1.5rem;
+    }
 }
 
 .ofm-modal-content, .ofm-design-v4 {
@@ -151,8 +145,8 @@ body.modal-open {
         padding: 0.5rem 0;
 
         &:not(:first-child) {
-                border-top: 1px dashed var(--ofm-border-color);
-            }
+            border-top: 1px dashed var(--ofm-border-color);
+        }
     }
 }
 

@@ -10,7 +10,7 @@ export const events = () => {
     }
 
     // Add category filter events
-    const categoryTabs = document.querySelectorAll(".ofm-tab");
+    const categoryTabs = document.querySelectorAll(".ofm-cat-tab");
     categoryTabs.forEach((tab) => {
         tab.addEventListener("click", handleCategoryFilter);
     });
@@ -41,7 +41,7 @@ const attachProductClickEvents = () => {
 
 function handleCategoryFilter(e) {
     const categoryId = e.target.dataset.categoryFilter;
-    const allTabs = document.querySelectorAll(".ofm-tab");
+    const allTabs = document.querySelectorAll(".ofm-cat-tab");
     const allCategories = document.querySelectorAll(".ofm-category");
 
     // Update active tab
