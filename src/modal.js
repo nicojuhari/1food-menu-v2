@@ -1,7 +1,8 @@
 import {
-    tagsHTML, allergensHTML, optionsHTML, productImageHTML
+    tagsHTML, optionsHTML, productImageHTML
 } from './template-helpers';
 import { getLabel } from './helpers';
+import { createAllergensHTML } from './allergens';
 
 export const showModal = (productId) => {
     // Input validation
@@ -73,9 +74,7 @@ const getModalContent = (productData) => {
 
     //allergens
     if (product.allergens?.length) {
-        html += `<div class="ofm-modal-allergens">`;
-        html += allergensHTML(product.allergens, true);
-        html += `</div>`;
+        html += createAllergensHTML({ prodAllergens: product.allergens, location: 'modal'});
     }
 
     html += `</div>`;

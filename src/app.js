@@ -8,7 +8,7 @@ import {
     prepareLayout,
     addCreditsOnPage,
 } from "./helpers";
-import { addAllergensOnPage } from "./allergensTemplate";
+import { createAllergensHTML } from "./allergens";
 import { createCategoryTabsHTML } from './template-helpers';
 
 export function createMenu(menuInput = {}, clientConfigs = {}) {
@@ -94,7 +94,8 @@ export function createMenu(menuInput = {}, clientConfigs = {}) {
 
     // Conditional rendering of allergens
     if (configs.features.allergenTabs && menu.allergens?.length) {
-        addAllergensOnPage(menu.allergens);
+        const allergensHTML = createAllergensHTML({ location: 'node'})
+        window.__OneFoodMenu__.nodes.menuAllergens.innerHTML = allergensHTML;
     }
 
     // Conditional rendering of credits

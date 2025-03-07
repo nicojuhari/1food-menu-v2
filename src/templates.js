@@ -1,6 +1,7 @@
 // Template Strategy Pattern - Define different version renderers
-import { allergensHTML, optionsHTML, tagsHTML, productImageHTML } from "./template-helpers";
+import { optionsHTML, tagsHTML, productImageHTML } from "./template-helpers";
 import { getLabel } from "./helpers";
+import { createAllergensHTML } from "./allergens";
 const renderProductV1 = (product) => `
     ${productImageHTML(product.imageUrl, product.name)}
     <div class="ofm-product__info">
@@ -49,13 +50,14 @@ const renderProductV4 = (product) => `
         <div class="ofm-product__title">${product.name}</div>
         ${product.description ? `<div class="ofm-product__desc">${product.description}</div>` : ""}
         ${
-            product.tags?.length || product.allergens?.length ? `
+            product.tags?.length || product.allergens?.length
+                ? `
             <div class="flex items-center gap-2">
                 <div class="ofm-product__tags flex items-center">
                     ${tagsHTML(product.tags)}
                 </div>
                 <div class="ofm-product__allergens flex items-center gap-2">
-                    ${allergensHTML(product.allergens, false)}
+                    ${createAllergensHTML({ prodAllergens:  product.allergens, location: "product" })}
                 </div>
             </div>`
                 : ""

@@ -1,22 +1,30 @@
 .ofm-allergens {
 
     &__tabs {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        justify-content: center;
+        --ofm-allergens-tab-width: 100%;
         padding: .5rem 0;
+        gap: 1rem;
+        flex-wrap: wrap;
+        
+        @media (min-width: 520px) {
+            --ofm-allergens-tab-width: calc(50% - 1rem/2);
+        }
+        
+        @media (min-width: 768px) {
+            --ofm-allergens-tab-width: auto;
+            
+            justify-content: center;
+        }
     }
 
     &__tab {
-        display: flex;
-        align-items: center;
         color: var(--ofm-allergens-tab-txt-color, var(--ofm-txt-color));
         gap: 0.5rem;
         padding: 0.5rem 1rem;
         border-radius: var(--ofm-border-radius);
         border: 1px dashed var(--ofm-allergens-tab-bg-color, var(--ofm-border-color));
         background-color: var(--ofm-allergens-tab-bg-color, transparent);
+        width: var(--ofm-allergens-tab-width);
 
         .allergen-name {
             font-weight: 500;
