@@ -138,6 +138,7 @@ export function getLabel(key) {
     const DEFAULT_LABELS = {
         outOfStock: "Currently Unavailable",
         allergens: "Allergens",
+        categoryAll: 'All',
         // categories: "Categories",
         // price: "Price",
         // Add more default labels as needed

@@ -2,33 +2,29 @@
 
 .ofm-category-tabs {
     display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
+    gap: 1rem;
+    overflow-x: auto;
     padding: 0.5rem 0;
-    justify-content: center;
-
-    @media (min-width: 768px) {
-        justify-content: flex-start;
-    }
-
 }
 
 .ofm-cat-tab {
-    padding: 0.5rem 1rem;
-    border-radius: var(--ofm-border-radius);
+    padding: 0.5rem .75rem;
+    border-radius: calc(var(--ofm-border-radius) - 0.25rem);
     background: var(--ofm-cat-tab-bg-color);
-    color: var(--ofm-cat-tab-txt-color);
+    border: 1.5px solid var(--ofm-cat-tab-border-color, var(--ofm-brand-color));
+    color: var(--ofm-cat-tab-txt-color, var(--ofm-brand-color));
     cursor: pointer;
-    box-shadow: var(--ofm-box-shadow);
     transition: all 0.3s ease;
-    font-size: var(--ofm-font-size-base);
+    font-size: calc(var(--ofm-font-size-base) + 2px);
+    flex-shrink: 0;
 
     &:hover {
         opacity: 0.8;
     }
 
-    &.active {
+    &.active, &:hover {
         background: var(--ofm-brand-color);
+        border-color: var(--ofm-brand-color);
         color: white;
     }
 }

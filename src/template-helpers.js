@@ -1,3 +1,5 @@
+import { getLabel } from "./helpers";
+
 export function tagsHTML(tags) {
     if (!tags?.length) return "";
     return tags
@@ -64,12 +66,12 @@ export let productImageHTML = (imageUrl = "", name = "") => {
 
 export const createCategoryTabsHTML = (categories) => {
     return `
-        <div class="ofm-category-tabs">
+        <div class="ofm-category-tabs ofm-scroll">
             <button 
                 class="ofm-cat-tab active" 
                 data-category-filter="all"
             >
-                All
+                ${ getLabel('categoryAll') }
             </button>
             ${categories
                 .map(
