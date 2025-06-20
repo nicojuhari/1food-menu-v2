@@ -1,11 +1,11 @@
 .ofm-product {
     background-color: var(--ofm-card-bg-color);
     color: var(--ofm-txt-color);
+    border: 1px solid var(--ofm-border-color);
     border-radius: var(--ofm-border-radius);
     cursor: pointer;
     height: 11rem;
     display: flex;
-    box-shadow: var(--ofm-box-shadow);
     padding: 1rem;
     transition: box-shadow .3s ease-in-out;
     position: relative;

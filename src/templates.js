@@ -33,14 +33,17 @@ const renderProductV1 = (product) => `
 `;
 
 const renderProductV3 = (product) => `
-    ${productImageHTML(product.imageUrl, product.name)}
+        
+    ${product.imageUrl ? productImageHTML(product.imageUrl, product.name) : ""}
     <div class="ofm-product__info">
     <div class="ofm-product__title ofm-line-clamp">${product.name}</div>
-    ${ product.options ? `
+    ${
+        product.options
+            ? `
         <div class="ofm-product__options">
             ${optionsHTML(product.options, false, false)}
         </div>`
-        : ""
+            : ""
     }
 </div>
 `;

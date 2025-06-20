@@ -22,7 +22,7 @@
         gap: 0.5rem;
         padding: 0.5rem 1rem;
         border-radius: var(--ofm-border-radius);
-        border: 1px dashed var(--ofm-allergens-tab-bg-color, var(--ofm-border-color));
+        border: 1px solid var(--ofm-allergens-tab-bg-color, var(--ofm-border-color));
         background-color: var(--ofm-allergens-tab-bg-color, transparent);
         width: var(--ofm-allergens-tab-width);
 

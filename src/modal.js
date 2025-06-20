@@ -1,7 +1,7 @@
 import {
     tagsHTML, optionsHTML, productImageHTML
 } from './template-helpers';
-import { getLabel } from './helpers';
+import { getLabel, renderArrow } from './helpers';
 import { createAllergensHTML } from './allergens';
 
 export const showModal = (productId) => {
@@ -39,6 +39,11 @@ export const showModal = (productId) => {
             });
         }
     }
+
+    // Initialize allergens toggle if product has allergens
+    if (product.allergens?.length) {
+        handleAllergensToggle();
+    }
 };
 
 const getModalContent = (productData) => {
@@ -58,13 +63,6 @@ const getModalContent = (productData) => {
     //descriptiom
     html += product.description && ` <div class="ofm-product__desc">${product.description}</div>`;
 
-    //productTags
-    if (product.tags?.length) {
-        html += `<div class="ofm-product__tags flex items-center gap-2">`;
-        html += tagsHTML(product.tags);
-        html += `</div>`;
-    }
-
     //prices
     if (product.options?.length) {
         html += `<div class="ofm-product__options">`;
@@ -72,9 +70,24 @@ const getModalContent = (productData) => {
         html += `</div>`;
     }
 
+    //productTags
+    if (product.tags?.length) {
+        html += `<div class="ofm-product__tags flex items-center gap-2">`;
+        html += tagsHTML(product.tags);
+        html += `</div>`;
+    }
+
     //allergens
     if (product.allergens?.length) {
-        html += createAllergensHTML({ prodAllergens: product.allergens, location: 'modal'});
+        html += `
+            <div class="ofm-collapsible">
+                <div class="ofm-collapsible-button flex items-center justify-between gap-2" data-allergens-toggle>
+                    <span>${getLabel("allergens")} (${product.allergens?.length})</span>
+                    ${renderArrow()}
+                </div>
+                ${createAllergensHTML({ prodAllergens: product.allergens, location: "modal" })}
+            </div>
+        `;
     }
 
     html += `</div>`;
@@ -139,3 +152,22 @@ const modalWrapper = (content) => {
             </div>
         </div>`;
 };
+
+function handleAllergensToggle() {
+    // Remove existing listener to prevent duplicates
+    document.removeEventListener('click', allergensToggleHandler);
+    
+    // Add the event listener
+    document.addEventListener('click', allergensToggleHandler);
+}
+
+function allergensToggleHandler(e) {
+    const toggleButton = e.target.closest('[data-allergens-toggle]');
+    if (toggleButton) {
+        const content = toggleButton.closest('.ofm-collapsible');
+        // Toggle active state
+        if (content) {
+        content.classList.toggle('active');
+        }
+    }
+}

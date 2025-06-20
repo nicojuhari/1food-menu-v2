@@ -73,11 +73,15 @@ body.modal-open {
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            width: 100%;
+            aspect-ratio: 1/1;
             height: 100%;
             flex-shrink: 0;
             object-fit: cover;
             display: block;
+        }
+
+        .product-image {
+            width: 100%;
         }
     
         .image-container {

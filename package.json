@@ -1,8 +1,8 @@
 {
   "name": "1food-menu",
   "type": "module",
-  "version": "0.6.9",
-  "description": "Digital Restaurant Menu designs created with 1FoodMenu app",
+  "version": "0.6.10",
+  "description": "Digital Food Menu Templates - for menus created with 1FoodMenu App",
   "homepage": "https://1food.menu",
   "repository": {
     "type": "git",
@@ -29,7 +29,7 @@
   "author": "Nicolae Cojuhari <nicojuhari@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "sass": "^1.85.1",
-    "vite": "^6.2.0"
+    "sass": "^1.89.2",
+    "vite": "^6.3.5"
   }
 }

@@ -1,4 +1,4 @@
-import { getLabel } from "./helpers";
+import { getLabel, renderArrow } from "./helpers";
 
 export function tagsHTML(tags) {
     if (!tags?.length) return "";
@@ -21,12 +21,14 @@ export function optionsHTML(options, inModal = false, showArrow = false) {
         .map((item, idx) => {
             if (version <= 3 && idx >= 1 && !inModal) return "";
 
+            let notShowArrow = !showArrow || !options[1] || inModal;
+
             return `
                 <div class="ofm-product__options-item">
                     <div class="ofm-product__size ofm-text-sm">${item?.size}</div>
                     <div class="ofm-product__price">
                         ${renderPrice(item)}
-                        ${renderArrow(showArrow, options, inModal)}
+                        ${ notShowArrow ? "" : renderArrow() }
                     </div>
                 </div>`;
         })
@@ -40,18 +42,6 @@ export function optionsHTML(options, inModal = false, showArrow = false) {
             `;
         }
         return `<div class="ofm-price ofm-text-lg">${formatPrice(item.price)}</div>`;
-    }
-
-    function renderArrow(showArrow, options, inModal) {
-        if (!showArrow || !options[1] || inModal) return "";
-
-        return `
-            <div class="arrow-down">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-        `;
     }
 }
 

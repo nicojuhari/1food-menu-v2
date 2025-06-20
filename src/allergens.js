@@ -6,7 +6,7 @@ export const createAllergensHTML = ({ prodAllergens = [], location = 'node' }) =
 
     // Shared tabs HTML structure
     const createTabsHTML = (allergens) => `
-        <div class="ofm-allergens__tabs flex">
+        <div class="ofm-allergens__tabs flex ${ location === 'modal' ? ' ofm-collapsible-content' : '' }">
             ${allergens.map((allergen) => `
                 <div class="ofm-allergens__tab flex items-center">
                     <div class="allergen-name">${allergen?.name}</div>

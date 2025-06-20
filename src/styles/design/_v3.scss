@@ -22,8 +22,7 @@
     .ofm-product {
         padding: .5rem;
         align-items: center;
-        gap: 1rem;
-        height: auto;        
+        height: 6rem;        
         
     }
 
@@ -44,7 +43,7 @@
 
         .ofm-product {
             &__info {
-                padding-right: 1.5rem;
+                padding: 0 1.5rem;
                 gap: 0.25rem;
                 flex-direction: row;
                 justify-content: space-between;
